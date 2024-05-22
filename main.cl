@@ -121,10 +121,6 @@
            (btn-primary (:type "submit")
              (find-l10n "submit" *html-lang* *l10n*)))))
 
-(defstruct survey-app
-  response
-  acceptor)
-
 (defun handle-acceptor (acceptor)
   (lambda (action)
     (case action
@@ -141,21 +137,22 @@
   "Return current time formatted as ISO-8601."
   (local-time:format-timestring nil (local-time:now) :format '((:hour 2) ":" (:min 2) ":" (:sec 2))))
 
-(defvar *app1* (make-survey-app :response (pathname (concatenate 'string (today) "_survey-db.cl"))
-                                :acceptor (handle-acceptor (make-instance 'easy-acceptor
-                                                                          :document-root (uiop:getcwd)
-                                                                          :port 8080))))
+(defvar *db* (pathname (concatenate 'string (today) "_survey-db.cl")))
 
-(defun load-response (app)
-  (with-open-file (stream (survey-app-response app)
+(defvar *app* (handle-acceptor (make-instance 'easy-acceptor
+                                              :document-root (uiop:getcwd)
+                                              :port 8080)))
+
+(defun load-response (db)
+  (with-open-file (stream db
                           :direction :input
                           :if-does-not-exist :create)
     (if (= (file-length stream) 0)
         '()
         (read stream))))
 
-(defun store-response (app responses)
-  (with-open-file (stream (survey-app-response app)
+(defun store-response (db responses)
+  (with-open-file (stream db
                           :direction :output
                           :if-exists :supersede)
     (prin1 responses stream)))
@@ -169,9 +166,9 @@
   (setf (content-type*) "text/plain")
 
   (let ((post-params (post-parameters* *request*))
-        (stored-response (load-response *app1*)))
+        (stored-response (load-response *db*)))
 
     (let ((response stored-response))
       (push (list (now) post-params) response)
-      (store-response *app1* (reverse response))
+      (store-response *db* (reverse response))
       (format nil "~A" response))))
