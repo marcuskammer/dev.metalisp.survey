@@ -156,7 +156,7 @@
                           :if-exists :supersede)
     (prin1 responses stream)))
 
-(define-easy-handler (sus :uri "/") ((lang) (name))
+(define-easy-handler (sus :uri "/") (lang)
   (setf *html-lang* lang)
   (cond ((string= lang "en")
          (sus-form-en))))
