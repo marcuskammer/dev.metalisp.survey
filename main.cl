@@ -15,7 +15,7 @@
 
 (defvar *company-logo* "company_logo.png")
 
-(defun sus-form-en (name)
+(defun sus-form-en ()
   (with-page (:title "SUS Form" :main-con t)
     (:nav :class "navbar bg-body-tertiary"
           (:div :class "container"
@@ -26,7 +26,6 @@
     (:form :action "/submit"
            :method "post"
            :class (spacing :property "m" :side "y" :size 5)
-           (:input :type "text" :name "name" :value name :style "display:none")
            (multi-form
              (:ask "I’d like to use this system frequently."
               :group "sus-1"
@@ -160,7 +159,7 @@
 (define-easy-handler (sus :uri "/") ((lang) (name))
   (setf *html-lang* lang)
   (cond ((string= lang "en")
-         (sus-form-en name))))
+         (sus-form-en))))
 
 (define-easy-handler (submit :uri "/submit") nil
   (setf (content-type*) "text/plain")
