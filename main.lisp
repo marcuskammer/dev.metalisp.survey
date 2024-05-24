@@ -1,4 +1,4 @@
-(in-package #:dev.metalisp.survey)
+(in-package :dev.metalisp.survey)
 
 (defvar *company-logo* "company_logo.png")
 
