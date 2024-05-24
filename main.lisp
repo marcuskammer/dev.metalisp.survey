@@ -12,11 +12,15 @@
 
 (defun today ()
   "Return today's date formatted as ISO-8601."
-  (local-time:format-timestring nil (local-time:now) :format '(:year "-" (:month 2) "-" (:day 2))))
+  (local-time:format-timestring nil
+                                (local-time:now)
+                                :format '(:year "-" (:month 2) "-" (:day 2))))
 
 (defun now ()
   "Return current time formatted as ISO-8601."
-  (local-time:format-timestring nil (local-time:now) :format '((:hour 2) ":" (:min 2) ":" (:sec 2))))
+  (local-time:format-timestring nil
+                                (local-time:now)
+                                :format '((:hour 2) ":" (:min 2) ":" (:sec 2))))
 
 (defvar *db* (pathname (concatenate 'string (today) "_survey-db.cl")))
 
