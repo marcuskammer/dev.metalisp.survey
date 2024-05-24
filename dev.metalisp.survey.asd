@@ -5,4 +5,6 @@
   :source-control "git@git.sr.ht:~marcuskammer/dev.metalisp.survey"
   :licence "MIT"
   :depends-on ("local-time" "hunchentoot" "dev.metalisp.sbt")
-  :components ((:file "main")))
+  :components ((:file "package")
+               (:file "pages")
+               (:file "main")))
