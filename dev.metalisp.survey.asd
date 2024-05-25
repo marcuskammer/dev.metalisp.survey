@@ -6,5 +6,9 @@
   :licence "MIT"
   :depends-on ("local-time" "hunchentoot" "dev.metalisp.sbt")
   :components ((:file "package")
-               (:file "pages")
-               (:file "main")))
+               (:module "src"
+                :depends-on ("package")
+                :serial t
+                :components
+                ((:file "pages")
+                 (:file "main")))))
