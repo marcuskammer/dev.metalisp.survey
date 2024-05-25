@@ -1,11 +1,18 @@
 (in-package :dev.metalisp.survey)
 
-(defun sus-form-en ()
-  (with-page (:title "SUS Form" :main-con t)
-    (:nav :class "navbar bg-body-tertiary"
+(defun form-header ()
+  (spinneret:with-html
+    (:nav :class (concatenate 'string
+                              "navbar bg-body-tertiary"
+                              " "
+                              (spacing :property "m" :side "b" :size 5))
           (:div :class "container"
                 (:a :class "navbar-brand" :href "#"
-                    (:img :src *company-logo* :alt "Company Logo" :width 100))))
+                    (:img :src *company-logo* :alt "Company Logo" :width 100))))))
+
+(defun sus-form-en ()
+  (with-page (:title "SUS Form" :main-con t)
+    (form-header)
     (:h2 "Usability Feedback Form")
     (:p "Please fill out the following forms and press the submit button.")
     (:form :action "/submit"
