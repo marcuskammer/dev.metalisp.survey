@@ -1,14 +1,21 @@
 (in-package :dev.metalisp.survey)
 
-(defvar *company-logo* "company_logo.png")
+(defun create-server (name port &optional document-root)
+  (let ((acceptor (make-instance 'hunchentoot:easy-acceptor
+                                 :name name
+                                 :document-root document-root
+                                 :port port)))
+    acceptor))
 
-(defun handle-acceptor (acceptor)
-  (lambda (action)
-    (case action
-      (start (hunchentoot:start acceptor))
-      (stop (hunchentoot:stop acceptor))
-      (restart (progn (hunchentoot:stop acceptor)
-                      (hunchentoot:start acceptor))))))
+(defun start-server (acceptor)
+  (hunchentoot:start acceptor))
+
+(defun stop-server (acceptor)
+  (hunchentoot:stop acceptor))
+
+(defun restart-server (acceptor)
+  (hunchentoot:stop acceptor)
+  (hunchentoot:start acceptor))
 
 (defun today ()
   "Return today's date formatted as ISO-8601."
@@ -22,18 +29,15 @@
                                 (local-time:now)
                                 :format '((:hour 2) ":" (:min 2) ":" (:sec 2))))
 
-(defvar *db* (pathname (concatenate 'string (today) "_survey-db.cl")))
-
-(defvar *app* (handle-acceptor (make-instance 'easy-acceptor
-                                              :document-root (uiop:getcwd)
-                                              :port 8080)))
+(defun make-db-path (&optional date-str)
+  (pathname (concatenate 'string date-str "_survey-db.cl")))
 
 (defun load-response (db)
   (with-open-file (stream db
                           :direction :input
                           :if-does-not-exist :create)
     (if (= (file-length stream) 0)
-        '()
+        (list)
         (read stream))))
 
 (defun store-response (db responses)
@@ -42,18 +46,18 @@
                           :if-exists :supersede)
     (prin1 responses stream)))
 
-(define-easy-handler (sus :uri "/") (lang)
-  (setf *html-lang* lang)
+(defun return-sus-form (lang)
   (cond ((string= lang "en")
          (sus-form-en))))
 
+(define-easy-handler (index :uri "/") (lang)
+  (setf *html-lang* lang)
+  (return-sus-form lang))
+
 (define-easy-handler (submit :uri "/submit") nil
   (setf (content-type*) "text/plain")
-
-  (let ((post-params (post-parameters* *request*))
-        (stored-response (load-response *db*)))
-
-    (let ((response stored-response))
-      (push (list (now) post-params) response)
-      (store-response *db* (reverse response))
-      (format nil "~A" response))))
+  (let* ((post-params (post-parameters* *request*))
+         (stored-response (load-response (make-db-path (today))))
+         (response (reverse (push (list (now) post-params) stored-response))))
+    (store-response (make-db-path (today)) (reverse response))
+    (format nil "~A" response)))
