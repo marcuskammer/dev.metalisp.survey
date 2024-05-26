@@ -19,5 +19,7 @@
                 #:spacing)
   (:import-from #:dev.metalisp.sbt/form
                 #:multi-form)
+  (:import-from #:dev.metalisp.sbt/navbar
+                #:navbar*)
   (:import-from #:dev.metalisp.sbt/btn
                 #:btn-primary))
