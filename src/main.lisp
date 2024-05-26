@@ -1,7 +1,8 @@
 (in-package :dev.metalisp.survey)
 
-(defun create-server (name port &optional document-root)
+(defun create-server (name port &key address document-root)
   (let ((acceptor (make-instance 'hunchentoot:easy-acceptor
+                                 :address address
                                  :name name
                                  :document-root document-root
                                  :port port)))
