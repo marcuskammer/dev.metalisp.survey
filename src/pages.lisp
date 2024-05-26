@@ -1,15 +1,5 @@
 (in-package :dev.metalisp.survey)
 
-(defun form-header ()
-  (spinneret:with-html
-    (:nav :class (concatenate 'string
-                              "navbar bg-body-tertiary"
-                              " "
-                              (spacing :property "m" :side "b" :size 5))
-          (:div :class "container"
-                (:a :class "navbar-brand" :href "#"
-                    (:img :src *company-logo* :alt "Company Logo" :width 100))))))
-
 (defun sus-form-en ()
   (with-page (:title "SUS Form" :main-con t)
     (navbar*
