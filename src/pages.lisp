@@ -12,7 +12,11 @@
 
 (defun sus-form-en ()
   (with-page (:title "SUS Form" :main-con t)
-    (form-header)
+    (navbar*
+        "sm"
+      (:url "#" :src "/src/assets/company_logo.png" :width 100)
+      "#mainNav"
+      ((:url "/" :name "Home")))
     (:h2 "Usability Feedback Form")
     (:p "Please fill out the following forms and press the submit button.")
     (:form :action "/submit"
