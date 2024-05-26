@@ -1,17 +1,47 @@
 (in-package :dev.metalisp.survey)
 
+(defmacro navbar-nav (&body body)
+  `(spinneret:with-html
+     (:div :class "collapse navbar-collapse"
+           :id "#mainNav"
+           (:ul :class "navbar-nav"
+                ,@(loop for navitem on body by #'cddr
+                        collect
+                        `(:li :class "nav-item"
+                              (:a :class "nav-link"
+                                  :href ,(first navitem)
+                                  ,(second navitem))))))))
+
+(defmacro navbar-en ()
+  `(spinneret:with-html
+     (:nav :class "navbar bg-body-tertiary navbar-expand-sm mb-5"
+           (:div :class "container-fluid"
+                 ;; brand
+                 (:a :class "navbar-brand"
+                     :href "#"
+                     (:img :src "/src/assets/company_logo.png"
+                           :alt "Company Logo"
+                           :width 100))
+                 ;; toggle button
+                 (:button :class "navbar-toggler"
+                          :type "button"
+                          :data-bs-toggle "collapse"
+                          :data-bs-target "#mainNav"
+                          :aria-controls "#mainNav"
+                          :aria-expanded "false"
+                          :aria-label "Toggle Navigation"
+                          (:span :class "navbar-toggler-icon"))
+                 ;; nav
+                 (navbar-nav "/" "Home" "/imprint" "Imprint")))))
+
 (defun sus-form-en ()
   (with-page (:title "SUS Form" :main-con t)
-    (navbar*
-        "sm"
-      (:url "#" :src "/src/assets/company_logo.png" :width 100)
-      "#mainNav"
-      ((:url "/" :name "Home")))
+    (navbar-en)
     (:h2 "Usability Feedback Form")
     (:p "Please fill out the following forms and press the submit button.")
     (:form :action "/submit"
            :method "post"
-           :class (spacing :property "m" :side "y" :size 5)
+           :class (dev.metalisp.sbt/utility:spacing :property "m" :side "y" :size 5)
            (multi-form
              (:ask "I’d like to use this system frequently."
               :group "sus-1"
