@@ -34,7 +34,7 @@
 (defmacro navbar (&body body)
   `(spinneret:with-html
      (:nav :class "navbar bg-body-tertiary navbar-expand-sm mb-5"
-           (:div :class "container-fluid"
+           (:div :class "container"
                  ,@body))))
 
 (defmacro navbar* (id brand-src brand-width &body body)
