@@ -49,9 +49,17 @@
 
 (defun return-sus-form (lang)
   (cond ((string= lang "en")
-         (sus-form-en))))
+         (sus-form-en))
+        ((string= lang "de")
+         (sus-form-de))))
 
-(define-easy-handler (index :uri "/") (lang)
+(define-easy-handler (index :uri "/") ()
+  (home))
+
+(define-easy-handler (imprint :uri "/imprint") ()
+  (imprint))
+
+(define-easy-handler (sus :uri "/sus") (lang)
   (setf *html-lang* lang)
   (return-sus-form lang))
 
