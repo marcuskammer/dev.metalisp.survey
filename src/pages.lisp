@@ -13,10 +13,19 @@
        (navbar-nav ,id "/" "Home" "/imprint" "Imprint"))))
 
 (defun home ()
-  (with-page (:title "Survey" :main-con t)
-    (navbar-de)
-    (:h2 "Surveys")
-    (:ul (:li (:a :href "/sus?lang=en" "SUS en")))))
+  (let ((collection '("English" ("/sus?lang=en" "System Usability Scale")
+                      "Deutsch" ("/sus?lang=de" "System Usability Scale"
+                                 "/demographics?lang=de" "Demografie"))))
+    (with-page (:title "Survey" :main-con t)
+      (navbar-en)
+      (:h2 :class "mb-3" "Surveys")
+      (loop for (lang anchors) on collection by #'cddr do
+        (:div :class "container-fluid mb-3"
+              (:h3 :class "mb-3" lang)
+              (:ul :class "list-group"
+                   (loop for (url name) on anchors by #'cddr do
+                     (:li :class "list-group-item"
+                          (:a :href url name)))))))))
 
 (defun sus-form-en ()
   (with-page (:title "SUS Form" :main-con t)
