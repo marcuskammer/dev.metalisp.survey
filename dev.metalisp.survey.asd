@@ -9,8 +9,11 @@
                (:module "src/partials"
                 :components
                 ((:file "_navbar")))
+               (:module "src/forms"
+                :components
+                ((:file "sus")))
                (:module "src"
-                :depends-on ("package" "src/partials")
+                :depends-on ("package" "src/partials" "src/forms")
                 :serial t
                 :components
                 ((:file "pages")

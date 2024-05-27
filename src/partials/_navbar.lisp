@@ -41,3 +41,15 @@
   `(navbar (navbar-brand ,brand-src ,brand-width)
      (navbar-toggle ,id)
      (navbar-nav ,id ,@body)))
+
+(defmacro navbar-de ()
+  (let ((id "#mainNav"))
+    `(navbar (navbar-brand "/src/assets/company_logo.png" 30)
+       (navbar-toggle ,id)
+       (navbar-nav ,id "/" "Home" "/imprint" "Impressum"))))
+
+(defmacro navbar-en ()
+  (let ((id "#mainNav"))
+    `(navbar (navbar-brand "/src/assets/company_logo.png" 30)
+       (navbar-toggle ,id)
+       (navbar-nav ,id "/" "Home" "/imprint" "Imprint"))))
