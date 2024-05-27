@@ -48,10 +48,11 @@
     (prin1 responses stream)))
 
 (defun return-sus-form (lang)
-  (cond ((string= lang "en")
-         (sus-form-en))
-        ((string= lang "de")
-         (sus-form-de))))
+  "Based on LANG decide which sus form to show."
+  (check-type lang string)
+  (cond ((string= lang "en") (sus-form-en))
+        ((string= lang "de") (sus-form-de))
+        (t (error "Unsupported language: ~A" lang))))
 
 (define-easy-handler (index :uri "/") ()
   (home))
