@@ -31,7 +31,7 @@
                                 :format '((:hour 2) ":" (:min 2) ":" (:sec 2))))
 
 (defun make-db-path (&optional date-str)
-  (pathname (concatenate 'string date-str "_survey-db.cl")))
+  (pathname (concatenate 'string date-str "_survey-db.lisp")))
 
 (defun load-response (db)
   (with-open-file (stream db
