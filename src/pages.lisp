@@ -37,19 +37,34 @@
     (:section :class "container"
               (:h2 :class "mb-3" "New Survey")
               (:form :action "/create-survey" :method "post"
+
                      (:h3 "Metadata")
                      (:div :class "mb-3"
-                           (:label :for "title" "Title")
+                           (:label :class "form-label"
+                                   :for "title" "Title")
                            (:input :class "form-control"
                                    :type "text"
                                    :id "title"
                                    :name "title"))
                      (:div :class "mb-3"
-                           (:label :for "description" "Description")
+                           (:label :class "form-label"
+                                   :for "description" "Description")
                            (:textarea :class "form-control"
                                       :rows "3"
                                       :id "description"
                                       :name "description"))
+
+                     (:h3 "Questionnaires")
+                     (:div :class "mb-3"
+                           (:div :class "form-check"
+                                 (:input :class "form-check-input"
+                                         :type "checkbox"
+                                         :value ""
+                                         :id "sus")
+                                 (:label :class "form-check-label"
+                                         :for "sus"
+                                         "System Usability Scale")))
+
                      (:button :type"Submit"
                               :class "btn btn-primary"
                               "Create Survey")))))
