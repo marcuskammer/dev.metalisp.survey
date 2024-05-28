@@ -72,10 +72,29 @@
     (store-response (make-db-path (today)) (reverse response))
     (format nil "~A" response)))
 
+(defun starts-with-subseq (subseq seq)
+  "Check if the sequence SEQ starts with the subsequence SUBSEQ."
+  (let ((subseq-length (length subseq)))
+    (and (<= subseq-length (length seq))
+         (string= subseq (subseq seq 0 subseq-length)))))
+
+(defun survey-uri-p (request)
+  "Predicate function to check if the request URI matches the survey pattern.
+The URI should start with \"/survey/\" followed by a numeric ID."
+  (let ((uri (hunchentoot:request-uri request)))
+    (and (starts-with-subseq "/survey/" uri)
+         (let ((id (subseq uri (length "/survey/"))))
+           (every #'digit-char-p id)))))
+
+(define-easy-handler (survey-handler :uri #'survey-uri-p) ()
+  (let ((id (subseq (hunchentoot:request-uri*) (length "/survey/"))))
+    (setf (content-type*) "text/plain")
+    (format nil "Survey ID: ~a" id)))
+
 (define-easy-handler (new-survey :uri "/new-survey") nil
   (dev.metalisp.survey/pages:new-survey))
 
-(define-easy-handler (write-survey :uri "/create-survey"
+(define-easy-handler (create-survey :uri "/create-survey"
                                    :default-request-type :post) nil
   (let ((post-params (post-params* *request*))
-        (unique-id (cl-uuid:make-random-uuid)))))
+        (uid (* (get-universal-time) (random 999))))))
