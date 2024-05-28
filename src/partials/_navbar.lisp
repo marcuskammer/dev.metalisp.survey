@@ -1,4 +1,4 @@
-(in-package :dev.metalisp.survey)
+(in-package :dev.metalisp.survey/partials)
 
 (defmacro navbar-brand (src width)
   `(spinneret:with-html

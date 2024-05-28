@@ -50,15 +50,15 @@
 (defun return-sus-form (lang)
   "Based on LANG decide which sus form to show."
   (check-type lang string)
-  (cond ((string= lang "en") (sus-form-en))
-        ((string= lang "de") (sus-form-de))
+  (cond ((string= lang "en") (dev.metalisp.survey/forms:sus-form-en))
+        ((string= lang "de") (dev.metalisp.survey/forms:sus-form-de))
         (t (error "Unsupported language: ~A" lang))))
 
 (define-easy-handler (index :uri "/") ()
-  (home))
+  (dev.metalisp.survey/pages:index))
 
 (define-easy-handler (imprint :uri "/imprint") ()
-  (imprint))
+  (dev.metalisp.survey/pages:imprint))
 
 (define-easy-handler (sus :uri "/sus") (lang)
   (setf *html-lang* lang)
@@ -71,3 +71,11 @@
          (response (reverse (push (list (now) post-params) stored-response))))
     (store-response (make-db-path (today)) (reverse response))
     (format nil "~A" response)))
+
+(define-easy-handler (new-survey :uri "/new-survey") nil
+  (dev.metalisp.survey/pages:new-survey))
+
+(define-easy-handler (write-survey :uri "/create-survey"
+                                   :default-request-type :post) nil
+  (let ((post-params (post-params* *request*))
+        (unique-id (cl-uuid:make-random-uuid)))))
