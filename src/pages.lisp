@@ -64,8 +64,9 @@
                                (:div :class "form-check"
                                      (:input :class "form-check-input"
                                              :type "checkbox"
-                                             :value ""
+                                             :value "t"
                                              :id (first el)
+                                             :name (first el)
                                              (:label :class "form-check-label"
                                                      :for (first el)
                                                      (second el)))))))

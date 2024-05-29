@@ -30,8 +30,11 @@
                                 (local-time:now)
                                 :format '((:hour 2) ":" (:min 2) ":" (:sec 2))))
 
-(defun make-db-path (&optional date-str)
-  (pathname (concatenate 'string date-str "_survey-db.lisp")))
+(defun make-db-path (date-str file-str)
+  (pathname (concatenate 'string date-str file-str)))
+
+(defun make-surveys-db-path ()
+  (make-db-path (today) "-surveys-db.lisp"))
 
 (defun load-response (db)
   (with-open-file (stream db
@@ -67,9 +70,9 @@
 (define-easy-handler (submit :uri "/submit") nil
   (setf (content-type*) "text/plain")
   (let* ((post-params (post-parameters* *request*))
-         (stored-response (load-response (make-db-path (today))))
+         (stored-response (load-response (make-db-path (today) "_submit-db.lisp")))
          (response (reverse (push (list (now) post-params) stored-response))))
-    (store-response (make-db-path (today)) (reverse response))
+    (store-response (make-db-path (today) "_submit-db.lisp") response)
     (format nil "~A" response)))
 
 (defun starts-with-subseq (subseq seq)
@@ -96,5 +99,9 @@ The URI should start with \"/survey/\" followed by a numeric ID."
 
 (define-easy-handler (create-survey :uri "/create-survey"
                                    :default-request-type :post) nil
-  (let ((post-params (post-params* *request*))
-        (uid (* (get-universal-time) (random 999))))))
+  (let ((post-params (post-parameters* *request*))
+        (uid (* (get-universal-time) (random 999)))
+        (stored-surveys (load-response (make-surveys-db-path))))
+    (store-response (make-surveys-db-path) (push (list uid post-params) stored-surveys))
+    (setf (content-type*) "text/plain")
+    (format nil "~A" post-params)))
