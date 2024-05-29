@@ -31,7 +31,9 @@
 ;;   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 ;;   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ;; );
+
 (defun new-survey ()
+  "Generates the view to create a new survey."
   (with-page (:title "New Survey")
     (dev.metalisp.survey/partials:navbar-en)
     (:section :class "container"
@@ -56,14 +58,17 @@
 
                      (:h3 "Questionnaires")
                      (:div :class "mb-3"
-                           (:div :class "form-check"
-                                 (:input :class "form-check-input"
-                                         :type "checkbox"
-                                         :value ""
-                                         :id "sus")
-                                 (:label :class "form-check-label"
-                                         :for "sus"
-                                         "System Usability Scale")))
+                           (let ((questionnaires '(("sus-de" "System Usability Scale (Deutsch)")
+                                                   ("sus-en" "System Usability Scale (English)"))))
+                             (loop for el in questionnaires do
+                               (:div :class "form-check"
+                                     (:input :class "form-check-input"
+                                             :type "checkbox"
+                                             :value ""
+                                             :id (first el)
+                                             (:label :class "form-check-label"
+                                                     :for (first el)
+                                                     (second el)))))))
 
                      (:button :type"Submit"
                               :class "btn btn-primary"
