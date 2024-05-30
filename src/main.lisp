@@ -57,9 +57,6 @@
         ((string= lang "de") (dev.metalisp.survey/forms:sus-form-de))
         (t (error "Unsupported language: ~A" lang))))
 
-(define-easy-handler (index :uri "/") ()
-  (dev.metalisp.survey/pages:index))
-
 (define-easy-handler (imprint :uri "/imprint") ()
   (dev.metalisp.survey/pages:imprint))
 
@@ -75,33 +72,47 @@
     (store-response (make-db-path (today) "_submit-db.lisp") response)
     (format nil "~A" response)))
 
-(defun starts-with-subseq (subseq seq)
-  "Check if the sequence SEQ starts with the subsequence SUBSEQ."
-  (let ((subseq-length (length subseq)))
-    (and (<= subseq-length (length seq))
-         (string= subseq (subseq seq 0 subseq-length)))))
+;; (defun starts-with-subseq (subseq seq)
+;;   "Check if the sequence SEQ starts with the subsequence SUBSEQ."
+;;   (let ((subseq-length (length subseq)))
+;;     (and (<= subseq-length (length seq))
+;;          (string= subseq (subseq seq 0 subseq-length)))))
 
-(defun survey-uri-p (request)
-  "Predicate function to check if the request URI matches the survey pattern.
-The URI should start with \"/survey/\" followed by a numeric ID."
+;; (defun survey-uri-p (request)
+;;   "Predicate function to check if the request URI matches the survey pattern.
+;; The URI should start with \"/survey/\" followed by a numeric ID."
+;;   (let* ((uri (hunchentoot:request-uri request))
+;;          (id (subseq uri (length "/survey/"))))
+;;     (and (starts-with-subseq "/survey/" uri)
+;;          (every #'digit-char-p id))))
+
+(defun survey-uri-p (uri)
+  "Check if the request URI matches the pattern '/survey/<numeric>'"
+  (let ((parts (uiop:split-string uri :separator "/")))
+    (and (= (length parts) 3)
+         (string= (second parts) "survey")
+         (every #'digit-char-p (third parts)))))
+
+(defun survey-uri (request)
   (let ((uri (hunchentoot:request-uri request)))
-    (and (starts-with-subseq "/survey/" uri)
-         (let ((id (subseq uri (length "/survey/"))))
-           (every #'digit-char-p id)))))
+    (survey-uri-p uri)))
 
-(define-easy-handler (survey-handler :uri #'survey-uri-p) ()
-  (let ((id (subseq (hunchentoot:request-uri*) (length "/survey/"))))
-    (setf (content-type*) "text/plain")
-    (format nil "Survey ID: ~a" id)))
+(define-easy-handler (survey :uri #'survey-uri) ()
+  (let* ((id (subseq (hunchentoot:request-uri*) (length "/survey/")))
+         (survey (assoc (parse-integer id) (load-response (make-surveys-db-path)))))
+    (dev.metalisp.survey/pages:survey survey)
+    (hunchentoot:request-uri*)))
 
 (define-easy-handler (new-survey :uri "/new-survey") nil
   (dev.metalisp.survey/pages:new-survey))
 
-(define-easy-handler (create-survey :uri "/create-survey"
-                                   :default-request-type :post) nil
+(define-easy-handler (create-survey :uri "/create-survey") nil
   (let ((post-params (post-parameters* *request*))
         (uid (* (get-universal-time) (random 999)))
         (stored-surveys (load-response (make-surveys-db-path))))
     (store-response (make-surveys-db-path) (push (list uid post-params) stored-surveys))
-    (setf (content-type*) "text/plain")
-    (format nil "~A" post-params)))
+    (dev.metalisp.survey/pages:create-survey uid)))
+
+(define-easy-handler (surveys :uri "/") nil
+  (let ((stored-surveys (load-response (make-surveys-db-path))))
+    (dev.metalisp.survey/pages:surveys stored-surveys)))
