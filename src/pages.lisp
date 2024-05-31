@@ -53,20 +53,20 @@
 
                      (:h3 "Questionnaires")
                      (:div :class "mb-3"
-                           (let ((questionnaires '(("sus?lang=de" "System Usability Scale (Deutsch)")
-                                                   ("sus?lang=en" "System Usability Scale (English)"))))
+                           (let ((questionnaires '(("System Usability Scale (Deutsch)" "/sus?lang=de")
+                                                   ("System Usability Scale (English)" "/sus?lang=en"))))
                              (loop for el in questionnaires
-                                   for key = (first el)
-                                   for value = (second el) do
+                                   for name = (first el)
+                                   for uri = (second el) do
                                      (:div :class "form-check"
                                            (:input :class "form-check-input"
                                                    :type "checkbox"
-                                                   :value key
-                                                   :id key
+                                                   :value uri
+                                                   :id uri
                                                    :name "questionnaire"
                                                    (:label :class "form-check-label"
-                                                           :for key
-                                                           value))))))
+                                                           :for uri
+                                                           name))))))
 
                      (:button :type"Submit"
                               :class "btn btn-primary"
@@ -134,6 +134,6 @@
                            for value = (cdr property) do
                              (:li :class "list-group-item"
                                   (if (string= key "questionnaire")
-                                      (:a :href (concatenate 'string "/survey/" id "/" value)
+                                      (:a :href (concatenate 'string "/survey/" id value)
                                           value)
                                       (format nil "~a: ~a" key value)))))))))
