@@ -99,7 +99,8 @@
 
 (define-easy-handler (survey :uri #'survey-uri) ()
   (let* ((id (subseq (hunchentoot:request-uri*) (length "/survey/")))
-         (survey (assoc (parse-integer id) (load-response (make-surveys-db-path)))))
+         (survey (assoc (parse-integer id)
+                        (load-response (make-surveys-db-path)))))
     (ml-survey/pages:survey survey)))
 
 (define-easy-handler (new-survey :uri "/new-survey") nil
