@@ -40,4 +40,9 @@
   (:use #:cl)
   (:import-from #:dev.metalisp.sbt
                 #:with-page)
-  (:export #:index #:imprint #:new-survey #:surveys #:create-survey #:survey))
+  (:export #:index
+           #:imprint
+           #:new-survey
+           #:surveys
+           #:create-survey
+           #:survey))
