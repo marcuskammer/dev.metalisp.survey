@@ -26,14 +26,6 @@
 ;;     (and (starts-with-subseq "/survey/" uri)
 ;;          (every #'digit-char-p id))))
 
-(defun generate-uuid ()
-  (parse-integer (format nil "~A~A~A"
-                         (sb-posix:getpid)
-                         (get-universal-time)
-                         (random 1000000))))
-
-(defun string-empty-p (string) (= (length string) 0))
-
 (defun split-uri (uri)
   (remove-if #'string-empty-p (uiop:split-string uri :separator "/")))
 

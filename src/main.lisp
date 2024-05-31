@@ -49,3 +49,11 @@
                           :direction :output
                           :if-exists :supersede)
     (prin1 responses stream)))
+
+(defun generate-uuid ()
+  (parse-integer (format nil "~A~A~A"
+                         (sb-posix:getpid)
+                         (get-universal-time)
+                         (random 1000000))))
+
+(defun string-empty-p (string) (= (length string) 0))
