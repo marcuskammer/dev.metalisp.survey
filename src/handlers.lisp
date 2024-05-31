@@ -7,9 +7,6 @@
         ((string= lang "de") (ml-survey/forms:sus-form-de))
         (t (error "Unsupported language: ~A" lang))))
 
-(define-easy-handler (imprint :uri "/imprint") ()
-  (ml-survey/pages:imprint))
-
 (define-easy-handler (sus :uri "/sus") (lang)
   (setf *html-lang* lang)
   (return-sus-form lang))
@@ -51,19 +48,19 @@
   (let* ((id (subseq (hunchentoot:request-uri*) (length "/survey/")))
          (survey (assoc (parse-integer id)
                         (load-response (make-surveys-db-path)))))
-    (ml-survey/pages:survey survey)))
+    (ml-survey/views:survey survey)))
 
 (define-easy-handler (new-survey :uri "/new-survey") nil
-  (ml-survey/pages:new-survey))
+  (ml-survey/views:new-survey))
 
 (define-easy-handler (create-survey :uri "/create-survey") nil
   (let ((post-params (post-parameters* *request*))
         (uid (* (get-universal-time) (random 999)))
         (stored-surveys (load-response (make-surveys-db-path))))
     (store-response (make-surveys-db-path) (push (list uid post-params) stored-surveys))
-    (ml-survey/pages:create-survey uid)))
+    (ml-survey/views:create-survey uid)))
 
 (define-easy-handler (surveys :uri "/") nil
   (let ((stored-surveys (load-response (make-surveys-db-path))))
     (hunchentoot:start-session)
-    (ml-survey/pages:surveys stored-surveys)))
+    (ml-survey/views:surveys stored-surveys)))
