@@ -14,7 +14,8 @@
   (with-page (:title "Surveys")
     (ml-survey/partials:navbar-en)
     (:section :class "container"
-              (:h2 :class "mb-3" "Your Surveys")
+              (:h2 :class "mb-3"
+                   "Your Surveys")
               (:div :class "btn-toolbar my-3"
                     (:div :class "btn-group me-2"
                           (:a :class "btn btn-primary"
@@ -28,7 +29,7 @@
                            (:li :class "list-group-item d-flex justify-content-between align-items-start"
                                 (:div :class "ms-2 me-auto"
                                       (:a :class "fw-bold clearfix"
-                                          :href (format nil "/survey/~A" id)
+                                          :href (format nil "/survey/~a" id)
                                           title)
                                       (if description
                                           (:span description)
