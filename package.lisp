@@ -36,7 +36,7 @@
   (:use #:cl)
   (:export #:navbar-en #:navbar-de))
 
-(defpackage ml-survey/pages
+(defpackage ml-survey/views
   (:use #:cl)
   (:import-from #:dev.metalisp.sbt
                 #:with-page)

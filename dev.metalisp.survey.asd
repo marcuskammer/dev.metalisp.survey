@@ -14,7 +14,11 @@
                 ((:file "sus")))
                (:module "src/views"
                 :components
-                ((:file "pages")))
+                ((:file "index")
+                 (:file "create-survey")
+                 (:file "new-survey")
+                 (:file "survey")
+                 (:file "surveys")))
                (:module "src"
                 :depends-on ("package" "src/views")
                 :serial t
