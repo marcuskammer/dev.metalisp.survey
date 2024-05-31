@@ -1,23 +1,16 @@
 (in-package :ml-survey)
 
-(defun return-sus-form (lang)
-  "Based on LANG decide which sus form to show."
-  (check-type lang string)
-  (cond ((string= lang "en") (ml-survey/forms:sus-form-en))
-        ((string= lang "de") (ml-survey/forms:sus-form-de))
-        (t (error "Unsupported language: ~A" lang))))
+;; (define-easy-handler (sus :uri "/sus") (lang)
+;;   (setf *html-lang* lang)
+;;   (return-sus-form lang))
 
-(define-easy-handler (sus :uri "/sus") (lang)
-  (setf *html-lang* lang)
-  (return-sus-form lang))
-
-(define-easy-handler (submit :uri "/submit") nil
-  (setf (content-type*) "text/plain")
-  (let* ((post-params (post-parameters* *request*))
-         (stored-response (load-response (make-db-path (today) "_submit-db.lisp")))
-         (response (reverse (push (list (now) post-params) stored-response))))
-    (store-response (make-db-path (today) "_submit-db.lisp") response)
-    (format nil "~A" response)))
+;; (define-easy-handler (submit :uri "/submit") nil
+;;   (setf (content-type*) "text/plain")
+;;   (let* ((post-params (post-parameters* *request*))
+;;          (stored-response (load-response (make-db-path (today) "_submit-db.lisp")))
+;;          (response (reverse (push (list (now) post-params) stored-response))))
+;;     (store-response (make-db-path (today) "_submit-db.lisp") response)
+;;     (format nil "~A" response)))
 
 ;; (defun starts-with-subseq (subseq seq)
 ;;   "Check if the sequence SEQ starts with the subsequence SUBSEQ."
@@ -33,12 +26,38 @@
 ;;     (and (starts-with-subseq "/survey/" uri)
 ;;          (every #'digit-char-p id))))
 
+(defun string-empty-p (string) (= (length string) 0))
+
+(defun split-uri (uri)
+  (remove-if #'string-empty-p (uiop:split-string uri :separator "/")))
+
+(defun questionnaire-uri-p (uri)
+  "Check if the request URI matches the pattern '/survey/<numeric>'"
+  (let ((parts (split-uri uri)))
+    (and (= (length parts) 3)
+         (string= (first parts) "survey")
+         (every #'digit-char-p (second parts)))))
+
+(defun questionnaire-uri (request)
+  (questionnaire-uri-p (hunchentoot:request-uri request)))
+
+(defun return-sus-form (lang)
+  "Based on LANG decide which sus form to show."
+  (check-type lang string)
+  (cond ((string= lang "en") (ml-survey/forms:sus-form-en))
+        ((string= lang "de") (ml-survey/forms:sus-form-de))
+        (t (error "Unsupported language: ~A" lang))))
+
+(define-easy-handler (questionnaire :uri #'questionnaire-uri) (lang)
+  (setf *html-lang* lang)
+  (return-sus-form lang))
+
 (defun survey-uri-p (uri)
   "Check if the request URI matches the pattern '/survey/<numeric>'"
-  (let ((parts (uiop:split-string uri :separator "/")))
-    (and (= (length parts) 3)
-         (string= (second parts) "survey")
-         (every #'digit-char-p (third parts)))))
+  (let ((parts (split-uri uri)))
+    (and (= (length parts) 2)
+         (string= (first parts) "survey")
+         (every #'digit-char-p (second parts)))))
 
 (defun survey-uri (request)
   (let ((uri (hunchentoot:request-uri request)))
