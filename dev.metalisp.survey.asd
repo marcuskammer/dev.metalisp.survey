@@ -6,15 +6,17 @@
   :licence "MIT"
   :depends-on ("local-time" "hunchentoot" "dev.metalisp.sbt")
   :components ((:file "package")
-               (:module "src/partials"
+               (:module "src/views/partials"
                 :components
                 ((:file "_navbar")))
-               (:module "src/forms"
+               (:module "src/views/forms"
                 :components
                 ((:file "sus")))
+               (:module "src/views"
+                :components
+                ((:file "pages")))
                (:module "src"
-                :depends-on ("package" "src/partials" "src/forms")
+                :depends-on ("package" "src/views")
                 :serial t
                 :components
-                ((:file "pages")
-                 (:file "main")))))
+                ((:file "main")))))
