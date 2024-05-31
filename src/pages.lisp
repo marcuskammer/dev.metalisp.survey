@@ -1,11 +1,11 @@
-(in-package :dev.metalisp.survey/pages)
+(in-package :ml-survey/pages)
 
 (defun index ()
   (let ((collection '("English" ("/sus?lang=en" "System Usability Scale")
                       "Deutsch" ("/sus?lang=de" "System Usability Scale"
                                  "/demographics?lang=de" "Demografie"))))
     (with-page (:title "Survey")
-      (dev.metalisp.survey/partials:navbar-en)
+      (ml-survey/partials:navbar-en)
       (:section :class "container"
                 (:h2 :class "mb-3" "Surveys")
                 (loop for (lang anchors) on collection by #'cddr do
@@ -30,7 +30,7 @@
 (defun new-survey ()
   "Generates the view to create a new survey."
   (with-page (:title "New Survey")
-    (dev.metalisp.survey/partials:navbar-en)
+    (ml-survey/partials:navbar-en)
     (:section :class "container"
               (:h2 :class "mb-3" "New Survey")
               (:form :action "/create-survey" :method "post"
@@ -87,7 +87,7 @@
 (defun surveys (surveys)
   "Generates the view to show all surveys available."
   (with-page (:title "Surveys")
-    (dev.metalisp.survey/partials:navbar-en)
+    (ml-survey/partials:navbar-en)
     (:section :class "container"
               (:h2 :class "mb-3" "Your Surveys")
               (:div :class "btn-toolbar my-3"
@@ -112,7 +112,7 @@
 (defun create-survey (survey-id)
   "Generates the view to show the survey created."
   (with-page (:title "Surveys")
-    (dev.metalisp.survey/partials:navbar-en)
+    (ml-survey/partials:navbar-en)
     (:section :class "container"
               (:h2 "Your Surveys")
               (if survey-id
@@ -125,7 +125,7 @@
   (let ((id (format nil "~a" (first survey)))
         (properties (first (rest survey))))
     (with-page (:title "Surveys")
-      (dev.metalisp.survey/partials:navbar-en)
+      (ml-survey/partials:navbar-en)
       (:section :class "container"
                 (:h2 id)
                 (:ul :class "list-group"

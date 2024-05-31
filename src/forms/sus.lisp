@@ -1,8 +1,8 @@
-(in-package :dev.metalisp.survey/forms)
+(in-package :ml-survey/forms)
 
 (defun sus-form-en ()
   (with-page (:title "SUS Form")
-    (dev.metalisp.survey/partials:navbar-en)
+    (ml-survey/partials:navbar-en)
     (:section :class "container"
               (:h2 "Usability Feedback Form")
               (:p "Please fill out the following forms and press the submit button.")
@@ -106,7 +106,7 @@
 
 (defun sus-form-de ()
   (with-page (:title "SUS Formular")
-    (dev.metalisp.survey/partials:navbar-de)
+    (ml-survey/partials:navbar-de)
     (:section :class "container"
               (:h2 "Usability Feedback Formular")
               (:p "Bitte füllen Sie die folgende Formular aus und klicken Sie auf die Schaltfläche 'Senden'.")

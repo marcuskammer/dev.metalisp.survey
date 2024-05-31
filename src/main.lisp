@@ -1,4 +1,4 @@
-(in-package :dev.metalisp.survey)
+(in-package :ml-survey)
 
 (defun create-server (name port &key address document-root)
   (let ((acceptor (make-instance 'hunchentoot:easy-acceptor
@@ -53,12 +53,12 @@
 (defun return-sus-form (lang)
   "Based on LANG decide which sus form to show."
   (check-type lang string)
-  (cond ((string= lang "en") (dev.metalisp.survey/forms:sus-form-en))
-        ((string= lang "de") (dev.metalisp.survey/forms:sus-form-de))
+  (cond ((string= lang "en") (ml-survey/forms:sus-form-en))
+        ((string= lang "de") (ml-survey/forms:sus-form-de))
         (t (error "Unsupported language: ~A" lang))))
 
 (define-easy-handler (imprint :uri "/imprint") ()
-  (dev.metalisp.survey/pages:imprint))
+  (ml-survey/pages:imprint))
 
 (define-easy-handler (sus :uri "/sus") (lang)
   (setf *html-lang* lang)
@@ -100,19 +100,18 @@
 (define-easy-handler (survey :uri #'survey-uri) ()
   (let* ((id (subseq (hunchentoot:request-uri*) (length "/survey/")))
          (survey (assoc (parse-integer id) (load-response (make-surveys-db-path)))))
-    (dev.metalisp.survey/pages:survey survey)
-    (hunchentoot:request-uri*)))
+    (ml-survey/pages:survey survey)))
 
 (define-easy-handler (new-survey :uri "/new-survey") nil
-  (dev.metalisp.survey/pages:new-survey))
+  (ml-survey/pages:new-survey))
 
 (define-easy-handler (create-survey :uri "/create-survey") nil
   (let ((post-params (post-parameters* *request*))
         (uid (* (get-universal-time) (random 999)))
         (stored-surveys (load-response (make-surveys-db-path))))
     (store-response (make-surveys-db-path) (push (list uid post-params) stored-surveys))
-    (dev.metalisp.survey/pages:create-survey uid)))
+    (ml-survey/pages:create-survey uid)))
 
 (define-easy-handler (surveys :uri "/") nil
   (let ((stored-surveys (load-response (make-surveys-db-path))))
-    (dev.metalisp.survey/pages:surveys stored-surveys)))
+    (ml-survey/pages:surveys stored-surveys)))

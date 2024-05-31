@@ -1,4 +1,4 @@
-(defpackage dev.metalisp.survey
+(defpackage ml-survey
   (:use #:cl)
   (:import-from #:hunchentoot
                 #:define-easy-handler
@@ -14,7 +14,7 @@
   (:import-from #:dev.metalisp.sbt/utility
                 #:spacing))
 
-(defpackage dev.metalisp.survey/forms
+(defpackage ml-survey/forms
   (:use #:cl)
   (:import-from #:spinneret
                 #:*html*
@@ -32,11 +32,11 @@
                 #:multi-form)
   (:export #:sus-form-en #:sus-form-de))
 
-(defpackage dev.metalisp.survey/partials
+(defpackage ml-survey/partials
   (:use #:cl)
   (:export #:navbar-en #:navbar-de))
 
-(defpackage dev.metalisp.survey/pages
+(defpackage ml-survey/pages
   (:use #:cl)
   (:import-from #:dev.metalisp.sbt
                 #:with-page)
