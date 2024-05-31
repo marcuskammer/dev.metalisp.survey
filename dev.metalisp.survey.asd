@@ -22,4 +22,5 @@
                 :depends-on ("package" "src/views")
                 :serial t
                 :components
-                ((:file "main")))))
+                ((:file "main")
+                 (:file "handlers")))))
