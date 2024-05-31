@@ -57,3 +57,8 @@
                          (random 1000000))))
 
 (defun string-empty-p (string) (= (length string) 0))
+
+(defvar *app* (create-server 'app
+                             8080
+                             :document-root
+                             "~/quicklisp/local-projects/dev.metalisp.survey/"))
