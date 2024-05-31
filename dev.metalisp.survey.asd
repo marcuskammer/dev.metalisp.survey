@@ -14,8 +14,7 @@
                 ((:file "sus")))
                (:module "src/views"
                 :components
-                ((:file "index")
-                 (:file "create-survey")
+                ((:file "create-survey")
                  (:file "new-survey")
                  (:file "survey")
                  (:file "surveys")))
