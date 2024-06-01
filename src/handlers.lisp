@@ -46,8 +46,8 @@
 (define-easy-handler (questionnaire-submit :uri #'questionnaire-submit-uri) (lang)
   (let ((post-params (post-parameters* *request*))
         (id (second (split-uri (hunchentoot:request-uri*)))))
-    (store-response (ensure-data-file-exist id lang) post-params)
-    "thank you"))
+    (store-response (ensure-data-file-exist id) post-params)
+    (ml-survey/views:questionnaire-submit)))
 
 (defun survey-uri-p (uri)
   "Check if the request URI matches the pattern '/survey/<numeric>'"
