@@ -8,7 +8,9 @@
                                  :port port)))
     acceptor))
 
-(defun start-server (acceptor)
+(defun start-server (acceptor &key document-root)
+  (if document-root
+      (setf (hunchentoot:acceptor-document-root acceptor) document-root))
   (hunchentoot:start acceptor))
 
 (defun stop-server (acceptor)
