@@ -24,3 +24,4 @@
 
 (ql:quickload :dev.metalisp.survey)
 (swank-loader:dump-image "sbcl.core-with-swank")
+(quit)
