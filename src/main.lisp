@@ -1,5 +1,10 @@
 (in-package :ml-survey)
 
+(defvar *survey-data-dir*
+  (ensure-directories-exist (format nil
+                                    "~adata/survey/"
+                                    (uiop:getcwd))))
+
 (defun create-server (name port &key address document-root)
   (let ((acceptor (make-instance 'hunchentoot:easy-acceptor
                                  :address address

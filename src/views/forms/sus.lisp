@@ -1,12 +1,12 @@
 (in-package :ml-survey/forms)
 
-(defun sus-form-en ()
+(defun sus-form-en (survey-id)
   (with-page (:title "SUS Form")
     (ml-survey/partials:navbar-en)
     (:section :class "container"
               (:h2 "Usability Feedback Form")
               (:p "Please fill out the following forms and press the submit button.")
-              (:form :action "/submit"
+              (:form :action (format nil "/survey/~a/submit?lang=en" survey-id)
                      :method "post"
                      :class (dev.metalisp.sbt/utility:spacing :property "m" :side "y" :size 5)
                      (multi-form
@@ -104,13 +104,13 @@
                        (find-l10n "submit" *html-lang* *l10n*))))))
 
 
-(defun sus-form-de ()
+(defun sus-form-de (survey-id)
   (with-page (:title "SUS Formular")
     (ml-survey/partials:navbar-de)
     (:section :class "container"
               (:h2 "Usability Feedback Formular")
               (:p "Bitte füllen Sie die folgende Formular aus und klicken Sie auf die Schaltfläche 'Senden'.")
-              (:form :action "/submit"
+              (:form :action (format nil "/survey/~a/submit?lang=de" survey-id)
                      :method "post"
                      :class (dev.metalisp.sbt/utility:spacing :property "m" :side "y" :size 5)
                      (multi-form
