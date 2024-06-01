@@ -17,7 +17,8 @@
                 ((:file "create-survey")
                  (:file "new-survey")
                  (:file "survey")
-                 (:file "surveys")))
+                 (:file "surveys")
+                 (:file "questionnaire-submit")))
                (:module "src"
                 :depends-on ("package" "src/views")
                 :serial t

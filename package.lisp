@@ -54,4 +54,5 @@
            #:new-survey
            #:surveys
            #:create-survey
-           #:survey))
+           #:survey
+           #:questionnaire-submit))
