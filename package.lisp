@@ -12,7 +12,12 @@
   (:import-from #:dev.metalisp.sbt
                 #:with-page)
   (:import-from #:dev.metalisp.sbt/utility
-                #:spacing))
+                #:spacing)
+  (:export
+   #:*app*
+   #:start-server
+   #:stop-server
+   #:restart-server))
 
 (defpackage ml-survey/forms
   (:use #:cl)
