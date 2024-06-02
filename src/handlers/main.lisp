@@ -34,7 +34,7 @@
   (make-db-path (today) "-surveys-db.lisp"))
 
 (defun load-response (db)
-  (check-type db string)
+  (check-type db (or string pathname))
   (with-open-file (stream db
                           :direction :input
                           :if-does-not-exist :create)
@@ -43,7 +43,7 @@
         (read stream))))
 
 (defun store-response (db responses)
-  (check-type db string)
+  (check-type db (or string pathname))
   (check-type responses list)
   (with-open-file (stream db
                           :direction :output
