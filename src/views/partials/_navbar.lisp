@@ -1,4 +1,4 @@
-(in-package :ml-survey/partials)
+(in-package :ml-survey/views)
 
 (defmacro navbar-brand (src width)
   `(spinneret:with-html

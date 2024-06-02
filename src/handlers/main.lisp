@@ -1,29 +1,19 @@
-(in-package :ml-survey)
+(in-package :ml-survey/handlers)
 
 (defvar *survey-data-dir*
   (ensure-directories-exist (format nil
                                     "~adata/survey/"
                                     (uiop:getcwd))))
 
-(defun create-server (name port &key address document-root)
-  (let ((acceptor (make-instance 'hunchentoot:easy-acceptor
-                                 :address address
-                                 :name name
-                                 :document-root document-root
-                                 :port port)))
-    acceptor))
+(defun split-uri (uri)
+  (remove-if #'string-empty-p
+             (uiop:split-string uri :separator "/")))
 
-(defun start-server (acceptor &key document-root)
-  (if document-root
-      (setf (hunchentoot:acceptor-document-root acceptor) document-root))
-  (hunchentoot:start acceptor))
-
-(defun stop-server (acceptor)
-  (hunchentoot:stop acceptor))
-
-(defun restart-server (acceptor)
-  (hunchentoot:stop acceptor)
-  (hunchentoot:start acceptor))
+(defun valid-survey-id-p (id)
+  (member (if (stringp id)
+              (parse-integer id)
+              id)
+          (mapcar #'car (load-response (make-surveys-db-path)))))
 
 (defun today ()
   "Return today's date formatted as ISO-8601."
@@ -64,8 +54,3 @@
                          (random 1000000))))
 
 (defun string-empty-p (string) (= (length string) 0))
-
-(defvar *app* (create-server 'app
-                             8080
-                             :document-root
-                             "~/quicklisp/local-projects/dev.metalisp.survey/"))

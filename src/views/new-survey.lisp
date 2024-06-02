@@ -14,7 +14,7 @@
 (defun new-survey ()
   "Generates the view to create a new survey."
   (with-page (:title "New Survey")
-    (ml-survey/partials:navbar-en)
+    (navbar-en)
     (:section :class "container"
               (:h2 :class "mb-3" "New Survey")
               (:form :action "/create-survey" :method "post"

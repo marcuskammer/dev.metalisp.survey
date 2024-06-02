@@ -5,7 +5,7 @@
   (let ((id (format nil "~a" (first survey)))
         (properties (first (rest survey))))
     (with-page (:title "Surveys")
-      (ml-survey/partials:navbar-en)
+      (navbar-en)
       (:section :class "container"
                 (:h2 id)
                 (:table :class "table"

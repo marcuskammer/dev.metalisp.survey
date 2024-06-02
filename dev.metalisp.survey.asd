@@ -6,22 +6,24 @@
   :licence "MIT"
   :depends-on ("local-time" "hunchentoot" "dev.metalisp.sbt")
   :components ((:file "package")
-               (:module "src/views/partials"
+               (:module "src"
                 :components
-                ((:file "_navbar")))
-               (:module "src/views/forms"
-                :components
-                ((:file "sus")))
+                ((:file "app")))
                (:module "src/views"
                 :components
-                ((:file "create-survey")
+                ((:file "partials/_navbar")
+                 (:file "forms/sus")
+                 (:file "create-survey")
                  (:file "new-survey")
                  (:file "survey")
                  (:file "surveys")
                  (:file "questionnaire-submit")))
-               (:module "src"
-                :depends-on ("package" "src/views")
-                :serial t
+               (:module "src/handlers"
                 :components
                 ((:file "main")
-                 (:file "handlers")))))
+                 (:file "create-survey")
+                 (:file "new-survey")
+                 (:file "survey")
+                 (:file "surveys")
+                 (:file "questionnaire")
+                 (:file "questionnaire-submit")))))

@@ -2,7 +2,7 @@
 
 (defun questionnaire-submit ()
   (with-page (:title "Confirmation")
-    (ml-survey/partials:navbar-en)
+    (navbar-en)
     (:section :class "container"
               (:h2 "Confirmation")
               (:div :class "alert alert-info" :role "alert"

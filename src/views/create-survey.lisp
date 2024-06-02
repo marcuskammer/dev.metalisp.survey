@@ -3,7 +3,7 @@
 (defun create-survey (survey-id)
   "Generates the view to show the survey created."
   (with-page (:title "Surveys")
-    (ml-survey/partials:navbar-en)
+    (navbar-en)
     (:section :class "container"
               (:h2 "Your Surveys")
               (if survey-id

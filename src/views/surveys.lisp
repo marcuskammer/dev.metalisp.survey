@@ -12,7 +12,7 @@
 (defun surveys (surveys)
   "Generates the view to show all surveys available."
   (with-page (:title "Surveys")
-    (ml-survey/partials:navbar-en)
+    (navbar-en)
     (:section :class "container"
               (:h2 :class "mb-3"
                    "Your Surveys")

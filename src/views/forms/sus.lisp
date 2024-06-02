@@ -1,8 +1,8 @@
-(in-package :ml-survey/forms)
+(in-package :ml-survey/views)
 
 (defun sus-form-en (survey-id)
   (with-page (:title "SUS Form")
-    (ml-survey/partials:navbar-en)
+    (navbar-en)
     (:section :class "container"
               (:h2 "Usability Feedback Form")
               (:p "Please fill out the following forms and press the submit button.")
@@ -106,7 +106,7 @@
 
 (defun sus-form-de (survey-id)
   (with-page (:title "SUS Formular")
-    (ml-survey/partials:navbar-de)
+    (navbar-de)
     (:section :class "container"
               (:h2 "Usability Feedback Formular")
               (:p "Bitte füllen Sie die folgende Formular aus und klicken Sie auf die Schaltfläche 'Senden'.")
