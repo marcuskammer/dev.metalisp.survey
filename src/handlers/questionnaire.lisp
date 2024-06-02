@@ -6,7 +6,7 @@
     (and (= (length parts) 3)
          (string= (first parts) "survey")
          (every #'digit-char-p (second parts))
-         (valid-survey-id-p (parse-integer (second parts))))))
+         (survey-id-p (parse-integer (second parts))))))
 
 (defun questionnaire-uri (request)
   (questionnaire-uri-p (request-uri request)))
@@ -19,6 +19,6 @@
         (t (error "Unsupported language: ~A" lang))))
 
 (define-easy-handler (questionnaire :uri #'questionnaire-uri) (lang)
-  (let ((survey-id (second (split-uri (request-uri*)))))
+  (let ((survey-id (survey-id (request-uri*))))
     (setf *html-lang* lang)
     (funcall (return-sus-form lang) survey-id)))
