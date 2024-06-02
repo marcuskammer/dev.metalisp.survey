@@ -12,14 +12,23 @@
     (and (= (length parts) 2)
          (string= (first parts) "survey")
          (every #'digit-char-p (second parts))
-         (valid-survey-id-p (parse-integer (second parts))))))
+         (survey-id-p (parse-integer (second parts))))))
 
 (defun survey-uri (request)
   (let ((uri (request-uri request)))
     (survey-uri-p uri)))
 
+(defun survey-id (uri)
+  (check-type uri string)
+  (let ((id (second (split-uri uri))))
+    (unless (survey-id-p (parse-integer id))
+      (error "Wrong survey id"))
+    id))
+
+(defun survey-properties (id)
+  (check-type id integer)
+  (first (rest (assoc id (load-response (make-surveys-db-path))))))
+
 (define-easy-handler (survey :uri #'survey-uri) ()
-  (let* ((id (second (split-uri (request-uri*))))
-         (survey (assoc (parse-integer id)
-                        (load-response (make-surveys-db-path)))))
-    (ml-survey/views:survey survey)))
+  (let ((id (survey-id (request-uri*))))
+    (ml-survey/views:survey id (survey-properties (parse-integer id)))))
