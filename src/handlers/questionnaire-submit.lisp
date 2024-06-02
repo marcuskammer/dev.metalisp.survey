@@ -2,10 +2,11 @@
 
 (defun questionnaire-submit-uri-p (uri)
   "Check if the request URI matches the pattern '/survey/<numeric>/submit'"
-  (let ((parts (split-uri uri)))
+  (let ((parts (split-uri uri))
+        (survey (make-survey uri)))
     (and (= (length parts) 3)
          (string= (first parts) "survey")
-         (and (survey-id-p (parse-integer (second parts)))
+         (and (funcall survey 'id)
               (every #'digit-char-p (second parts)))
          (search "submit" (third parts)))))
 
@@ -21,6 +22,6 @@
 
 (define-easy-handler (questionnaire-submit :uri #'questionnaire-submit-uri) nil
   (let ((post-params (post-parameters* *request*))
-        (id (survey-id (request-uri*))))
-    (store-response (ensure-data-file-exist id) post-params)
+        (survey (make-survey (request-uri*))))
+    (store-response (ensure-data-file-exist (funcall survey 'id)) post-params)
     (ml-survey/views:questionnaire-submit)))
