@@ -10,11 +10,6 @@
   (remove-if #'string-empty-p
              (uiop:split-string uri :separator "/")))
 
-(defun valid-survey-id-p (id)
-  (check-type id integer)
-  (let ((ids (mapcar #'car (load-response (make-surveys-db-path)))))
-    (if (member id ids) t nil)))
-
 (defun today ()
   "Return today's date formatted as ISO-8601."
   (local-time:format-timestring nil
