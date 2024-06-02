@@ -6,14 +6,14 @@
                                     (uiop:getcwd))))
 
 (defun split-uri (uri)
+  (check-type uri string)
   (remove-if #'string-empty-p
              (uiop:split-string uri :separator "/")))
 
 (defun valid-survey-id-p (id)
-  (member (if (stringp id)
-              (parse-integer id)
-              id)
-          (mapcar #'car (load-response (make-surveys-db-path)))))
+  (check-type id integer)
+  (let ((ids (mapcar #'car (load-response (make-surveys-db-path)))))
+    (if (member id ids) t nil)))
 
 (defun today ()
   "Return today's date formatted as ISO-8601."
@@ -34,6 +34,7 @@
   (make-db-path (today) "-surveys-db.lisp"))
 
 (defun load-response (db)
+  (check-type db string)
   (with-open-file (stream db
                           :direction :input
                           :if-does-not-exist :create)
@@ -42,6 +43,8 @@
         (read stream))))
 
 (defun store-response (db responses)
+  (check-type db string)
+  (check-type responses list)
   (with-open-file (stream db
                           :direction :output
                           :if-exists :supersede)
