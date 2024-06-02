@@ -5,7 +5,8 @@
   (let ((parts (split-uri uri)))
     (and (= (length parts) 3)
          (string= (first parts) "survey")
-         (every #'digit-char-p (second parts)))))
+         (every #'digit-char-p (second parts))
+         (valid-survey-id-p (parse-integer (second parts))))))
 
 (defun questionnaire-uri (request)
   (questionnaire-uri-p (request-uri request)))
