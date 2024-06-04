@@ -12,7 +12,7 @@
 (defun questionnaire-uri (request)
   (questionnaire-uri-p (request-uri request)))
 
-(defun return-sus-form (lang)
+(defun choose-sus-form (lang)
   "Based on LANG decide which sus form to show."
   (check-type lang string)
   (cond ((string= lang "en") #'ml-survey/views:sus-form-en)
@@ -22,4 +22,4 @@
 (define-easy-handler (questionnaire :uri #'questionnaire-uri) (lang)
   (let ((survey (make-survey (request-uri*))))
     (setf *html-lang* lang)
-    (funcall (return-sus-form lang) (funcall survey 'id))))
+    (funcall (choose-sus-form lang) (funcall survey 'id))))
