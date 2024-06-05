@@ -4,6 +4,7 @@
                 #:easy-acceptor)
   (:export
    #:*app*
+   #:set-default-directory
    #:start-server
    #:stop-server
    #:restart-server))

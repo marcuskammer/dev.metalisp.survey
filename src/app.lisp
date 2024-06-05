@@ -1,5 +1,8 @@
 (in-package :ml-survey)
 
+(defun set-default-directory (directory)
+  (setf *default-pathname-defaults* (truename (merge-pathnames directory))))
+
 (defun create-server (name port &key address document-root)
   (let ((acceptor (make-instance 'hunchentoot:easy-acceptor
                                  :address address
@@ -23,4 +26,4 @@
 (defvar *app* (create-server 'app
                              8080
                              :document-root
-                             "~/quicklisp/local-projects/dev.metalisp.survey/"))
+                             (merge-pathnames (uiop:getcwd) "public")))
