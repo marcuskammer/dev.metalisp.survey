@@ -1,6 +1,5 @@
 (in-package :ml-survey)
 
-
 (defun create-server (name port &key address document-root)
   (let ((acceptor (make-instance 'hunchentoot:easy-acceptor
                                  :address address
