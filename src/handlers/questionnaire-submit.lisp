@@ -12,14 +12,16 @@
 (defun questionnaire-submit-uri (request)
   (questionnaire-submit-uri-p (request-uri request)))
 
-(defun ensure-data-file-exist (survey-id)
-  (ensure-directories-exist (format nil "~a~a/~a.lisp"
+(defun ensure-data-file-exist (survey-id questionnaire-id)
+  (ensure-directories-exist (format nil "~a/~a/~a.lisp"
                                     *survey-data-dir*
                                     survey-id
-                                    (generate-uuid))))
+                                    questionnaire-id)))
 
 (define-easy-handler (questionnaire-submit :uri #'questionnaire-submit-uri) nil
   (let ((post-params (post-parameters* *request*))
+        (questionnaire-id (generate-uuid))
         (survey (make-survey (request-uri*))))
-    (store-response (ensure-data-file-exist (funcall survey 'id)) post-params)
+    (store-response (ensure-data-file-exist (funcall survey 'id) questionnaire-id)
+                    post-params)
     (ml-survey/views:questionnaire-submit)))
