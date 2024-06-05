@@ -6,19 +6,17 @@
         (survey (make-survey uri)))
     (and (= (length parts) 3)
          (string= (first parts) "survey")
-         (and (funcall survey 'id)
-              (every #'digit-char-p (second parts)))
+         (funcall survey 'id)
          (search "submit" (third parts)))))
 
 (defun questionnaire-submit-uri (request)
   (questionnaire-submit-uri-p (request-uri request)))
 
-(defun ensure-data-file-exist (id &optional lang)
-  (ensure-directories-exist (format nil "~a~a/~a-~a.lisp"
+(defun ensure-data-file-exist (survey-id)
+  (ensure-directories-exist (format nil "~a~a/~a.lisp"
                                     *survey-data-dir*
-                                    id
-                                    (generate-uuid)
-                                    lang)))
+                                    survey-id
+                                    (generate-uuid))))
 
 (define-easy-handler (questionnaire-submit :uri #'questionnaire-submit-uri) nil
   (let ((post-params (post-parameters* *request*))
