@@ -1,7 +1,7 @@
 (in-package :ml-survey/handlers)
 
-(defvar *survey-data-dir*
-  (ensure-directories-exist (uiop:merge-pathnames* "data/survey")))
+(defun surveys-data-dir ()
+  (ensure-directories-exist (uiop:merge-pathnames* "data/surveys")))
 
 (defun split-uri (uri)
   (check-type uri string)
@@ -20,7 +20,7 @@
                                 (local-time:now)
                                 :format '((:hour 2) ":" (:min 2) ":" (:sec 2))))
 
-(defun ensure-file-exists (pathname)
+(defun ensure-file-exist (pathname)
   "Ensure that a file specified by PATHNAME exists, create it if it doesn't."
   (unless (uiop:file-exists-p pathname)
     (with-open-file (stream pathname
@@ -30,10 +30,11 @@
       (format stream "")))
   pathname)
 
-(defun make-db-file (file-str)
+(defun make-db-file (file)
   "Prepare and ensure a database file at FILE-STR path."
-  (let ((path (uiop:merge-pathnames* file-str)))
-    (ensure-file-exits (truename path))))
+  (check-type file string)
+  (let ((path (uiop:merge-pathnames* file)))
+    (ensure-file-exist (truename path))))
 
 (defun make-surveys-db-file ()
   (make-db-file "surveys-db.lisp"))
