@@ -34,7 +34,7 @@
   "Prepare and ensure a database file at FILE-STR path."
   (check-type file string)
   (let ((path (uiop:merge-pathnames* file)))
-    (ensure-file-exist (truename path))))
+    (ensure-file-exist path)))
 
 (defun make-surveys-db-file ()
   (make-db-file "surveys-db.lisp"))
