@@ -14,7 +14,7 @@
 
 (defun ensure-data-file-exist (survey-id questionnaire-id)
   (ensure-directories-exist (format nil "~a/~a/~a.lisp"
-                                    *survey-data-dir*
+                                    (surveys-data-dir)
                                     survey-id
                                     questionnaire-id)))
 

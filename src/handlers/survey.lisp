@@ -5,7 +5,7 @@
              (case action
                (id (second (split-uri uri)))
 
-               (id-p (let ((ids (mapcar #'car (load-response (make-surveys-db-path)))))
+               (id-p (let ((ids (mapcar #'car (load-response (make-surveys-db-file)))))
                        (if (member (parse-integer (survey-fn 'id)) ids) t nil)))
 
                (uri-p (let ((parts (split-uri uri)))
@@ -15,7 +15,7 @@
                              (survey-fn 'id-p))))
 
                (properties (first (rest (assoc (parse-integer (survey-fn 'id))
-                                               (load-response (make-surveys-db-path)))))))))
+                                               (load-response (make-surveys-db-file)))))))))
     #'survey-fn))
 
 (defun survey-uri (request)
