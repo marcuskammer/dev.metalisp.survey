@@ -1,7 +1,9 @@
 (in-package :ml-survey/handlers)
 
 (defun surveys-data-dir ()
-  (ensure-directories-exist (uiop:merge-pathnames* "data/surveys")))
+  (let ((data-dir (uiop:merge-pathnames* "data/surveys/")))
+    (ensure-directories-exist data-dir)
+    data-dir))
 
 (defun split-uri (uri)
   (check-type uri string)

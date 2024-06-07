@@ -1,24 +1,14 @@
 (in-package :ml-survey/views)
 
-(defun survey (id properties)
+(defun survey (survey &optional results)
   "Generates the view to show the survey created."
-  (check-type id string)
-  (check-type properties list)
-  (with-page (:title "Surveys")
+  (with-page (:title "Survey Details")
     (navbar-en)
     (:section :class "container"
-              (:h2 id)
-              (:table :class "table"
-                (:thead :class "thead-dark"
-                        (:tr (:th :scope "col"
-                                  "Key")
-                             (:th :scope "col"
-                                  "Value")))
-                (:tbody (loop for property in properties
-                              for key = (car property)
-                              for value = (cdr property) do
-                                (:tr (:td key)
-                                     (:td (if (string= key "questionnaire")
-                                              (:a :href (concatenate 'string "/survey/" id value)
-                                                  value)
-                                              value)))))))))
+              (:h2 (format nil "Survey ID: ~a" (ml-survey/handlers::survey-id survey)))
+              (:h3 "Properties")
+              (ml-survey/handlers::survey-html survey)
+              (:h3 "Questionnaire Results")
+              (:ul
+               (loop for result in results do
+                 (:li result))))))

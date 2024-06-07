@@ -2,12 +2,10 @@
 
 (defun questionnaire-uri-p (uri)
   "Check if the request URI matches the pattern '/survey/<numeric>'"
-  (let ((parts (split-uri uri))
-        (survey (make-survey uri)))
+  (let ((parts (split-uri uri)))
     (and (= (length parts) 3)
          (string= (first parts) "survey")
-         (every #'digit-char-p (second parts))
-         (funcall survey 'id-p))))
+         (every #'digit-char-p (second parts)))))
 
 (defun questionnaire-uri (request)
   (questionnaire-uri-p (request-uri request)))
@@ -20,6 +18,6 @@
         (t (error "Unsupported language: ~A" lang))))
 
 (define-easy-handler (questionnaire :uri #'questionnaire-uri) (lang)
-  (let ((survey (make-survey (request-uri*))))
+  (let ((s (make-instance 'survey :id (second (split-uri (request-uri*))))))
     (setf *html-lang* lang)
-    (funcall (choose-sus-form lang) (funcall survey 'id))))
+    (funcall (choose-sus-form lang) (survey-id s))))
