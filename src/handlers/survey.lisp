@@ -61,6 +61,9 @@ Returns a list of integers."
 (defmethod survey-data-dir-p ((survey survey))
   (uiop:directory-exists-p (survey-data-dir survey)))
 
+(defun build-questionnaire-link (survey-id resource)
+  (format nil "/survey/~a/~a" survey-id resource))
+
 (defmethod survey-html ((survey survey))
   (spinneret:with-html
     (:table :class "table"
@@ -73,18 +76,15 @@ Returns a list of integers."
                     for key = (car property)
                     for value = (cdr property) do
                       (:tr (:td key)
-                           (:td (if (string= key "questionnaire")
-                                    (:a :href (concatenate 'string "/survey/" (survey-id survey) value)
-                                        value)
-                                    value))))))))
+                           (cond ((string= key "questionnaire")
+                                  (:td (:a :href (build-questionnaire-link (survey-id survey) value))))
+                                 (t (:td value)))))))))
 
 (defun survey-uri-p (uri)
-  (let* ((parts (split-uri uri))
-         (s (make-instance 'survey :id (second parts))))
-    (and (= (length parts) 2)
-         (string= (first parts) "survey")
-         (every #'digit-char-p (survey-id s))
-         (survey-id-p s))))
+  (let ((parts (split-uri uri)))
+        (and (= (length parts) 2)
+             (string= (first parts) "survey")
+             (every #'digit-char-p (second parts)))))
 
 (defun survey-uri (request)
   (survey-uri-p (request-uri request)))
