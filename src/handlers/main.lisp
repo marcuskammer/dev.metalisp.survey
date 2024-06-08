@@ -64,4 +64,11 @@
                          (get-universal-time)
                          (random 1000000))))
 
+(defun generate-random-id ()
+  (let ((charset "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+        (length 11))
+    (coerce (loop repeat length
+                  collect (char charset (random (length charset))))
+            'string)))
+
 (defun string-empty-p (string) (= (length string) 0))
