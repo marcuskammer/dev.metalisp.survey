@@ -1,30 +1,30 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#orgf738832)
-    1.  [Introduction](#org47dadf1)
-    2.  [Dependencies](#org4d5be1c)
-    3.  [Mailing list](#orgccf3013)
-    4.  [Issue tracker](#org7fa29d6)
-    5.  [News Feed](#org2fa1e6f)
-    6.  [Installation instructions](#org095797a)
-        1.  [1. Install a Common Lisp implementation](#org3954d41)
-        2.  [2. Set up ASDF](#org3468e36)
-        3.  [3. Organize your project directory](#org2529f8d)
-        4.  [4. Configure ASDF to find your project](#org026723c)
-        5.  [5. Load your project](#orgcd4f33a)
-        6.  [6. Run your project](#org3a3b3db)
-        7.  [Optional: Example Initialization in .sbclrc](#orgaa8ab9c)
-    7.  [License](#org156e0f4)
+1.  [dev.metalisp.survey](#orgfc20458)
+    1.  [Introduction](#org82e49d0)
+    2.  [Dependencies](#org0384d14)
+    3.  [Mailing list](#orgcddacc5)
+    4.  [Issue tracker](#org6369bf7)
+    5.  [News Feed](#orgfbb79a0)
+    6.  [Installation instructions](#org9b4ca7a)
+        1.  [1. Install a Common Lisp implementation](#org8cdd8c0)
+        2.  [2. Set up ASDF](#orgf77351d)
+        3.  [3. Organize the project directory](#org6c13c6a)
+        4.  [4. Configure ASDF to find the project](#org1a1ebc5)
+        5.  [5. Load the project](#orgacb4ed1)
+        6.  [6. Run the project](#org3908f2a)
+        7.  [Optional: Example Initialization in .sbclrc](#org6a80305)
+    7.  [License](#org4d30f3e)
 
 
 
-<a id="orgf738832"></a>
+<a id="orgfc20458"></a>
 
 # dev.metalisp.survey
 
 
-<a id="org47dadf1"></a>
+<a id="org82e49d0"></a>
 
 ## Introduction
 
@@ -35,7 +35,7 @@ questions and collecting responses. The goal is to streamline the process of
 gathering and analyzing usability feedback.
 
 
-<a id="org4d5be1c"></a>
+<a id="org0384d14"></a>
 
 ## Dependencies
 
@@ -43,33 +43,33 @@ gathering and analyzing usability feedback.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="orgccf3013"></a>
+<a id="orgcddacc5"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org7fa29d6"></a>
+<a id="org6369bf7"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org2fa1e6f"></a>
+<a id="orgfbb79a0"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org095797a"></a>
+<a id="org9b4ca7a"></a>
 
 ## Installation instructions
 
 
-<a id="org3954d41"></a>
+<a id="org8cdd8c0"></a>
 
 ### 1. Install a Common Lisp implementation
 
@@ -80,7 +80,7 @@ gathering and analyzing usability feedback.
     -   [CCL](https://ccl.clozure.com/)
 
 
-<a id="org3468e36"></a>
+<a id="orgf77351d"></a>
 
 ### 2. Set up ASDF
 
@@ -88,9 +88,9 @@ gathering and analyzing usability feedback.
     it&rsquo;s not present, you can download it from [ASDF&rsquo;s repository](https://gitlab.common-lisp.net/asdf/asdf).
 
 
-<a id="org2529f8d"></a>
+<a id="org6c13c6a"></a>
 
-### 3. Organize your project directory
+### 3. Organize the project directory
 
 -   Place the `dev.metalisp.survey` project in the `~/common-lisp`
     directory. Ensure the directory structure looks like this:
@@ -102,9 +102,9 @@ gathering and analyzing usability feedback.
                   └── app.lisp
 
 
-<a id="org026723c"></a>
+<a id="org1a1ebc5"></a>
 
-### 4. Configure ASDF to find your project
+### 4. Configure ASDF to find the project
 
 -   Open your Common Lisp REPL and run the following commands to set up the
     ASDF central registry:
@@ -116,27 +116,27 @@ gathering and analyzing usability feedback.
         (push #p"~/common-lisp/" asdf:*central-registry*)
 
 
-<a id="orgcd4f33a"></a>
+<a id="orgacb4ed1"></a>
 
-### 5. Load your project
+### 5. Load the project
 
 -   In your REPL, load the project by running:
     
         (asdf:load-system :dev.metalisp.survey)
 
 
-<a id="org3a3b3db"></a>
+<a id="org3908f2a"></a>
 
-### 6. Run your project
+### 6. Run the project
 
 -   After loading the system, you can run the main function or entry point of
     the project.
-    `dev.metalisp.survey:start`, you would execute:
+    `ml-survey:start`, you would execute:
     
-        (dev.metalisp.survey:start)
+        (ml-survey:start)
 
 
-<a id="orgaa8ab9c"></a>
+<a id="org6a80305"></a>
 
 ### Optional: Example Initialization in .sbclrc
 
@@ -155,7 +155,7 @@ setup to your `.sbclrc` file:
         `~/common-lisp` directory in the ASDF central registry.
 
 
-<a id="org156e0f4"></a>
+<a id="org4d30f3e"></a>
 
 ## License
 
