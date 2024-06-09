@@ -19,6 +19,83 @@ gathering and analyzing usability feedback.
 - https://todo.sr.ht/~marcuskammer/dev.metalisp.survey
 ** News Feed
 - https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml
+** Installation instructions
+*** 1. Install a Common Lisp implementation
+
+   - Ensure you have a Common Lisp implementation installed. Common options
+     include SBCL (Steel Bank Common Lisp) and CCL (Clozure Common Lisp). You
+     can download and install them from their respective websites:
+
+     - [[http://www.sbcl.org/][SBCL]]
+     - [[https://ccl.clozure.com/][CCL]]
+
+*** 2. Set up ASDF
+
+   - ASDF is typically bundled with modern Lisp implementations. However, if
+     it's not present, you can download it from [[https://gitlab.common-lisp.net/asdf/asdf][ASDF's repository]].
+
+*** 3. Organize your project directory
+
+   - Place the =dev.metalisp.survey= project in the =~/common-lisp=
+     directory. Ensure the directory structure looks like this:
+
+     #+BEGIN_EXAMPLE
+     ~/common-lisp/
+       └── dev.metalisp.survey/
+           ├── dev.metalisp.survey.asd
+           └── src/
+               └── main.lisp
+     #+END_EXAMPLE
+
+*** 4. Configure ASDF to find your project
+
+   - Open your Common Lisp REPL and run the following commands to set up the
+     ASDF central registry:
+
+     #+BEGIN_SRC lisp
+     ;; Ensure ASDF is loaded
+     (require :asdf)
+
+     ;; Add ~/common-lisp to the ASDF central registry
+     (push #p"~/common-lisp/" asdf:*central-registry*)
+     #+END_SRC
+
+*** 5. Load your project
+
+   - In your REPL, load your project by running:
+
+     #+BEGIN_SRC lisp
+     (asdf:load-system :dev.metalisp.survey)
+     #+END_SRC
+
+*** 6. Run your project
+
+   - After loading the system, you can run the main function or entry point of
+     your project. For example, if your main function is
+     =dev.metalisp.survey:start=, you would execute:
+
+     #+BEGIN_SRC lisp
+     (dev.metalisp.survey:start)
+     #+END_SRC
+
+*** Optional: Example Initialization in .sbclrc
+
+To make the ASDF configuration persistent across REPL sessions, you can add the
+setup to your =.sbclrc= file:
+
+1. Edit =.sbclrc=
+   - Open (or create) the =.sbclrc= file in your home directory and add the
+     following lines:
+
+     #+BEGIN_SRC lisp
+     (require :asdf)
+     (push #p"~/common-lisp/" asdf:*central-registry*)
+     #+END_SRC
+
+2. Reload SBCL
+   - The next time you start SBCL, it will automatically include the
+     =~/common-lisp= directory in the ASDF central registry.
+
 ** License
 
 MIT
