@@ -3,6 +3,7 @@
   (:import-from #:hunchentoot
                 #:easy-acceptor)
   (:export
+   #:start
    #:*app*
    #:set-default-directory
    #:start-server

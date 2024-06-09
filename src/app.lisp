@@ -27,3 +27,6 @@
                              8080
                              :document-root
                              (merge-pathnames (uiop:getcwd) "public")))
+
+(defun start ()
+  (start-server *app*))

@@ -34,7 +34,7 @@ gathering and analyzing usability feedback.
    - ASDF is typically bundled with modern Lisp implementations. However, if
      it's not present, you can download it from [[https://gitlab.common-lisp.net/asdf/asdf][ASDF's repository]].
 
-*** 3. Organize your project directory
+*** 3. Organize the project directory
 
    - Place the =dev.metalisp.survey= project in the =~/common-lisp=
      directory. Ensure the directory structure looks like this:
@@ -47,7 +47,7 @@ gathering and analyzing usability feedback.
                └── app.lisp
      #+END_EXAMPLE
 
-*** 4. Configure ASDF to find your project
+*** 4. Configure ASDF to find the project
 
    - Open your Common Lisp REPL and run the following commands to set up the
      ASDF central registry:
@@ -60,7 +60,7 @@ gathering and analyzing usability feedback.
      (push #p"~/common-lisp/" asdf:*central-registry*)
      #+END_SRC
 
-*** 5. Load your project
+*** 5. Load the project
 
    - In your REPL, load the project by running:
 
@@ -68,14 +68,14 @@ gathering and analyzing usability feedback.
      (asdf:load-system :dev.metalisp.survey)
      #+END_SRC
 
-*** 6. Run your project
+*** 6. Run the project
 
    - After loading the system, you can run the main function or entry point of
      the project.
-     =dev.metalisp.survey:start=, you would execute:
+     =ml-survey:start=, you would execute:
 
      #+BEGIN_SRC lisp
-     (dev.metalisp.survey:start)
+     (ml-survey:start)
      #+END_SRC
 
 *** Optional: Example Initialization in .sbclrc
