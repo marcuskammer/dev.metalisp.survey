@@ -17,6 +17,8 @@ gathering and analyzing usability feedback.
 - https://lists.sr.ht/~marcuskammer/dev.metalisp.survey
 ** Issue tracker
 - https://todo.sr.ht/~marcuskammer/dev.metalisp.survey
+** News Feed
+- https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml
 ** License
 
 MIT
