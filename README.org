@@ -44,7 +44,7 @@ gathering and analyzing usability feedback.
        └── dev.metalisp.survey/
            ├── dev.metalisp.survey.asd
            └── src/
-               └── main.lisp
+               └── app.lisp
      #+END_EXAMPLE
 
 *** 4. Configure ASDF to find your project
@@ -62,7 +62,7 @@ gathering and analyzing usability feedback.
 
 *** 5. Load your project
 
-   - In your REPL, load your project by running:
+   - In your REPL, load the project by running:
 
      #+BEGIN_SRC lisp
      (asdf:load-system :dev.metalisp.survey)
@@ -71,7 +71,7 @@ gathering and analyzing usability feedback.
 *** 6. Run your project
 
    - After loading the system, you can run the main function or entry point of
-     your project. For example, if your main function is
+     the project.
      =dev.metalisp.survey:start=, you would execute:
 
      #+BEGIN_SRC lisp

@@ -1,30 +1,30 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#org69a1733)
-    1.  [Introduction](#org2a7150a)
-    2.  [Dependencies](#org1ee57c9)
-    3.  [Mailing list](#org3357d0b)
-    4.  [Issue tracker](#orgc414d01)
-    5.  [News Feed](#org4946fdf)
-    6.  [Installation instructions](#org9c4c36e)
-        1.  [1. Install a Common Lisp implementation](#org3df3cc5)
-        2.  [2. Set up ASDF](#org244fc7d)
-        3.  [3. Organize your project directory](#org68b8a26)
-        4.  [4. Configure ASDF to find your project](#org238e518)
-        5.  [5. Load your project](#org3ada275)
-        6.  [6. Run your project](#org72e0615)
-        7.  [Optional: Example Initialization in .sbclrc](#orgc2db2d7)
-    7.  [License](#org0e7424a)
+1.  [dev.metalisp.survey](#orgf738832)
+    1.  [Introduction](#org47dadf1)
+    2.  [Dependencies](#org4d5be1c)
+    3.  [Mailing list](#orgccf3013)
+    4.  [Issue tracker](#org7fa29d6)
+    5.  [News Feed](#org2fa1e6f)
+    6.  [Installation instructions](#org095797a)
+        1.  [1. Install a Common Lisp implementation](#org3954d41)
+        2.  [2. Set up ASDF](#org3468e36)
+        3.  [3. Organize your project directory](#org2529f8d)
+        4.  [4. Configure ASDF to find your project](#org026723c)
+        5.  [5. Load your project](#orgcd4f33a)
+        6.  [6. Run your project](#org3a3b3db)
+        7.  [Optional: Example Initialization in .sbclrc](#orgaa8ab9c)
+    7.  [License](#org156e0f4)
 
 
 
-<a id="org69a1733"></a>
+<a id="orgf738832"></a>
 
 # dev.metalisp.survey
 
 
-<a id="org2a7150a"></a>
+<a id="org47dadf1"></a>
 
 ## Introduction
 
@@ -35,7 +35,7 @@ questions and collecting responses. The goal is to streamline the process of
 gathering and analyzing usability feedback.
 
 
-<a id="org1ee57c9"></a>
+<a id="org4d5be1c"></a>
 
 ## Dependencies
 
@@ -43,33 +43,33 @@ gathering and analyzing usability feedback.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org3357d0b"></a>
+<a id="orgccf3013"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orgc414d01"></a>
+<a id="org7fa29d6"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org4946fdf"></a>
+<a id="org2fa1e6f"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org9c4c36e"></a>
+<a id="org095797a"></a>
 
 ## Installation instructions
 
 
-<a id="org3df3cc5"></a>
+<a id="org3954d41"></a>
 
 ### 1. Install a Common Lisp implementation
 
@@ -80,7 +80,7 @@ gathering and analyzing usability feedback.
     -   [CCL](https://ccl.clozure.com/)
 
 
-<a id="org244fc7d"></a>
+<a id="org3468e36"></a>
 
 ### 2. Set up ASDF
 
@@ -88,7 +88,7 @@ gathering and analyzing usability feedback.
     it&rsquo;s not present, you can download it from [ASDF&rsquo;s repository](https://gitlab.common-lisp.net/asdf/asdf).
 
 
-<a id="org68b8a26"></a>
+<a id="org2529f8d"></a>
 
 ### 3. Organize your project directory
 
@@ -99,10 +99,10 @@ gathering and analyzing usability feedback.
           └── dev.metalisp.survey/
               ├── dev.metalisp.survey.asd
               └── src/
-                  └── main.lisp
+                  └── app.lisp
 
 
-<a id="org238e518"></a>
+<a id="org026723c"></a>
 
 ### 4. Configure ASDF to find your project
 
@@ -116,27 +116,27 @@ gathering and analyzing usability feedback.
         (push #p"~/common-lisp/" asdf:*central-registry*)
 
 
-<a id="org3ada275"></a>
+<a id="orgcd4f33a"></a>
 
 ### 5. Load your project
 
--   In your REPL, load your project by running:
+-   In your REPL, load the project by running:
     
         (asdf:load-system :dev.metalisp.survey)
 
 
-<a id="org72e0615"></a>
+<a id="org3a3b3db"></a>
 
 ### 6. Run your project
 
 -   After loading the system, you can run the main function or entry point of
-    your project. For example, if your main function is
+    the project.
     `dev.metalisp.survey:start`, you would execute:
     
         (dev.metalisp.survey:start)
 
 
-<a id="orgc2db2d7"></a>
+<a id="orgaa8ab9c"></a>
 
 ### Optional: Example Initialization in .sbclrc
 
@@ -155,7 +155,7 @@ setup to your `.sbclrc` file:
         `~/common-lisp` directory in the ASDF central registry.
 
 
-<a id="org0e7424a"></a>
+<a id="org156e0f4"></a>
 
 ## License
 
