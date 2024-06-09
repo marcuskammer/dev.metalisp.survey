@@ -90,7 +90,7 @@ Returns a list of integers."
   (survey-uri-p (request-uri request)))
 
 (define-easy-handler (survey :uri #'survey-uri) ()
-  (let ((s (make-instance 'survey :id (second (split-uri (request-uri*))))))
+  (let ((s (make-instance 'survey :id (get-survey-id (request-uri*)))))
     (ml-survey/views:survey s
                             (when (survey-data-dir-p s)
                               (sus-calc (survey-data-dir-files s))))))

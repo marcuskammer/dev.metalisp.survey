@@ -10,6 +10,13 @@
   (remove-if #'string-empty-p
              (uiop:split-string uri :separator "/")))
 
+(defun get-resource-id (resource request)
+  (case resource
+    (survey (second (split-uri request)))))
+
+(defun get-survey-id (request)
+  (get-resource-id 'survey request))
+
 (defun today ()
   "Return today's date formatted as ISO-8601."
   (local-time:format-timestring nil

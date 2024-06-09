@@ -19,6 +19,8 @@
         (t (error "Unsupported language: ~A" lang))))
 
 (defun process-questionnaire-get (lang s)
+  (check-type lang string)
+  (check-type s survey)
   (setf *html-lang* lang)
   (funcall (choose-sus-form lang) (survey-id s)))
 
@@ -31,7 +33,7 @@
     (ml-survey/views:questionnaire-submit)))
 
 (define-easy-handler (questionnaire :uri #'questionnaire-uri) (lang)
-  (let ((s (make-instance 'survey :id (second (split-uri (request-uri*))))))
+  (let ((s (make-instance 'survey :id (get-survey-id (request-uri*)))))
     (cond ((eq (hunchentoot:request-method*) :get)
            (process-questionnaire-get lang s))
           ((eq (hunchentoot:request-method*) :post)
