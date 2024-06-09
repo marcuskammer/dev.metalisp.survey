@@ -6,7 +6,7 @@
     (:section :class "container"
               (:h2 "Usability Feedback Form")
               (:p "Please fill out the following forms and press the submit button.")
-              (:form :action (format nil "/survey/~a/submit?lang=en" survey-id)
+              (:form :action (format nil "/survey/~a/questionnaire/sus" survey-id)
                      :method "post"
                      :class (dev.metalisp.sbt/utility:spacing :property "m" :side "y" :size 5)
                      (multi-form
@@ -110,7 +110,7 @@
     (:section :class "container"
               (:h2 "Usability Feedback Formular")
               (:p "Bitte füllen Sie die folgende Formular aus und klicken Sie auf die Schaltfläche 'Senden'.")
-              (:form :action (format nil "/survey/~a/submit?lang=de" survey-id)
+              (:form :action (format nil "/survey/~a/questionnaire/sus" survey-id)
                      :method "post"
                      :class (dev.metalisp.sbt/utility:spacing :property "m" :side "y" :size 5)
                      (multi-form
