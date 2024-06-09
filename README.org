@@ -9,6 +9,9 @@ users to easily conduct usability evaluations by presenting the standard SUS
 questions and collecting responses. The goal is to streamline the process of
 gathering and analyzing usability feedback.
 
+* Dependencies
+- https://github.com/edicl/hunchentoot
+- https://git.sr.ht/~marcuskammer/dev.metalisp.sbt
 * License
 
 MIT

@@ -1,12 +1,13 @@
 
 # Table of Contents
 
-1.  [Introduction](#org7039b6d)
-2.  [License](#org1b9cfed)
+1.  [Introduction](#org6f2bebf)
+2.  [Dependencies](#org8c2deae)
+3.  [License](#org5544a2f)
 
 
 
-<a id="org7039b6d"></a>
+<a id="org6f2bebf"></a>
 
 # Introduction
 
@@ -17,7 +18,15 @@ questions and collecting responses. The goal is to streamline the process of
 gathering and analyzing usability feedback.
 
 
-<a id="org1b9cfed"></a>
+<a id="org8c2deae"></a>
+
+# Dependencies
+
+-   <https://github.com/edicl/hunchentoot>
+-   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
+
+
+<a id="org5544a2f"></a>
 
 # License
 
