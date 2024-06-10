@@ -26,7 +26,7 @@
 (defvar *app* (create-server 'app
                              8080
                              :document-root
-                             (merge-pathnames (uiop:getcwd) "public")))
+                             "public/"))
 
 (defun start ()
   (start-server *app*))

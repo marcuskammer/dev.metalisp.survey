@@ -44,12 +44,12 @@
 
 (defmacro navbar-de ()
   (let ((id "foo-bar"))
-    `(navbar (navbar-brand "/src/assets/company_logo.png" 30)
+    `(navbar (navbar-brand "company_logo.png" 30)
        (navbar-toggle ,id)
        (navbar-nav ,id "/" "Home" "/imprint" "Impressum"))))
 
 (defmacro navbar-en ()
   (let ((id "foo-bar"))
-    `(navbar (navbar-brand "/src/assets/company_logo.png" 30)
+    `(navbar (navbar-brand "company_logo.png" 30)
        (navbar-toggle ,id)
        (navbar-nav ,id "/" "Home" "/imprint" "Imprint"))))
