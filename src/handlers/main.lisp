@@ -1,9 +1,25 @@
 (in-package :ml-survey/handlers)
 
 (defun base-dir ()
-  (if (uiop:os-unix-p)
-      (format nil "~a/" (uiop:getenv "XDG_DATA_HOME"))
-      (format nil "~a/" (uiop:getenv "LOCALAPPDATA"))))
+  (let ((os (uiop:detect-os)))
+    (cond ((eq os :os-windows)
+           (format nil "~a/" (uiop:getenv "LOCALAPPDATA")))
+
+          ((eq os :os-unix)
+           (format nil "~a" (uiop:merge-pathnames*
+                             ".local/share/"
+                             (format nil
+                                     "~a/"
+                                     (uiop:getenv "HOME")))))
+
+          ((eq os :os-macos)
+           (format nil "~a" (uiop:merge-pathnames*
+                             "Library/Application Support/"
+                             (format nil
+                                     "~a/"
+                                     (uiop:getenv "HOME")))))
+
+          (t (error "Unsupported OS")))))
 
 (defun app-dir ()
   (uiop:merge-pathnames* "ml-survey/" (base-dir)))
