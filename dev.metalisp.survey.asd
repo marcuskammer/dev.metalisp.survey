@@ -11,8 +11,8 @@
                 ((:file "app")))
                (:module "src/views"
                 :components
-                ((:file "partials/_navbar")
-                 (:file "forms/sus")
+                ((:file "_navbar")
+                 (:file "sus")
                  (:file "create-survey")
                  (:file "new-survey")
                  (:file "survey")
@@ -25,5 +25,4 @@
                  (:file "new-survey")
                  (:file "survey")
                  (:file "surveys")
-                 (:file "questionnaire")
-                 (:file "questionnaire-submit")))))
+                 (:file "questionnaire")))))

@@ -13,7 +13,7 @@
      (:button :class "navbar-toggler"
               :type "button"
               :data-bs-toggle "collapse"
-              :data-bs-target ,target
+              :data-bs-target (format nil "#~a" ,target)
               :aria-controls ,target
               :aria-expanded "false"
               :aria-label "Toggle Navigation"
@@ -43,13 +43,13 @@
      (navbar-nav ,id ,@body)))
 
 (defmacro navbar-de ()
-  (let ((id "#mainNav"))
+  (let ((id "foo-bar"))
     `(navbar (navbar-brand "/src/assets/company_logo.png" 30)
        (navbar-toggle ,id)
        (navbar-nav ,id "/" "Home" "/imprint" "Impressum"))))
 
 (defmacro navbar-en ()
-  (let ((id "#mainNav"))
+  (let ((id "foo-bar"))
     `(navbar (navbar-brand "/src/assets/company_logo.png" 30)
        (navbar-toggle ,id)
        (navbar-nav ,id "/" "Home" "/imprint" "Imprint"))))
