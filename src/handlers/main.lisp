@@ -1,9 +1,20 @@
 (in-package :ml-survey/handlers)
 
-(defun surveys-data-dir ()
-  (let ((data-dir (uiop:merge-pathnames* "data/surveys/")))
-    (ensure-directories-exist data-dir)
-    data-dir))
+(defun base-dir ()
+  (if (uiop:os-unix-p)
+      (format nil "~a/" (uiop:getenv "XDG_DATA_HOME"))
+      (format nil "~a/" (uiop:getenv "LOCALAPPDATA"))))
+
+(defun app-dir ()
+  (uiop:merge-pathnames* "ml-survey/" (base-dir)))
+
+(defun data-dir ()
+  (uiop:merge-pathnames* "data/surveys/" (app-dir)))
+
+(defun ensure-data-dir ()
+  (let ((data-dir (data-dir)))
+    (ensure-directories-exist (data-dir))
+  data-dir))
 
 (defun split-uri (uri)
   (check-type uri string)
@@ -39,10 +50,18 @@
       (format stream "")))
   pathname)
 
+(defun ensure-data-file-exist (survey-id questionnaire-id)
+  (let ((path (format nil "~a~a/~a.lisp"
+                      (ensure-data-dir)
+                      survey-id
+                      questionnaire-id)))
+    (ensure-directories-exist path)
+    (ensure-file-exist path)))
+
 (defun make-db-file (file)
   "Prepare and ensure a database file at FILE-STR path."
   (check-type file string)
-  (let ((path (uiop:merge-pathnames* file)))
+  (let ((path (uiop:merge-pathnames* file (ensure-data-dir))))
     (ensure-file-exist path)))
 
 (defun make-surveys-db-file ()

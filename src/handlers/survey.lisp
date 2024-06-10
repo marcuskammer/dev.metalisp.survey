@@ -38,7 +38,7 @@ Returns a list of integers."
   (with-slots (id data-dir properties) survey
     (setf data-dir (uiop:merge-pathnames*
                     (format nil "~a/" id)
-                    (surveys-data-dir)))
+                    (ensure-data-dir)))
     (setf properties (first (rest (assoc (parse-integer id)
                                          (load-response (make-surveys-db-file))))))))
 
