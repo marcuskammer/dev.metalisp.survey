@@ -5,9 +5,9 @@
   (with-page (:title "Survey Details")
     (navbar-en)
     (:section :class "container"
-              (:h2 (format nil "Survey ID: ~a" (ml-survey/handlers::survey-id survey)))
+              (:h2 (format nil "Survey ID: ~a" (ml-survey:survey-id survey)))
               (:h3 "Properties")
-              (ml-survey/handlers::survey-html survey)
+              (ml-survey:survey-html survey)
               (when results
                 (:h3 "Questionnaire Results")
                 (:ul
