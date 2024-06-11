@@ -8,7 +8,8 @@
               (:h2 (format nil "Survey ID: ~a" (ml-survey/handlers::survey-id survey)))
               (:h3 "Properties")
               (ml-survey/handlers::survey-html survey)
-              (:h3 "Questionnaire Results")
-              (:ul
-               (loop for result in results do
-                 (:li result))))))
+              (when results
+                (:h3 "Questionnaire Results")
+                (:ul
+                 (loop for result in results do
+                   (:li result)))))))
