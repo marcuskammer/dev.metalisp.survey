@@ -1,0 +1,874 @@
+#cloud-config
+# Make sure to check the cloud-init logs: /var/log/cloud-init.log and /var/log/cloud-init-output.log
+# Author: Marcus Kammer
+# Tested: Ubuntu 22.04
+# Copyright © 2023 Marcus Kammer
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the “Software”), to deal in
+# the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+# of the Software, and to permit persons to whom the Software is furnished to do
+# so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+locale: en_US.UTF-8
+keyboard:
+  layout: us
+timezone: Europe/Berlin
+
+groups:
+  - nginxgroup
+
+users:
+  - name: nginxuser
+    system: true
+    shell: /usr/sbin/nologin
+    groups: nginxgroup
+    sudo: null
+  # Create a new user named 'cl'
+  - name: cl
+    # Add the user to the 'users' and 'admin' groups
+    groups: users, admin
+    # Allow the user to execute any command with sudo without entering a password
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    # Set the user's default shell to /bin/bash
+    shell: /bin/bash
+    # Add the user's public SSH key for key-based authentication
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA+46Y3AHPLJgz8KK61doqH3jBX2TL3TJvZsJrB9Km03 visua@xps-8930
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMIHJ5qpMIKL7N3nC0GG1O4ygtkqOlQuZReoik6xGBxn marcus@XPS-13-9380.local
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6xSH5nE0uy0C0kglpp4EqrbbW2CrBeAIj+X6Sf2pd0 XPS-8930-Ubuntu_22
+
+packages:
+  - detachtty
+  - fail2ban
+  - ufw
+  - unattended-upgrades
+  - sbcl
+  - mosh
+  - tmux
+  - git
+  - nginx
+  - certbot
+  - python3-certbot-nginx
+  - libev4
+  - build-essential
+  - libzstd-dev
+  - libsqlite3-dev
+  - sqlite3
+  - emacs-nox
+  - python3-pip
+  - python3-pandas
+  - python3-matplotlib
+  - curl
+  - wget
+  - guile-3.0
+  - guile-json
+  - guile-sqlite3
+
+package_update: true
+package_upgrade: true
+
+write_files:
+  - path: /etc/apt/apt.conf.d/20auto-upgrades
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Download-Upgradeable-Packages "1";
+      APT::Periodic::AutocleanInterval "7";
+      APT::Periodic::Unattended-Upgrade "1";
+
+  - path: /etc/ssh/sshd_config
+    content: |
+      # Include additional configuration files from the specified directory
+      Include /etc/ssh/sshd_config.d/*.conf
+      # Set the maximum number of authentication attempts allowed per connection
+      MaxAuthTries 3
+      # Specifies the file containing public keys for user authentication
+      AuthorizedKeysFile .ssh/authorized_keys
+      # Disables password authentication
+      PasswordAuthentication no
+      # Specifies the authentication method(s) to use (public key authentication in this case)
+      AuthenticationMethods publickey
+      # Enables public key authentication
+      PubkeyAuthentication yes
+      # Disables root login via SSH
+      PermitRootLogin no
+      # Disables keyboard-interactive authentication
+      KbdInteractiveAuthentication no
+      # Enables the Pluggable Authentication Module (PAM) for authentication
+      UsePAM yes
+      # Disables agent forwarding for SSH connections
+      AllowAgentForwarding no
+      # Enables TCP forwarding for SSH connections
+      AllowTcpForwarding yes
+      # Disables X11 forwarding for SSH connections
+      X11Forwarding no
+      # Disables printing of the message of the day (MOTD) when a user logs in
+      PrintMotd no
+      # Specifies the key exchange algorithms to use
+      KexAlgorithms curve25519-sha256@libssh.org
+      # Specifies the ciphers allowed for protocol version 2
+      Ciphers chacha20-poly1305@openssh.com
+      # Specifies the message authentication code (MAC) algorithms in order of preference
+      MACs hmac-sha2-512-etm@openssh.com
+      # Specifies environment variables sent by the client to the server
+      AcceptEnv LANG LC_*
+      # Specifies the command to use for the SFTP subsystem
+      Subsystem sftp /usr/lib/openssh/sftp-server
+      # Specifies the user(s) allowed to log in via SSH (in this case, only the user "marcus")
+      AllowUsers cl
+
+  - path: /etc/fail2ban/jail.local
+    content: |
+      [DEFAULT]
+      # Ban time (in seconds) for an IP after reaching the max number of retries.
+      bantime = 3600
+      # Time window (in seconds) in which 'maxretry' failures must occur.
+      findtime = 600
+      # Maximum number of failed login attempts before an IP gets banned.
+      maxretry = 3
+      # Ban action to use (ufw in this case).
+      banaction = ufw
+
+      [sshd]
+      # Enable the sshd jail.
+      enabled = true
+      # Specify the port for the sshd service.
+      port = 22
+      # Path to the log file for the sshd service.
+      logpath = /var/log/auth.log
+
+      [sshd-ddos]
+      # Specify the filter to use (created earlier)
+      filter = sshd
+      # Enable the sshd-ddos jail.
+      enabled = true
+      # Specify the port for the sshd service.
+      port = ssh
+      # Path to the log file for the sshd service.
+      logpath = /var/log/auth.log
+      # Maximum number of failed login attempts before an IP gets banned (for DDoS protection).
+      maxretry = 5
+      # Ban time (in seconds) for an IP after reaching the max number of retries (for DDoS protection).
+      bantime = 600
+
+      [nginx-http-auth]
+      # Enable the jail
+      enabled = true
+      # Specify the filter to use (created earlier)
+      # filter = nginx-http-auth
+      # Define the action to take (using UFW)
+      action = ufw
+      # Specify the log file to monitor
+      logpath = /var/log/nginx/error.log
+      # Set the maximum number of failed attempts before banning
+      maxretry = 6
+      # Set the ban time in seconds (1 hour)
+      bantime = 3600
+      # Set the time window for failed attempts in seconds (10 minutes)
+      findtime = 600
+
+  - path: /etc/nginx/nginx.conf
+    content: |
+      user nginxuser;
+      worker_processes auto;
+      pid /run/nginx.pid;
+      include /etc/nginx/modules-enabled/*.conf;
+      events {
+        worker_connections 768;
+        # multi_accept on;
+      }
+      http {
+        ##
+        # Basic Settings
+        ##
+        sendfile on;
+        tcp_nopush on;
+        types_hash_max_size 2048;
+        # server_tokens off;
+        # server_names_hash_bucket_size 64;
+        # server_name_in_redirect off;
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+        ##
+        # SSL Settings
+        ##
+        ssl_protocols TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
+        ssl_prefer_server_ciphers on;
+        ##
+        # Logging Settings
+        ##
+        log_format csv '$time_iso8601,$remote_addr,$remote_user,"$request",$status,$body_bytes_sent,$http_referer,"$http_user_agent"';
+        access_log /var/log/nginx/access.csv csv;
+        error_log /var/log/nginx/error.log;
+        ##
+        # Gzip Settings
+        ##
+        gzip on;
+        # gzip_vary on;
+        # gzip_proxied any;
+        # gzip_comp_level 6;
+        # gzip_buffers 16 8k;
+        # gzip_http_version 1.1;
+        # gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+        ##
+        # Dont send nginx version number
+        ##
+        server_tokens off;
+        ##
+        # Virtual Host Configs
+        ##
+        include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/sites-enabled/*;
+      }
+
+  # Write reverse-proxy configuration file
+  - path: /etc/nginx/sites-available/reverse-proxy.conf
+    content: |
+      # Listen on port 80
+      server {
+        listen 80;
+        # Set your domain name
+        server_name u1.metalisp.dev;
+        # Redirect all requests to HTTPS
+        return 301 https://$host$request_uri;
+      }
+
+      # Listen on port 443 with SSL
+      server {
+        listen 443 ssl;
+        # Set your domain name
+        server_name u1.metalisp.dev;
+
+        # Include SSL certificate managed by Certbot
+        ssl_certificate /etc/letsencrypt/live/u1.metalisp.dev/fullchain.pem;
+        # Include SSL certificate key managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/u1.metalisp.dev/privkey.pem;
+        # Include SSL options provided by Certbot
+        include /etc/letsencrypt/options-ssl-nginx.conf;
+        # Include DH parameters provided by Certbot
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+        # Proxy settings for the location
+        location / {
+          # Set backend server address and port
+          proxy_pass http://localhost:8080;
+          # Set Host header
+          proxy_set_header Host $host;
+          # Set X-Real-IP header
+          proxy_set_header X-Real-IP $remote_addr;
+          # Set X-Forwarded-For header
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          # Set X-Forwarded-Proto header
+          proxy_set_header X-Forwarded-Proto $scheme;
+        }
+      }
+
+      server {
+        listen 80;
+        # Set your domain name
+        server_name docs.u1.metalisp.dev;
+        # Redirect all requests to HTTPS
+        return 301 https://$host$request_uri;
+      }
+
+      # Listen on port 443 with SSL
+      server {
+        listen 443 ssl;
+        # Set your domain name
+        server_name docs.u1.metalisp.dev;
+
+        # Include SSL certificate managed by Certbot
+        ssl_certificate /etc/letsencrypt/live/docs.u1.metalisp.dev/fullchain.pem;
+        # Include SSL certificate key managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/docs.u1.metalisp.dev/privkey.pem;
+        # Include SSL options provided by Certbot
+        include /etc/letsencrypt/options-ssl-nginx.conf;
+        # Include DH parameters provided by Certbot
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+        location / {
+          root /home/cl/www/u1/docs/public;
+          index index.html;
+        }
+      }
+
+  - path: /home/cl/setup_git.sh
+    owner: 'cl:cl'
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+      git config --global user.email "marcus.kammer@mailbox.org"
+      git config --global user.name "Marcus Kammer"
+      git config --global init.defaultBranch main
+
+  - path: /home/cl/setup_repos.sh
+    owner: 'cl:cl'
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+      # Clone the SLIME repository for a specific branch and depth
+      git clone --branch v2.9 https://github.com/slime/slime.git ~/slime
+
+  - path: /home/cl/setup_user_all.sh
+    owner: 'cl:cl'
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+      /bin/bash /home/cl/setup_git.sh
+      /bin/bash /home/cl/setup_repos.sh
+      ssh-keygen -t ed25519 -C 'u1.metalisp' -f ~/.ssh/id_ed25519 -N ''
+      mkdir -p ~/www/u1/docs/
+
+  - path: /home/cl/openai_block_access.sh
+    owner: 'cl:cl'
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+      # Purpose: Block OpenAI ChatGPT bot CIDR
+      # Tested on: Debian and Ubuntu Linux
+      # Author: Vivek Gite {https://www.cyberciti.biz} under GPL v2.x+
+      # ------------------------------------------------------------------
+      file="/tmp/out.txt.$$"
+      wget -q -O "$file" https://openai.com/gptbot-ranges.txt 2>/dev/null
+
+      while IFS= read -r cidr
+      do
+          sudo ufw deny proto tcp from $cidr to any port 80
+          sudo ufw deny proto tcp from $cidr to any port 443
+      done < "$file"
+      [ -f "$file" ] && rm -f "$file"
+
+  - path: /home/cl/.tmux.conf
+    owner: 'cl:cl'
+    permissions: '0755'
+    defer: True
+    content: |
+      # Improve colors and set TERM correctly inside tmux
+      set -g default-terminal "screen-256color"
+
+      # Set prefix key to Ctrl-a, like GNU Screen
+      unbind C-b
+      set -g prefix C-a
+      bind C-a send-prefix
+
+      # Enable mouse support
+      set -g mouse on
+
+      # Use Alt-arrow keys to switch panes
+      bind -n M-Left select-pane -L
+      bind -n M-Right select-pane -R
+      bind -n M-Up select-pane -U
+      bind -n M-Down select-pane -D
+
+      # Use Alt+h/j/k/l to resize panes
+      bind -n M-h resize-pane -L 2
+      bind -n M-j resize-pane -D 2
+      bind -n M-k resize-pane -U 2
+      bind -n M-l resize-pane -R 2
+
+      # Split panes with | and -
+      bind | split-window -h
+      bind - split-window -v
+
+      # Reload tmux config
+      bind r source-file ~/.tmux.conf
+
+      # Quick pane cycling
+      unbind ^A
+      bind ^A select-pane -t :.+
+
+      # Enable clipboard support on macOS
+      # Uncomment the line below if you are on macOS and have reattach-to-user-namespace installed
+      # set-option -g default-command "reattach-to-user-namespace -l $SHELL"
+
+      # Increase history limit
+      set -g history-limit 50000
+
+      # One Dark theme specific settings
+
+      # Status bar colors
+      set -g status-bg colour235 # Base background color
+      set -g status-fg colour137 # Base foreground color
+      set -g status-interval 5
+      set -g status-left "#[fg=colour81]#H " # Hostname in a different color
+      set -g status-right "#[fg=colour137]#(date '+%Y-%m-%d %H:%M')" # Date and time
+
+      # Active window in status bar
+      setw -g window-status-current-style fg=colour125,bg=colour235,bold
+
+      # Pane border
+      set -g pane-border-style fg=colour238
+      set -g pane-active-border-style fg=colour81
+
+      # Message styling
+      set -g message-style fg=colour166,bg=colour235
+
+      # Window list - pane number (current and other)
+      setw -g window-status-current-format "#[bold,fg=colour81]#I:#W#F"
+      setw -g window-status-format "#[fg=colour137]#I:#W#F"
+
+  - path: /home/cl/access_logs.sql
+    owner: 'cl:cl'
+    defer: True
+    content: |
+      -- Set the mode to CSV to properly import CSV files
+      .mode csv
+
+      -- If the table doesn't exist, create it
+      CREATE TABLE IF NOT EXISTS access_logs (
+        timestamp TEXT,
+        ip_address TEXT,
+        remote_user TEXT,
+        request TEXT,
+        status_code INTEGER,
+        body_bytes_sent INTEGER,
+        http_referer TEXT,
+        http_user_agent TEXT
+      );
+
+      -- Import the data into the 'access_logs' table
+      .import '/var/log/nginx/access.csv' access_logs
+
+  - path: /home/cl/pihole_set_ufw.sh
+    owner: 'cl:cl'
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+      # Necessary pihole ufw setup
+      sudo ufw allow 80/tcp
+      sudo ufw allow 53/tcp
+      sudo ufw allow 53/udp
+      sudo ufw allow 67/tcp
+      sudo ufw allow 67/udp
+      sudo ufw allow 546:547/udp
+
+  - path: /etc/sbclrc
+    content: |
+      ;;; -*- lisp -*-
+      ;;; System-wide startup file for sbcl
+
+      ;;; https://github.com/ghollisjr/sbcl-script
+      ;;; If the first user-processable command-line argument is a filename,
+      ;;; disable the debugger, load the file handling shebang-line and quit.
+      (let ((script (and (second *posix-argv*)
+                         (probe-file (second *posix-argv*)))))
+         (when script
+            ;; Handle shebang-line
+            (set-dispatch-macro-character #\# #\!
+                                          (lambda (stream char arg)
+                                             (declare (ignore char arg))
+                                             (read-line stream)))
+            ;; Disable debugger
+            (setf *invoke-debugger-hook*
+                  (lambda (condition hook)
+                    (declare (ignore hook))
+                    ;; Uncomment to get backtraces on errors
+                    ;; (sb-debug:backtrace 20)
+                    (format *error-output* "Error: ~A~%" condition)
+                    (quit)))
+            (load script)
+            (quit)))
+
+      (defun print-condition-hook (condition hook)
+        "This function is designed to be used as a custom debugger hook.
+        It prints the condition (error message), clears any remaining input,
+        and aborts the current operation."
+        ;; Ignore the hook argument since it's not used in this function.
+        (declare (ignore hook))
+
+        ;; Print the error message associated with the condition.
+        (princ condition)
+
+        ;; Clear any pending input from the stream.
+        (clear-input)
+
+        ;; Abort the current operation and return to the top-level.
+        (abort))
+
+      ;; Get the value of the global variable *debugger-hook*.
+      *debugger-hook*
+
+      ;; Set the global variable *debugger-hook* to the custom debugger hook
+      ;; function 'print-condition-hook'. This function will now be called
+      ;; whenever an unhandled error occurs.
+      (setf *debugger-hook* #'print-condition-hook)
+
+  - path: /home/cl/.sbclrc
+    owner: 'cl:cl'
+    defer: True
+    content: |
+      ;;; -*- lisp -*-
+      (sb-ext:set-sbcl-source-location #P"~/sbcl/")
+
+  - path: /home/cl/lisp_01_setup_sbcl.sh
+    owner: 'cl:cl'
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+      # Exit on error
+      set -e
+      sudo apt update
+      sudo apt install -y sbcl git libzstd-dev
+      # Download SBCL source
+      # wget http://prdownloads.sourceforge.net/sbcl/sbcl-2.3.10-source.tar.bz2
+      # Extract it
+      # tar -xjf sbcl-2.3.10-source.tar.bz2
+      git clone --branch sbcl-2.4.2 git://git.code.sf.net/p/sbcl/sbcl ~/sbcl
+      # Change into the directory
+      cd sbcl
+      # Compile and install
+      sh make.sh --fancy
+      sudo sh install.sh
+      # Remove ubuntu specific sbcl
+      sudo apt remove sbcl -y
+      cd ~/ && sbcl --version
+
+  - path: /home/cl/lisp_02_setup_quicklisp.sh
+    owner: 'cl:cl'
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+      # Needs to be run manually, cant be run automatically.
+      # If runs automatically, `quicklisp.lisp' cant be find by sbcl.
+      sudo apt install -y libev4 libsqlite3-dev
+      curl https://beta.quicklisp.org/quicklisp.lisp -o ~/quicklisp.lisp
+      sbcl --noinform --load quicklisp.lisp --eval "(quicklisp-quickstart:install)" --eval "(ql-util:without-prompting (ql:add-to-init-file))" --non-interactive
+      sbcl --noinform --eval "(ql:quickload '(:hunchentoot :drakma :cl-yaml :cl-json :jonathan :cl-ppcre :spinneret :dexador :rove :vecto :woo :cl-dbi :clsql-sqlite3 :mito :bknr.datastore :cl-project))" --non-interactive
+
+  - path: /home/cl/lisp_03_load_swank_faster.lisp
+    owner: 'cl:cl'
+    defer: True
+    content: |
+      ;;;; This Common Lisp script sets up a development environment by loading essential
+      ;;;; libraries for web development and data handling, including SBCL system
+      ;;;; libraries and external tools via Quicklisp. It concludes by saving the
+      ;;;; environment state to a core file for efficient reusability in future sessions.
+      (mapc 'require '(sb-bsd-sockets sb-posix sb-introspect sb-cltl2 asdf))
+      (ql:quickload '(:hunchentoot :drakma :cl-yaml :cl-json :jonathan :cl-ppcre :spinneret :dexador :rove :vecto :woo :cl-dbi :clsql-sqlite3 :mito :bknr.datastore :cl-project))
+      (save-lisp-and-die "sbcl.core-for-slime")
+
+  - path: /home/cl/lisp_03_load_swank_faster.sh
+    owner: 'cl:cl'
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+      sbcl --noinform --noprint --load ~/lisp_03_load_swank_faster.lisp
+
+  - path: /home/cl/emacs_build.sh
+    owner: cl:cl
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+
+      # Update package list and install dependencies
+      sudo apt update
+      sudo apt install -y build-essential git autoconf texinfo libncurses-dev libgnutls28-dev libjansson-dev libgccjit-11-dev pkg-config zlib1g-dev libtree-sitter-dev
+
+      # Clone the Emacs repository
+      git clone git://git.sv.gnu.org/emacs.git ~/emacs-src && cd emacs-src
+
+      # Check out the Emacs-29 branch (replace 'emacs-29' with the specific version if different)
+      git checkout emacs-29
+
+      # Prepare for build
+      ./autogen.sh
+
+      # Configure Emacs for building without X11, without GTK, without image support, and with native compilation
+
+      # This configuration is tailored for an Emacs build focused on performance and
+      # native compilation, with reduced dependency on external image libraries and
+      # graphical systems. It's particularly suitable if you're aiming for a
+      # lightweight Emacs setup, primarily for text editing and programming tasks
+      # without the need for image handling within Emacs.
+
+      ./configure --without-x --without-jpeg --without-png --without-gif --without-tiff --without-xpm --without-rsvg --without-webp --without-lcms2 --without-cairo --without-gpm --with-json --with-native-compilation --with-tree-sitter
+
+      # Build Emacs
+      make -j$(nproc)
+
+      # If the build succeeds, install Emacs
+      sudo make install
+
+  - path: /home/cl/.emacs.d/init.el
+    owner: cl:cl
+    defer: True
+    content: |
+      ;; Set up package archives from which to fetch Emacs packages
+      (setq package-archives
+            '(("melpa" . "https://melpa.org/packages/") ;; MELPA: Community-maintained repo of Emacs packages
+              ("org" . "https://orgmode.org/elpa/")     ;; Org ELPA: Official repo for Org mode packages
+              ("elpa" . "https://elpa.gnu.org/packages/") ;; GNU ELPA: Official GNU repo for Emacs packages
+              ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; NonGNU ELPA: Repo for non-GNU Emacs packages
+
+      ;; Initialize the package management system
+      (package-initialize)
+
+      ;; Refresh package contents if they're not already present
+      (unless package-archive-contents
+        (package-refresh-contents))
+
+      ;; Install use-package if not already installed
+      (unless (package-installed-p 'use-package)
+        (package-install 'use-package))
+
+      ;; Load use-package which simplifies package management
+      (require 'use-package)
+
+      ;; Load ido for interactive buffer and file navigation
+      (require 'ido)
+
+      ;; Ensure packages are installed by default
+      (setq use-package-always-ensure t)
+
+      ;; Disable the menu bar
+      (menu-bar-mode -1)
+
+      ;; Enable showing matching parentheses
+      (show-paren-mode 1)
+
+      ;; Highlight the current line
+      (global-hl-line-mode 1)
+
+      ;; Display the time in the mode line
+      (display-time-mode 1)
+
+      ;; Disable symbol prettification
+      (global-prettify-symbols-mode -1)
+
+      ;; Prefer UTF-8 Unix coding system
+      (prefer-coding-system 'utf-8-unix)
+      (set-default-coding-systems 'utf-8-unix)
+      (set-terminal-coding-system 'utf-8)
+      (set-keyboard-coding-system 'utf-8)
+
+      ;; Customize time display format
+      (setq display-time-format "W%V %a %d %b %R")
+
+      ;; Use 24-hour time format
+      (setq display-time-24hr-format t)
+
+      ;; Use UTF-8 Unix for buffer file coding
+      (setq default-buffer-file-coding-system 'utf-8-unix)
+
+      ;; Disable tab indentation
+      (setq indent-tabs-mode nil)
+
+      ;; Set line spacing to default
+      (setq line-spacing nil)
+
+      ;; Disable creation of backup files
+      (setq make-backup-files nil)
+
+      ;; Add newlines when navigating to the next line
+      (setq next-line-add-newlines t)
+
+      ;; Enable flexible string matching for ido
+      (setq ido-enable-flex-matching t)
+
+      ;; Enable ido in all contexts where it can be used
+      (setq ido-everywhere t)
+
+      ;; Always create a new buffer with ido if needed
+      (setq ido-create-new-buffer 'always)
+
+      ;; Set the default major mode to text mode
+      (setq default-major-mode 'text-mode)
+
+      ;; Disable the startup screen and buffer menu
+      (setq inhibit-startup-buffer-menu t inhibit-startup-screen t)
+
+      ;; Do not ask about saving files before compilation
+      (setq compilation-ask-about-save nil)
+
+      ;; Set version control systems to be used
+      (setq vc-handled-backends '(Git Hg))
+
+      ;; Enable narrowing to region
+      (put 'narrow-to-region 'disabled nil)
+
+      ;; Enable narrowing to page
+      (put 'narrow-to-page 'disabled nil)
+
+      ;; Use y/n instead of full yes/no for confirmations
+      (defalias 'yes-or-no-p 'y-or-n-p)
+
+      ;; Bind M-i to imenu for easy navigation
+      (global-set-key (kbd "M-i") 'imenu)
+
+      ;; Bind C-x C-b to ibuffer
+      (global-set-key (kbd "C-x C-b") 'ibuffer-list-buffers)
+
+      ;; Automatically wrap lines in text mode
+      (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+      ;; Use fancy diary display
+      (add-hook 'diary-display-hook 'fancy-diary-display)
+
+      ;; Highlight today in calendar
+      (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
+
+      ;; Delete trailing whitespace on save
+      (add-hook 'write-file-hooks 'delete-trailing-whitespace)
+
+      ;; Include other diary files
+      (add-hook 'diary-list-entries-hook 'diary-include-other-diary-files)
+
+      ;; Mark included diary files
+      (add-hook 'diary-mark-entries-hook 'diary-mark-included-diary-files)
+
+      ;; Make script files executable upon save
+      (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+      ;; Enable fido mode for a more modern ido experience
+      (fido-vertical-mode 1)
+
+      ;; File name to load inferior shells from
+      (setq shell-file-name "/bin/bash")
+
+      (use-package magit
+        :bind ("C-x g" . magit-status)
+        :config
+        (global-set-key (kbd "C-x M-g") 'magit-dispatch))
+
+      (use-package slime
+        :custom
+        (slime-autodoc-use-multiline-p 1)
+        :bind ("C-c C-q" . slime-close-all-parens-in-sexp)
+        :config
+        (slime-setup '(slime-autodoc
+                       slime-tramp
+                       slime-fancy
+                       slime-asdf
+                       slime-indentation
+                       slime-editing-commands
+                       slime-sbcl-exts))
+        ;; shell$ sbcl
+        ;; * (mapc 'require '(sb-bsd-sockets sb-posix sb-introspect sb-cltl2 asdf))
+        ;; * (save-lisp-and-die "sbcl.core-for-slime")
+        (when (eq system-type 'gnu/linux)
+          (let ((image-path (expand-file-name "~/sbcl.core-for-slime")))
+            (when (file-exists-p image-path)
+              (setq slime-lisp-implementations
+                    `((sbcl ("sbcl" "--noinform" "--core" ,image-path) :coding-system utf-8-unix))))))
+
+      (use-package lisp-mode
+        :ensure nil
+        :hook ((lisp-mode . prettify-symbols-mode)
+               (lisp-mode . (lambda ()
+                              (set-face-attribute 'font-lock-function-name-face nil :underline t)
+                              (face-remap-add-relative 'font-lock-function-name-face nil :underline t)
+                              (face-remap-add-relative 'font-lock-keyword-face nil :slant 'italic))))
+        :mode (("\\.lisp$" . lisp-mode)
+               ("\\.lsp$" . lisp-mode)
+               ("\\.cl$" . lisp-mode))
+        :init
+        (setq inferior-lisp-program "/usr/local/bin/sbcl --noinform"))
+
+      (use-package elisp-mode
+        :ensure nil
+        :hook ((emacs-lisp-mode . prettify-symbols-mode)
+           (emacs-lisp-mode . (lambda () (setq-local lisp-indent-function 'lisp-indent-function))))
+        :mode (("\\.el$" . emacs-lisp-mode)))
+
+      (use-package doom-themes
+        :init
+        (load-theme 'doom-one t)
+        :config
+        (setq doom-themes-enable-bold t
+              doom-themes-enable-italic t))
+
+  - path: home/cl/.config/systemd/user/emacs.service
+    owner: cl:cl
+    defer: True
+    content: |
+      [Unit]
+      Description=Emacs text editor
+      Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+
+      [Service]
+      Type=forking
+      ExecStart=/usr/local/bin/emacs --daemon
+      ExecStop=/usr/local/bin/emacsclient --eval "(kill-emacs)"
+      Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+      Restart=on-failure
+
+      [Install]
+      WantedBy=default.target
+
+  - path: /home/cl/webserver.lisp
+    owner: cl:cl
+    defer: True
+    content: |
+      (ql:quickload "hunchentoot")
+
+      (defun start-server (&key (port 8080))
+        (hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port port)))
+
+      (hunchentoot:define-easy-handler (hello-html :uri "/hello") ()
+        (setf (hunchentoot:content-type*) "text/html")
+        (format nil "<!DOCTYPE html><html><head><title>Hello</title></head><body><h1>Hello, World!</h1></body></html>"))
+
+runcmd:
+  # Run Certbot to obtain SSL certificates and configure Nginx
+  - certbot certonly --nginx -d u1.metalisp.dev --non-interactive --agree-tos --email marcus.kammer@mailbox.org --redirect
+  - certbot certonly --nginx -d docs.u1.metalisp.dev --non-interactive --agree-tos --email marcus.kammer@mailbox.org --redirect
+  # Add cron job for automatic certificate renewal (runs once a month)
+  - echo '0 0 1 * * root certbot renew --post-hook "systemctl reload nginx" >> /var/log/letsencrypt/letsencrypt-auto-renew.log' > /etc/cron.d/letsencrypt-renew
+  # Download DHPARAM
+
+  # The Diffie-Hellman algorithm is used to establish a shared secret between two
+  # parties (typically a client and a server) over a public channel, and is a
+  # fundamental part of many cryptographic protocols, including HTTPS.
+
+  # However, generating Diffie-Hellman parameters can be computationally expensive,
+  # so pre-generated parameters are often used. Mozilla provides such pre-generated
+  # parameters, and they are considered to be trustworthy.
+
+  # The downloaded parameters are saved in a file named ssl-dhparam.pem in the
+  # /etc/letsencrypt directory. This file is then referenced in the configuration
+  # of services that use Diffie-Hellman key exchange, such as your Nginx server, to
+  # establish secure communications.
+
+  # This step is part of a broader effort to set up SSL/TLS securely on your
+  # server, enhancing the security of your connections.
+
+  - curl https://ssl-config.mozilla.org/ffdhe2048.txt > /etc/letsencrypt/ssl-dhparam.pem
+  # Create a symlink for the configuration file
+  - ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/
+  # Remove default Nginx configuration
+  - rm /etc/nginx/sites-enabled/default
+  # Reload Nginx configuration
+  - systemctl reload nginx
+  # Allow Nginx Full (HTTP and HTTPS) through the firewall
+  - ufw allow 'Nginx Full'
+  # Set UFW firewall rules
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow 22/tcp
+  - ufw allow mosh
+  - ufw enable
+  # Enable and start the fail2ban service
+  - systemctl enable fail2ban && systemctl start fail2ban
+  # Restart the SSH server to apply the new configuration
+  - systemctl restart sshd
+  - sudo -u cl /bin/bash /home/cl/setup_user_all.sh
