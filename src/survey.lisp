@@ -1,3 +1,8 @@
+(in-package :ml-survey)
+
+(defun make-surveys-db-file ()
+  (make-db-file "surveys-db.lisp"))
+
 (defclass survey ()
   ((id :initarg :id :reader survey-id)
    (data-dir :initarg :data-dir :reader survey-data-dir)

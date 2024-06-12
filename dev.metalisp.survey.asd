@@ -10,6 +10,7 @@
   ((:module "src"
     :components
     ((:file "package")
+     (:file "fileops")
      (:file "app")
      (:file "survey")))
 

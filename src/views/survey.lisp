@@ -1,6 +1,7 @@
 (in-package :ml-survey/views)
 
 (defun survey (survey &optional results)
+  (check-type survey ml-survey:survey)
   "Generates the view to show the survey created."
   (with-page (:title "Survey Details")
     (navbar-en)
