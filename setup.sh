@@ -20,4 +20,4 @@ curl https://beta.quicklisp.org/quicklisp.lisp -o ~/quicklisp.lisp
 
 sbcl --noinform --load quicklisp.lisp --eval "(quicklisp-quickstart:install)" --eval "(ql-util:without-prompting (ql:add-to-init-file))" --non-interactive
 
-sbcl --noinform --eval "(ql:quickload '(:hunchentoot :drakma :cl-yaml :cl-json :jonathan :cl-ppcre :spinneret :dexador :rove :vecto :woo :cl-dbi :clsql-sqlite3 :mito :bknr.datastore :cl-project))" --non-interactive
+sbcl --noinform --eval "(ql:quickload '(:hunchentoot :spinneret))" --non-interactive
