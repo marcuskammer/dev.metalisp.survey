@@ -1,2 +1,2 @@
-(in-package :ml-survey)
-(start-server *app*)
+(load "~/slime/start-swank.lisp")
+(ml-survey:start)
