@@ -67,14 +67,8 @@ packages:
   - libsqlite3-dev
   - sqlite3
   - emacs-nox
-  - python3-pip
-  - python3-pandas
-  - python3-matplotlib
   - curl
   - wget
-  - guile-3.0
-  - guile-json
-  - guile-sqlite3
 
 package_update: true
 package_upgrade: true
