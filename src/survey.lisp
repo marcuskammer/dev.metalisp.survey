@@ -40,16 +40,10 @@
 
 (defmethod survey-html ((survey survey))
   (spinneret:with-html
-    (:table :class "table"
-      (:thead :class "thead-dark"
-              (:tr (:th :scope "col"
-                        "Key")
-                   (:th :scope "col"
-                        "Value")))
-      (:tbody (loop for property in (survey-properties survey)
-                    for key = (car property)
-                    for value = (cdr property) do
-                      (:tr (:td key)
-                           (cond ((string= key "questionnaire")
-                                  (:td (:a :href (build-questionnaire-link (survey-id survey) value) value)))
-                                 (t (:td value)))))))))
+    (:dl (loop for property in (survey-properties survey)
+               for key = (car property)
+               for value = (cdr property) do
+                 (:dt key)
+                 (cond ((string= key "questionnaire")
+                        (:dd (:a :href (build-questionnaire-link (survey-id survey) value) value)))
+                       (t (:dd value)))))))
