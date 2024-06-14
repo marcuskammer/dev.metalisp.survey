@@ -2,30 +2,23 @@
 
 (defun base-dir ()
   (let ((os (uiop:detect-os)))
-    (cond ((eq os :os-windows)
-           (format nil "~a/" (uiop:getenv "LOCALAPPDATA")))
+    (uiop:parse-native-namestring
+     (cond ((eq os :os-windows)
+            (format nil "~a/" (uiop:getenv "LOCALAPPDATA")))
 
-          ((eq os :os-unix)
-           (format nil "~a" (uiop:merge-pathnames*
-                             ".local/share/"
-                             (format nil
-                                     "~a/"
-                                     (uiop:getenv "HOME")))))
+           ((eq os :os-unix)
+            (format nil "~a/.local/share/" (user-homedir-pathname)))
 
-          ((eq os :os-macos)
-           (format nil "~a" (uiop:merge-pathnames*
-                             "Library/Application Support/"
-                             (format nil
-                                     "~a/"
-                                     (uiop:getenv "HOME")))))
+           ((eq os :os-macos)
+            (format nil "~a/Library/Application Support/" (user-homedir-pathname)))
 
-          (t (error "Unsupported OS")))))
+           (t (error "Unsupported OS"))))))
 
 (defun app-dir ()
-  (uiop:merge-pathnames* "ml-survey/" (base-dir)))
+  (uiop:merge-pathnames* #P"ml-survey/" (base-dir)))
 
 (defun data-dir ()
-  (uiop:merge-pathnames* "data/surveys/" (app-dir)))
+  (uiop:merge-pathnames* #P"data/surveys/" (app-dir)))
 
 (defun ensure-data-dir ()
   (let ((data-dir (data-dir)))
