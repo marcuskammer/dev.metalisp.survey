@@ -61,12 +61,10 @@ packages:
   - nginx
   - certbot
   - python3-certbot-nginx
-  - libev4
   - build-essential
   - libzstd-dev
   - libsqlite3-dev
   - sqlite3
-  - emacs-nox
   - curl
   - wget
 
@@ -233,7 +231,7 @@ write_files:
       server {
         listen 80;
         # Set your domain name
-        server_name u1.metalisp.dev;
+        server_name survey.metalisp.dev;
         # Redirect all requests to HTTPS
         return 301 https://$host$request_uri;
       }
@@ -242,12 +240,12 @@ write_files:
       server {
         listen 443 ssl;
         # Set your domain name
-        server_name u1.metalisp.dev;
+        server_name survey.metalisp.dev;
 
         # Include SSL certificate managed by Certbot
-        ssl_certificate /etc/letsencrypt/live/u1.metalisp.dev/fullchain.pem;
+        ssl_certificate /etc/letsencrypt/live/survey.metalisp.dev/fullchain.pem;
         # Include SSL certificate key managed by Certbot
-        ssl_certificate_key /etc/letsencrypt/live/u1.metalisp.dev/privkey.pem;
+        ssl_certificate_key /etc/letsencrypt/live/survey.metalisp.dev/privkey.pem;
         # Include SSL options provided by Certbot
         include /etc/letsencrypt/options-ssl-nginx.conf;
         # Include DH parameters provided by Certbot
@@ -265,35 +263,6 @@ write_files:
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           # Set X-Forwarded-Proto header
           proxy_set_header X-Forwarded-Proto $scheme;
-        }
-      }
-
-      server {
-        listen 80;
-        # Set your domain name
-        server_name docs.u1.metalisp.dev;
-        # Redirect all requests to HTTPS
-        return 301 https://$host$request_uri;
-      }
-
-      # Listen on port 443 with SSL
-      server {
-        listen 443 ssl;
-        # Set your domain name
-        server_name docs.u1.metalisp.dev;
-
-        # Include SSL certificate managed by Certbot
-        ssl_certificate /etc/letsencrypt/live/docs.u1.metalisp.dev/fullchain.pem;
-        # Include SSL certificate key managed by Certbot
-        ssl_certificate_key /etc/letsencrypt/live/docs.u1.metalisp.dev/privkey.pem;
-        # Include SSL options provided by Certbot
-        include /etc/letsencrypt/options-ssl-nginx.conf;
-        # Include DH parameters provided by Certbot
-        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-
-        location / {
-          root /home/cl/www/u1/docs/public;
-          index index.html;
         }
       }
 
@@ -545,7 +514,7 @@ write_files:
       sudo apt install -y libev4 libsqlite3-dev
       curl https://beta.quicklisp.org/quicklisp.lisp -o ~/quicklisp.lisp
       sbcl --noinform --load quicklisp.lisp --eval "(quicklisp-quickstart:install)" --eval "(ql-util:without-prompting (ql:add-to-init-file))" --non-interactive
-      sbcl --noinform --eval "(ql:quickload '(:hunchentoot :drakma :cl-yaml :cl-json :jonathan :cl-ppcre :spinneret :dexador :rove :vecto :woo :cl-dbi :clsql-sqlite3 :mito :bknr.datastore :cl-project))" --non-interactive
+      sbcl --noinform --eval "(ql:quickload '(:hunchentoot :spinneret))" --non-interactive
 
   - path: /home/cl/lisp_03_load_swank_faster.lisp
     owner: 'cl:cl'
@@ -556,7 +525,7 @@ write_files:
       ;;;; libraries and external tools via Quicklisp. It concludes by saving the
       ;;;; environment state to a core file for efficient reusability in future sessions.
       (mapc 'require '(sb-bsd-sockets sb-posix sb-introspect sb-cltl2 asdf))
-      (ql:quickload '(:hunchentoot :drakma :cl-yaml :cl-json :jonathan :cl-ppcre :spinneret :dexador :rove :vecto :woo :cl-dbi :clsql-sqlite3 :mito :bknr.datastore :cl-project))
+      (ql:quickload '(:hunchentoot :spinneret))
       (save-lisp-and-die "sbcl.core-for-slime")
 
   - path: /home/cl/lisp_03_load_swank_faster.sh
@@ -567,265 +536,10 @@ write_files:
       #!/bin/bash
       sbcl --noinform --noprint --load ~/lisp_03_load_swank_faster.lisp
 
-  - path: /home/cl/emacs_build.sh
-    owner: cl:cl
-    permissions: '0755'
-    defer: True
-    content: |
-      #!/bin/bash
-
-      # Update package list and install dependencies
-      sudo apt update
-      sudo apt install -y build-essential git autoconf texinfo libncurses-dev libgnutls28-dev libjansson-dev libgccjit-11-dev pkg-config zlib1g-dev libtree-sitter-dev
-
-      # Clone the Emacs repository
-      git clone git://git.sv.gnu.org/emacs.git ~/emacs-src && cd emacs-src
-
-      # Check out the Emacs-29 branch (replace 'emacs-29' with the specific version if different)
-      git checkout emacs-29
-
-      # Prepare for build
-      ./autogen.sh
-
-      # Configure Emacs for building without X11, without GTK, without image support, and with native compilation
-
-      # This configuration is tailored for an Emacs build focused on performance and
-      # native compilation, with reduced dependency on external image libraries and
-      # graphical systems. It's particularly suitable if you're aiming for a
-      # lightweight Emacs setup, primarily for text editing and programming tasks
-      # without the need for image handling within Emacs.
-
-      ./configure --without-x --without-jpeg --without-png --without-gif --without-tiff --without-xpm --without-rsvg --without-webp --without-lcms2 --without-cairo --without-gpm --with-json --with-native-compilation --with-tree-sitter
-
-      # Build Emacs
-      make -j$(nproc)
-
-      # If the build succeeds, install Emacs
-      sudo make install
-
-  - path: /home/cl/.emacs.d/init.el
-    owner: cl:cl
-    defer: True
-    content: |
-      ;; Set up package archives from which to fetch Emacs packages
-      (setq package-archives
-            '(("melpa" . "https://melpa.org/packages/") ;; MELPA: Community-maintained repo of Emacs packages
-              ("org" . "https://orgmode.org/elpa/")     ;; Org ELPA: Official repo for Org mode packages
-              ("elpa" . "https://elpa.gnu.org/packages/") ;; GNU ELPA: Official GNU repo for Emacs packages
-              ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; NonGNU ELPA: Repo for non-GNU Emacs packages
-
-      ;; Initialize the package management system
-      (package-initialize)
-
-      ;; Refresh package contents if they're not already present
-      (unless package-archive-contents
-        (package-refresh-contents))
-
-      ;; Install use-package if not already installed
-      (unless (package-installed-p 'use-package)
-        (package-install 'use-package))
-
-      ;; Load use-package which simplifies package management
-      (require 'use-package)
-
-      ;; Load ido for interactive buffer and file navigation
-      (require 'ido)
-
-      ;; Ensure packages are installed by default
-      (setq use-package-always-ensure t)
-
-      ;; Disable the menu bar
-      (menu-bar-mode -1)
-
-      ;; Enable showing matching parentheses
-      (show-paren-mode 1)
-
-      ;; Highlight the current line
-      (global-hl-line-mode 1)
-
-      ;; Display the time in the mode line
-      (display-time-mode 1)
-
-      ;; Disable symbol prettification
-      (global-prettify-symbols-mode -1)
-
-      ;; Prefer UTF-8 Unix coding system
-      (prefer-coding-system 'utf-8-unix)
-      (set-default-coding-systems 'utf-8-unix)
-      (set-terminal-coding-system 'utf-8)
-      (set-keyboard-coding-system 'utf-8)
-
-      ;; Customize time display format
-      (setq display-time-format "W%V %a %d %b %R")
-
-      ;; Use 24-hour time format
-      (setq display-time-24hr-format t)
-
-      ;; Use UTF-8 Unix for buffer file coding
-      (setq default-buffer-file-coding-system 'utf-8-unix)
-
-      ;; Disable tab indentation
-      (setq indent-tabs-mode nil)
-
-      ;; Set line spacing to default
-      (setq line-spacing nil)
-
-      ;; Disable creation of backup files
-      (setq make-backup-files nil)
-
-      ;; Add newlines when navigating to the next line
-      (setq next-line-add-newlines t)
-
-      ;; Enable flexible string matching for ido
-      (setq ido-enable-flex-matching t)
-
-      ;; Enable ido in all contexts where it can be used
-      (setq ido-everywhere t)
-
-      ;; Always create a new buffer with ido if needed
-      (setq ido-create-new-buffer 'always)
-
-      ;; Set the default major mode to text mode
-      (setq default-major-mode 'text-mode)
-
-      ;; Disable the startup screen and buffer menu
-      (setq inhibit-startup-buffer-menu t inhibit-startup-screen t)
-
-      ;; Do not ask about saving files before compilation
-      (setq compilation-ask-about-save nil)
-
-      ;; Set version control systems to be used
-      (setq vc-handled-backends '(Git Hg))
-
-      ;; Enable narrowing to region
-      (put 'narrow-to-region 'disabled nil)
-
-      ;; Enable narrowing to page
-      (put 'narrow-to-page 'disabled nil)
-
-      ;; Use y/n instead of full yes/no for confirmations
-      (defalias 'yes-or-no-p 'y-or-n-p)
-
-      ;; Bind M-i to imenu for easy navigation
-      (global-set-key (kbd "M-i") 'imenu)
-
-      ;; Bind C-x C-b to ibuffer
-      (global-set-key (kbd "C-x C-b") 'ibuffer-list-buffers)
-
-      ;; Automatically wrap lines in text mode
-      (add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-      ;; Use fancy diary display
-      (add-hook 'diary-display-hook 'fancy-diary-display)
-
-      ;; Highlight today in calendar
-      (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
-
-      ;; Delete trailing whitespace on save
-      (add-hook 'write-file-hooks 'delete-trailing-whitespace)
-
-      ;; Include other diary files
-      (add-hook 'diary-list-entries-hook 'diary-include-other-diary-files)
-
-      ;; Mark included diary files
-      (add-hook 'diary-mark-entries-hook 'diary-mark-included-diary-files)
-
-      ;; Make script files executable upon save
-      (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-      ;; Enable fido mode for a more modern ido experience
-      (fido-vertical-mode 1)
-
-      ;; File name to load inferior shells from
-      (setq shell-file-name "/bin/bash")
-
-      (use-package magit
-        :bind ("C-x g" . magit-status)
-        :config
-        (global-set-key (kbd "C-x M-g") 'magit-dispatch))
-
-      (use-package slime
-        :custom
-        (slime-autodoc-use-multiline-p 1)
-        :bind ("C-c C-q" . slime-close-all-parens-in-sexp)
-        :config
-        (slime-setup '(slime-autodoc
-                       slime-tramp
-                       slime-fancy
-                       slime-asdf
-                       slime-indentation
-                       slime-editing-commands
-                       slime-sbcl-exts))
-        ;; shell$ sbcl
-        ;; * (mapc 'require '(sb-bsd-sockets sb-posix sb-introspect sb-cltl2 asdf))
-        ;; * (save-lisp-and-die "sbcl.core-for-slime")
-        (when (eq system-type 'gnu/linux)
-          (let ((image-path (expand-file-name "~/sbcl.core-for-slime")))
-            (when (file-exists-p image-path)
-              (setq slime-lisp-implementations
-                    `((sbcl ("sbcl" "--noinform" "--core" ,image-path) :coding-system utf-8-unix))))))
-
-      (use-package lisp-mode
-        :ensure nil
-        :hook ((lisp-mode . prettify-symbols-mode)
-               (lisp-mode . (lambda ()
-                              (set-face-attribute 'font-lock-function-name-face nil :underline t)
-                              (face-remap-add-relative 'font-lock-function-name-face nil :underline t)
-                              (face-remap-add-relative 'font-lock-keyword-face nil :slant 'italic))))
-        :mode (("\\.lisp$" . lisp-mode)
-               ("\\.lsp$" . lisp-mode)
-               ("\\.cl$" . lisp-mode))
-        :init
-        (setq inferior-lisp-program "/usr/local/bin/sbcl --noinform"))
-
-      (use-package elisp-mode
-        :ensure nil
-        :hook ((emacs-lisp-mode . prettify-symbols-mode)
-           (emacs-lisp-mode . (lambda () (setq-local lisp-indent-function 'lisp-indent-function))))
-        :mode (("\\.el$" . emacs-lisp-mode)))
-
-      (use-package doom-themes
-        :init
-        (load-theme 'doom-one t)
-        :config
-        (setq doom-themes-enable-bold t
-              doom-themes-enable-italic t))
-
-  - path: home/cl/.config/systemd/user/emacs.service
-    owner: cl:cl
-    defer: True
-    content: |
-      [Unit]
-      Description=Emacs text editor
-      Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
-
-      [Service]
-      Type=forking
-      ExecStart=/usr/local/bin/emacs --daemon
-      ExecStop=/usr/local/bin/emacsclient --eval "(kill-emacs)"
-      Environment=SSH_AUTH_SOCK=%t/keyring/ssh
-      Restart=on-failure
-
-      [Install]
-      WantedBy=default.target
-
-  - path: /home/cl/webserver.lisp
-    owner: cl:cl
-    defer: True
-    content: |
-      (ql:quickload "hunchentoot")
-
-      (defun start-server (&key (port 8080))
-        (hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port port)))
-
-      (hunchentoot:define-easy-handler (hello-html :uri "/hello") ()
-        (setf (hunchentoot:content-type*) "text/html")
-        (format nil "<!DOCTYPE html><html><head><title>Hello</title></head><body><h1>Hello, World!</h1></body></html>"))
-
 runcmd:
   # Run Certbot to obtain SSL certificates and configure Nginx
-  - certbot certonly --nginx -d u1.metalisp.dev --non-interactive --agree-tos --email marcus.kammer@mailbox.org --redirect
-  - certbot certonly --nginx -d docs.u1.metalisp.dev --non-interactive --agree-tos --email marcus.kammer@mailbox.org --redirect
+  - certbot certonly --nginx -d survey.metalisp.dev --non-interactive --agree-tos --email marcus.kammer@metalisp.dev --redirect
+  - certbot certonly --nginx -d survey.u1.metalisp.dev --non-interactive --agree-tos --email marcus.kammer@metalisp.dev --redirect
   # Add cron job for automatic certificate renewal (runs once a month)
   - echo '0 0 1 * * root certbot renew --post-hook "systemctl reload nginx" >> /var/log/letsencrypt/letsencrypt-auto-renew.log' > /etc/cron.d/letsencrypt-renew
   # Download DHPARAM
