@@ -1,5 +1,14 @@
 (in-package :ml-survey/views)
 
+(defun load-form (lang form-file-name)
+  "Load a Lisp file containing form definitions."
+  (let* ((relative-path (concatenate 'string "src/views/forms/" lang "/"))
+         (full-path (merge-pathnames relative-path *default-pathname-defaults*))
+         (form-path (merge-pathnames form-file-name full-path)))
+    (unless (probe-file form-path)
+      (error "Form file ~A does not exist." form-path))
+    (load form-path)))
+
 (defun sus-form-en (survey-id)
   (with-page (:title "SUS Form")
     (navbar-en)
