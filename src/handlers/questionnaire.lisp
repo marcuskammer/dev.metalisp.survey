@@ -14,10 +14,10 @@
 (defun choose-sus-form (lang)
   "Based on LANG decide which sus form to show."
   (check-type lang string)
-  (case (string-downcase lang)
-    ("en" #'ml-survey/views:sus-form-en)
-    ("de" #'ml-survey/views:sus-form-de)
-    (otherwise (error "Unsupported language: ~A" lang))))
+  (let ((lang (string-downcase lang)))
+  (cond ((string= lang "en") #'ml-survey/views:sus-form-en)
+        ((string= lang "de") #'ml-survey/views:sus-form-de)
+        (t (error "Unsupported language: ~A" lang)))))
 
 (defun process-questionnaire-get (lang survey)
   (check-type lang string)
