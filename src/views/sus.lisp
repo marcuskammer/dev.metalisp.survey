@@ -25,16 +25,3 @@
 
                      (btn-primary (:type "submit")
                        (find-l10n "submit" *html-lang* *l10n*))))))
-
-(defun sus-form-de (survey-id)
-  (with-page (:title "SUS Formular")
-    (navbar-de)
-    (:section :class "container"
-              (:h2 "Usability Feedback Formular")
-              (:p "Bitte füllen Sie die folgende Formular aus und klicken Sie auf die Schaltfläche 'Senden'.")
-              (:form :action (format nil "/survey/~a/questionnaire/sus" survey-id)
-                     :method "post"
-                     :class (dev.metalisp.sbt/utility:spacing :property "m" :side "y" :size 5)
-
-                     (btn-primary (:type "submit")
-                       (find-l10n "submit" *html-lang* *l10n*))))))
