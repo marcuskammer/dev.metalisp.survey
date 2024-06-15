@@ -21,5 +21,4 @@
            #:create-survey
            #:survey
            #:questionnaire-submit
-           #:sus-form-de
-           #:sus-form-en))
+           #:sus-form))
