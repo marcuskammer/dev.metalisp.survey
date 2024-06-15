@@ -12,18 +12,18 @@
     (load form-path))
   nil)
 
-(defun sus-form (survey-id)
-  (with-page (:title "SUS Form")
-    (:section :class "container my-5"
-              (:h2 "Usability Feedback Form")
-              (:p "Please fill out the following forms and press the submit button.")
-              (:form :action (format nil "/survey/~a/questionnaire/sus" survey-id)
-                     :method "post"
-                     :class (dev.metalisp.sbt/utility:spacing :property "m"
-                                                              :side "y"
-                                                              :size 5)
-                     ;; load the multi-form from disk
-                     (load-form *html-lang* "sus.lisp")
-
-                     (btn-primary (:type "submit")
-                       (find-l10n "submit" *html-lang* *l10n*))))))
+(defun sus-form (survey-id &optional action)
+  (let ((action (if action
+                    action
+                    (format nil "/survey/~a/questionnaire/sus" survey-id))))
+    (with-page (:title "SUS Form")
+      (:section :class "container my-5"
+                (:h2 "Usability Feedback Form")
+                (:p "Please fill out the following forms and press the submit button.")
+                (:form :action action
+                       :method "post"
+                       :class (spacing :property "m" :side "y" :size 5)
+                       ;; load the multi-form from disk
+                       (load-form *html-lang* "sus.lisp")
+                       (btn-primary (:type "submit")
+                         (find-l10n "submit" *html-lang* *l10n*)))))))

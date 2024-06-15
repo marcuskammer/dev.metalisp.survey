@@ -14,6 +14,8 @@
                 #:with-page)
   (:import-from #:dev.metalisp.sbt/form
                 #:multi-form)
+  (:import-from #:dev.metalisp.sbt/utility
+                #:spacing)
   (:export #:index
            #:imprint
            #:new-survey
