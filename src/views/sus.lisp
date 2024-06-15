@@ -3,115 +3,28 @@
 (defun load-form (lang form-file-name)
   "Load a Lisp file containing form definitions."
   (let* ((relative-path (concatenate 'string "src/views/forms/" lang "/"))
-         (full-path (merge-pathnames relative-path *default-pathname-defaults*))
-         (form-path (merge-pathnames form-file-name full-path)))
+         (full-path (uiop:merge-pathnames* relative-path (uiop:getcwd)))
+         (form-path (uiop:merge-pathnames* form-file-name full-path)))
     (unless (probe-file form-path)
       (error "Form file ~A does not exist." form-path))
-    (load form-path)))
+    (load form-path))
+  nil)
 
 (defun sus-form-en (survey-id)
   (with-page (:title "SUS Form")
-    (navbar-en)
-    (:section :class "container"
+    (:section :class "container my-5"
               (:h2 "Usability Feedback Form")
               (:p "Please fill out the following forms and press the submit button.")
               (:form :action (format nil "/survey/~a/questionnaire/sus" survey-id)
                      :method "post"
-                     :class (dev.metalisp.sbt/utility:spacing :property "m" :side "y" :size 5)
-                     (multi-form
-                       (:ask "I’d like to use this system frequently."
-                        :group "sus-1"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree"))
-
-                       (:ask "The system is unnecessarily complex."
-                        :group "sus-2"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree"))
-
-                       (:ask "The system is easy to use."
-                        :group "sus-3"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree"))
-
-                       (:ask "I need the support of a technical person to use this system."
-                        :group "sus-4"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree"))
-
-                       (:ask "The functions in this system are well integrated."
-                        :group "sus-5"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree"))
-
-                       (:ask "There is too much inconsistency in this system."
-                        :group "sus-6"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree"))
-
-                       (:ask "Most people would learn to use this system very quickly."
-                        :group "sus-7"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree"))
-
-                       (:ask "The system is very awkward to use."
-                        :group "sus-8"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree"))
-
-                       (:ask "I feel very confident using this system."
-                        :group "sus-9"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree"))
-
-                       (:ask "I needed to learn a lot of things to get started with this system."
-                        :group "sus-10"
-                        :style "list-style:none;"
-                        :choices (:single "1 Strongly Disagree"
-                                          "2 Disagree"
-                                          "3 Neither Agree nor Disagree"
-                                          "4 Agree"
-                                          "5 Strongly Agree")))
+                     :class (dev.metalisp.sbt/utility:spacing :property "m"
+                                                              :side "y"
+                                                              :size 5)
+                     ;; load the multi-form from disk
+                     (load-form "en" "sus.lisp")
 
                      (btn-primary (:type "submit")
                        (find-l10n "submit" *html-lang* *l10n*))))))
-
 
 (defun sus-form-de (survey-id)
   (with-page (:title "SUS Formular")
