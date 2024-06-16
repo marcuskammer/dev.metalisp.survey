@@ -16,6 +16,10 @@
                 #:multi-form)
   (:import-from #:dev.metalisp.sbt/utility
                 #:spacing)
+  (:import-from #:dev.metalisp.sbt
+                #:*use-cdn*
+                #:bs-url-css
+                #:bs-url-js)
   (:export #:index
            #:imprint
            #:new-survey
