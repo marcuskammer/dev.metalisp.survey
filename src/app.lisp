@@ -27,9 +27,9 @@
 (defvar *app* (create-server 'app
                              8080
                              :document-root
-                             "public/"
+                             (public-dir)
                              :access-log-destination
-                             (uiop:merge-pathnames* #P"access.log" (app-dir))))
+                             (access-log-file)))
 
 (defun start ()
   (start-server *app*))

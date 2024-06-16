@@ -66,3 +66,9 @@ within the data directory."
                           :direction :output
                           :if-exists :supersede)
     (prin1 responses stream)))
+
+(defun access-log-file ()
+  (uiop:merge-pathnames* #P"access.log" (app-dir)))
+
+(defun public-dir ()
+  (uiop:merge-pathnames* #P"public/" (app-dir)))
