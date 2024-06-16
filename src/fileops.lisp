@@ -1,6 +1,7 @@
 (in-package :ml-survey)
 
 (defun base-dir ()
+  "Determine and return the base directory for application data based on the operating system."
   (let ((os (uiop:detect-os)))
     (cond ((eq os :os-windows) (truename "~/AppData/Local/"))
           ((eq os :os-unix) (truename "~/.local/share/"))
@@ -8,12 +9,15 @@
           (t (error "Unsupported OS")))))
 
 (defun app-dir ()
+  "Construct and return the application-specific directory path."
   (uiop:merge-pathnames* #P"ml-survey/" (base-dir)))
 
 (defun data-dir ()
+  "Construct and return the directory path for storing data within the application."
   (uiop:merge-pathnames* #P"data/surveys/" (app-dir)))
 
 (defun ensure-data-dir ()
+  "Ensure the data directory exists, create it if necessary, and return its path."
   (let ((data-dir (data-dir)))
     (ensure-directories-exist (data-dir))
   data-dir))
@@ -29,6 +33,7 @@
   (truename pathname))
 
 (defun ensure-data-file-exist (survey-id questionnaire-id)
+  "Ensure that a specific file for given survey and questionnaire IDs exists within the data directory."
   (let ((path (format nil "~a~a/~a.lisp"
                       (ensure-data-dir)
                       survey-id
