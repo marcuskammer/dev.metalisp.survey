@@ -12,18 +12,15 @@
     (load form-path))
   nil)
 
-(defun sus-form (survey-id &optional action)
-  (let ((action (if action
-                    action
-                    (format nil "/survey/~a/questionnaire/sus" survey-id))))
+(defun sus-form ()
     (with-page (:title "SUS Form")
       (:section :class "container my-5"
                 (:h2 "Usability Feedback Form")
                 (:p "Please fill out the following forms and press the submit button.")
-                (:form :action action
+                (:form :action (hunchentoot:request-uri*)
                        :method "post"
                        :class (spacing :property "m" :side "y" :size 5)
                        ;; load the multi-form from disk
                        (load-form *html-lang* "sus.lisp")
                        (btn-primary (:type "submit")
-                         (find-l10n "submit" *html-lang* *l10n*)))))))
+                         (find-l10n "submit" *html-lang* *l10n*))))))
