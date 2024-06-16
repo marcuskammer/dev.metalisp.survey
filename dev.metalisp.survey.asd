@@ -18,6 +18,7 @@
     :components
     ((:file "package")
      (:file "_navbar")
+     (:file "main")
      (:file "sus")
      (:file "create-survey")
      (:file "new-survey")
