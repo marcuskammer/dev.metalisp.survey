@@ -15,7 +15,7 @@
   (check-type lang string)
   (check-type survey ml-survey:survey)
   (setf *html-lang* lang)
-  (ml-survey/views:sus-form (ml-survey:survey-id survey)))
+  (ml-survey/views:sus-form))
 
 (defun process-questionnaire-post (request survey)
   (let ((post-params (post-parameters* request))
