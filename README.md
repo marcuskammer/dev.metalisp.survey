@@ -1,30 +1,30 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#orgfc20458)
-    1.  [Introduction](#org82e49d0)
-    2.  [Dependencies](#org0384d14)
-    3.  [Mailing list](#orgcddacc5)
-    4.  [Issue tracker](#org6369bf7)
-    5.  [News Feed](#orgfbb79a0)
-    6.  [Installation instructions](#org9b4ca7a)
-        1.  [1. Install a Common Lisp implementation](#org8cdd8c0)
-        2.  [2. Set up ASDF](#orgf77351d)
-        3.  [3. Organize the project directory](#org6c13c6a)
-        4.  [4. Configure ASDF to find the project](#org1a1ebc5)
-        5.  [5. Load the project](#orgacb4ed1)
-        6.  [6. Run the project](#org3908f2a)
-        7.  [Optional: Example Initialization in .sbclrc](#org6a80305)
-    7.  [License](#org4d30f3e)
+1.  [dev.metalisp.survey](#org0b55d6d)
+    1.  [Introduction](#org44f7f75)
+    2.  [Dependencies](#orgb8893f3)
+    3.  [Mailing list](#org1e94521)
+    4.  [Issue tracker](#org21705ad)
+    5.  [News Feed](#org1538d08)
+    6.  [Installation instructions](#orgbe27a7f)
+        1.  [1. Install a Common Lisp implementation](#orgb1cd926)
+        2.  [2. Set up ASDF](#org096f7ea)
+        3.  [3. Organize the project directory](#org7e09293)
+        4.  [4. Configure ASDF to find the project](#orge70699b)
+        5.  [5. Load the project](#org3a2e8bb)
+        6.  [6. Run the project](#orgaca1c5b)
+        7.  [Optional: Example Initialization in .sbclrc](#org7f6f9be)
+    7.  [License](#orgcd477b2)
 
 
 
-<a id="orgfc20458"></a>
+<a id="org0b55d6d"></a>
 
 # dev.metalisp.survey
 
 
-<a id="org82e49d0"></a>
+<a id="org44f7f75"></a>
 
 ## Introduction
 
@@ -34,8 +34,21 @@ users to easily conduct usability evaluations by presenting the standard SUS
 questions and collecting responses. The goal is to streamline the process of
 gathering and analyzing usability feedback.
 
+The survey software developed aims to simplify the creation, administration and
+integration of questionnaires into existing websites or software systems. The
+use of flexible templates should enable a high degree of reusability and
+adaptability of the survey components. Users can easily combine and analyze
+data from multiple questionnaires within a single study, leading to a deeper
+understanding of the collected data. The software is self-hosted, which means
+that the data is stored on its own servers. This approach reinforces data
+protection and gives users complete control over their data, which is
+particularly important for data-sensitive areas. Through these features, the
+survey web application strives to make a valuable contribution to research
+projects, market research and other application areas where accurate data
+collection and analysis is crucial.
 
-<a id="org0384d14"></a>
+
+<a id="orgb8893f3"></a>
 
 ## Dependencies
 
@@ -43,33 +56,33 @@ gathering and analyzing usability feedback.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="orgcddacc5"></a>
+<a id="org1e94521"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org6369bf7"></a>
+<a id="org21705ad"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orgfbb79a0"></a>
+<a id="org1538d08"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org9b4ca7a"></a>
+<a id="orgbe27a7f"></a>
 
 ## Installation instructions
 
 
-<a id="org8cdd8c0"></a>
+<a id="orgb1cd926"></a>
 
 ### 1. Install a Common Lisp implementation
 
@@ -80,7 +93,7 @@ gathering and analyzing usability feedback.
     -   [CCL](https://ccl.clozure.com/)
 
 
-<a id="orgf77351d"></a>
+<a id="org096f7ea"></a>
 
 ### 2. Set up ASDF
 
@@ -88,7 +101,7 @@ gathering and analyzing usability feedback.
     it&rsquo;s not present, you can download it from [ASDF&rsquo;s repository](https://gitlab.common-lisp.net/asdf/asdf).
 
 
-<a id="org6c13c6a"></a>
+<a id="org7e09293"></a>
 
 ### 3. Organize the project directory
 
@@ -102,7 +115,7 @@ gathering and analyzing usability feedback.
                   └── app.lisp
 
 
-<a id="org1a1ebc5"></a>
+<a id="orge70699b"></a>
 
 ### 4. Configure ASDF to find the project
 
@@ -116,7 +129,7 @@ gathering and analyzing usability feedback.
         (push #p"~/common-lisp/" asdf:*central-registry*)
 
 
-<a id="orgacb4ed1"></a>
+<a id="org3a2e8bb"></a>
 
 ### 5. Load the project
 
@@ -125,7 +138,7 @@ gathering and analyzing usability feedback.
         (asdf:load-system :dev.metalisp.survey)
 
 
-<a id="org3908f2a"></a>
+<a id="orgaca1c5b"></a>
 
 ### 6. Run the project
 
@@ -136,7 +149,7 @@ gathering and analyzing usability feedback.
         (ml-survey:start)
 
 
-<a id="org6a80305"></a>
+<a id="org7f6f9be"></a>
 
 ### Optional: Example Initialization in .sbclrc
 
@@ -155,7 +168,7 @@ setup to your `.sbclrc` file:
         `~/common-lisp` directory in the ASDF central registry.
 
 
-<a id="org4d30f3e"></a>
+<a id="orgcd477b2"></a>
 
 ## License
 

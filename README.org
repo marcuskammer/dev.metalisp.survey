@@ -10,6 +10,19 @@ users to easily conduct usability evaluations by presenting the standard SUS
 questions and collecting responses. The goal is to streamline the process of
 gathering and analyzing usability feedback.
 
+The survey software developed aims to simplify the creation, administration and
+integration of questionnaires into existing websites or software systems. The
+use of flexible templates should enable a high degree of reusability and
+adaptability of the survey components. Users can easily combine and analyze
+data from multiple questionnaires within a single study, leading to a deeper
+understanding of the collected data. The software is self-hosted, which means
+that the data is stored on its own servers. This approach reinforces data
+protection and gives users complete control over their data, which is
+particularly important for data-sensitive areas. Through these features, the
+survey web application strives to make a valuable contribution to research
+projects, market research and other application areas where accurate data
+collection and analysis is crucial.
+
 ** Dependencies
 - https://github.com/edicl/hunchentoot
 - https://git.sr.ht/~marcuskammer/dev.metalisp.sbt
