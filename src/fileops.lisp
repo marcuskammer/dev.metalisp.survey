@@ -21,9 +21,7 @@ application."
 (defun ensure-data-dir ()
   "Ensure the data directory exists, create it if necessary, and return its
 path."
-  (let ((data-dir (data-dir)))
-    (ensure-directories-exist (data-dir))
-  data-dir))
+  (ensure-directories-exist (data-dir)))
 
 (defun ensure-file-exist (pathname)
   "Ensure that a file specified by PATHNAME exists, create it if it doesn't."
@@ -72,3 +70,7 @@ within the data directory."
 
 (defun public-dir ()
   (uiop:merge-pathnames* #P"public/" (app-dir)))
+
+(ensure-directories-exist (public-dir))
+
+(format t "App Data Directory: ~a~%" (app-dir))
