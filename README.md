@@ -1,76 +1,72 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#orgd64d9bb)
-    1.  [Introduction](#org955868c)
-        1.  [Design Goals](#org71faa7e)
-    2.  [Dependencies](#orgfa4e430)
-    3.  [Mailing list](#org1d8307c)
-    4.  [Issue tracker](#org406575f)
-    5.  [News Feed](#orgd8c6a45)
-    6.  [Installation instructions](#orga5c9fc3)
-        1.  [1. Install a Common Lisp implementation](#org67de338)
-        2.  [2. Set up ASDF](#org762005d)
-        3.  [3. Organize the project directory](#orga1725f5)
-        4.  [4. Configure ASDF to find the project](#org5e3ce31)
-        5.  [5. Load the project](#org9f571d3)
-        6.  [6. Run the project](#org6538bb4)
-        7.  [Optional: Example Initialization in .sbclrc](#org01cbab2)
-    7.  [License](#org2b2279f)
+1.  [dev.metalisp.survey](#orgd64e9c8)
+    1.  [Introduction](#orgf97d78a)
+    2.  [Design Goals](#org6fd0952)
+    3.  [Dependencies](#org81ce433)
+    4.  [Mailing list](#org0d7fc51)
+    5.  [Issue tracker](#org32aff05)
+    6.  [News Feed](#orge459190)
+    7.  [Installation instructions](#org50fe2e7)
+        1.  [1. Install a Common Lisp implementation](#org8f3be53)
+        2.  [2. Set up ASDF](#org5793033)
+        3.  [3. Organize the project directory](#orgdc541ad)
+        4.  [4. Configure ASDF to find the project](#org1137230)
+        5.  [5. Load the project](#orgdf9fae7)
+        6.  [6. Run the project](#orgdc968c0)
+        7.  [Optional: Example Initialization in .sbclrc](#org98d9f63)
+    8.  [License](#org3e92933)
 
 
 
-<a id="orgd64d9bb"></a>
+<a id="orgd64e9c8"></a>
 
 # dev.metalisp.survey
 
 
-<a id="org955868c"></a>
+<a id="orgf97d78a"></a>
 
 ## Introduction
 
-I am developing a simple web application in Common Lisp that facilitates the
-execution of the System Usability Scale (SUS) questionnaire. This app allows
-users to easily conduct usability evaluations by presenting the standard SUS
-questions and collecting responses. The goal is to streamline the process of
-gathering and analyzing usability feedback.
+I am developing a web application using Common Lisp, designed to administer the
+System Usability Scale (SUS) questionnaire efficiently. This application
+simplifies the process of conducting usability evaluations by presenting SUS
+questions and collecting responses, streamlining both the gathering and
+analysis of usability feedback.
 
-The survey software developed aims to simplify the creation, administration and
-integration of questionnaires into existing websites or software systems. The
-use of flexible templates should enable a high degree of reusability and
-adaptability of the survey components. Users can easily combine and analyze
-data from multiple questionnaires within a single study, leading to a deeper
-understanding of the collected data. The software is self-hosted, which means
-that the data is stored on its own servers. This approach reinforces data
-protection and gives users complete control over their data, which is
-particularly important for data-sensitive areas. Through these features, the
-survey web application strives to make a valuable contribution to research
-projects, market research and other application areas where accurate data
-collection and analysis is crucial.
+The software focuses on enhancing the ease of creating, managing, and
+integrating questionnaires within existing websites or software. Leveraging
+flexible templates, it offers a high level of reusability and
+adaptability. Data from multiple questionnaires can be synthesized within a
+single study, facilitating more profound insights. As a self-hosted solution,
+it assures enhanced data protection, granting users complete control over their
+data, a crucial feature for sensitive data environments. This application is
+aimed at significantly contributing to research projects, market research, and
+other fields where precise data collection and analysis are vital.
 
 
-<a id="org71faa7e"></a>
+<a id="org6fd0952"></a>
 
-### Design Goals
+## Design Goals
 
--   Integrate questionnaires into your own website or software: The software
-    enables seamless integration of questionnaires into existing digital
-    environments to improve user experience and simplify data collection.
+1.  **Integration**: The app integrates seamlessly into existing digital
+    platforms, enhancing user experience and simplifying data capture.
 
--   Reusability through templates: Through customizable templates, the software
-    offers an efficient solution for creating repeatable and consistent survey
-    formats for various use cases.
+2.  **Reusability and Adaptability**: Customizable templates allow for the
+    creation of consistent and repeatable survey formats suitable for various
+    applications.
 
--   Ability to combine data from multiple questionnaires into one study: Users
-    can merge and aggregate data from different questionnaires to provide more
-    comprehensive insights and analysis in a single study.
+3.  **Data Synthesis**: It supports combining data from multiple questionnaires
+    into a single study, providing broader and more comprehensive analytical
+    insights.
 
--   Data protection through self-hosting: The self-hosting option ensures
-    complete data control and strengthens data protection as sensitive
-    information does not need to be transferred to external servers.
+4.  **Privacy and Control**: With self-hosting, the software ensures complete data
+    sovereignty and enhances privacy, avoiding the need to transfer sensitive
+    data to external servers.
 
 
-<a id="orgfa4e430"></a>
+<a id="org81ce433"></a>
 
 ## Dependencies
 
@@ -78,33 +74,33 @@ collection and analysis is crucial.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org1d8307c"></a>
+<a id="org0d7fc51"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org406575f"></a>
+<a id="org32aff05"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orgd8c6a45"></a>
+<a id="orge459190"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="orga5c9fc3"></a>
+<a id="org50fe2e7"></a>
 
 ## Installation instructions
 
 
-<a id="org67de338"></a>
+<a id="org8f3be53"></a>
 
 ### 1. Install a Common Lisp implementation
 
@@ -115,7 +111,7 @@ collection and analysis is crucial.
     -   [CCL](https://ccl.clozure.com/)
 
 
-<a id="org762005d"></a>
+<a id="org5793033"></a>
 
 ### 2. Set up ASDF
 
@@ -123,7 +119,7 @@ collection and analysis is crucial.
     it&rsquo;s not present, you can download it from [ASDF&rsquo;s repository](https://gitlab.common-lisp.net/asdf/asdf).
 
 
-<a id="orga1725f5"></a>
+<a id="orgdc541ad"></a>
 
 ### 3. Organize the project directory
 
@@ -137,7 +133,7 @@ collection and analysis is crucial.
                   └── app.lisp
 
 
-<a id="org5e3ce31"></a>
+<a id="org1137230"></a>
 
 ### 4. Configure ASDF to find the project
 
@@ -151,7 +147,7 @@ collection and analysis is crucial.
         (push #p"~/common-lisp/" asdf:*central-registry*)
 
 
-<a id="org9f571d3"></a>
+<a id="orgdf9fae7"></a>
 
 ### 5. Load the project
 
@@ -160,7 +156,7 @@ collection and analysis is crucial.
         (asdf:load-system :dev.metalisp.survey)
 
 
-<a id="org6538bb4"></a>
+<a id="orgdc968c0"></a>
 
 ### 6. Run the project
 
@@ -171,7 +167,7 @@ collection and analysis is crucial.
         (ml-survey:start)
 
 
-<a id="org01cbab2"></a>
+<a id="org98d9f63"></a>
 
 ### Optional: Example Initialization in .sbclrc
 
@@ -190,7 +186,7 @@ setup to your `.sbclrc` file:
         `~/common-lisp` directory in the ASDF central registry.
 
 
-<a id="org2b2279f"></a>
+<a id="org3e92933"></a>
 
 ## License
 

@@ -4,42 +4,39 @@
 
 * dev.metalisp.survey
 ** Introduction
-I am developing a simple web application in Common Lisp that facilitates the
-execution of the System Usability Scale (SUS) questionnaire. This app allows
-users to easily conduct usability evaluations by presenting the standard SUS
-questions and collecting responses. The goal is to streamline the process of
-gathering and analyzing usability feedback.
 
-The survey software developed aims to simplify the creation, administration and
-integration of questionnaires into existing websites or software systems. The
-use of flexible templates should enable a high degree of reusability and
-adaptability of the survey components. Users can easily combine and analyze
-data from multiple questionnaires within a single study, leading to a deeper
-understanding of the collected data. The software is self-hosted, which means
-that the data is stored on its own servers. This approach reinforces data
-protection and gives users complete control over their data, which is
-particularly important for data-sensitive areas. Through these features, the
-survey web application strives to make a valuable contribution to research
-projects, market research and other application areas where accurate data
-collection and analysis is crucial.
+I am developing a web application using Common Lisp, designed to administer the
+System Usability Scale (SUS) questionnaire efficiently. This application
+simplifies the process of conducting usability evaluations by presenting SUS
+questions and collecting responses, streamlining both the gathering and
+analysis of usability feedback.
 
-*** Design Goals
+The software focuses on enhancing the ease of creating, managing, and
+integrating questionnaires within existing websites or software. Leveraging
+flexible templates, it offers a high level of reusability and
+adaptability. Data from multiple questionnaires can be synthesized within a
+single study, facilitating more profound insights. As a self-hosted solution,
+it assures enhanced data protection, granting users complete control over their
+data, a crucial feature for sensitive data environments. This application is
+aimed at significantly contributing to research projects, market research, and
+other fields where precise data collection and analysis are vital.
 
-- Integrate questionnaires into your own website or software: The software
-  enables seamless integration of questionnaires into existing digital
-  environments to improve user experience and simplify data collection.
+** Design Goals
 
-- Reusability through templates: Through customizable templates, the software
-  offers an efficient solution for creating repeatable and consistent survey
-  formats for various use cases.
+1. *Integration*: The app integrates seamlessly into existing digital
+   platforms, enhancing user experience and simplifying data capture.
 
-- Ability to combine data from multiple questionnaires into one study: Users
-  can merge and aggregate data from different questionnaires to provide more
-  comprehensive insights and analysis in a single study.
+2. *Reusability and Adaptability*: Customizable templates allow for the
+   creation of consistent and repeatable survey formats suitable for various
+   applications.
 
-- Data protection through self-hosting: The self-hosting option ensures
-  complete data control and strengthens data protection as sensitive
-  information does not need to be transferred to external servers.
+3. *Data Synthesis*: It supports combining data from multiple questionnaires
+   into a single study, providing broader and more comprehensive analytical
+   insights.
+
+4. *Privacy and Control*: With self-hosting, the software ensures complete data
+   sovereignty and enhances privacy, avoiding the need to transfer sensitive
+   data to external servers.
 
 ** Dependencies
 - https://github.com/edicl/hunchentoot
