@@ -1,30 +1,31 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#org0b55d6d)
-    1.  [Introduction](#org44f7f75)
-    2.  [Dependencies](#orgb8893f3)
-    3.  [Mailing list](#org1e94521)
-    4.  [Issue tracker](#org21705ad)
-    5.  [News Feed](#org1538d08)
-    6.  [Installation instructions](#orgbe27a7f)
-        1.  [1. Install a Common Lisp implementation](#orgb1cd926)
-        2.  [2. Set up ASDF](#org096f7ea)
-        3.  [3. Organize the project directory](#org7e09293)
-        4.  [4. Configure ASDF to find the project](#orge70699b)
-        5.  [5. Load the project](#org3a2e8bb)
-        6.  [6. Run the project](#orgaca1c5b)
-        7.  [Optional: Example Initialization in .sbclrc](#org7f6f9be)
-    7.  [License](#orgcd477b2)
+1.  [dev.metalisp.survey](#orgd64d9bb)
+    1.  [Introduction](#org955868c)
+        1.  [Design Goals](#org71faa7e)
+    2.  [Dependencies](#orgfa4e430)
+    3.  [Mailing list](#org1d8307c)
+    4.  [Issue tracker](#org406575f)
+    5.  [News Feed](#orgd8c6a45)
+    6.  [Installation instructions](#orga5c9fc3)
+        1.  [1. Install a Common Lisp implementation](#org67de338)
+        2.  [2. Set up ASDF](#org762005d)
+        3.  [3. Organize the project directory](#orga1725f5)
+        4.  [4. Configure ASDF to find the project](#org5e3ce31)
+        5.  [5. Load the project](#org9f571d3)
+        6.  [6. Run the project](#org6538bb4)
+        7.  [Optional: Example Initialization in .sbclrc](#org01cbab2)
+    7.  [License](#org2b2279f)
 
 
 
-<a id="org0b55d6d"></a>
+<a id="orgd64d9bb"></a>
 
 # dev.metalisp.survey
 
 
-<a id="org44f7f75"></a>
+<a id="org955868c"></a>
 
 ## Introduction
 
@@ -48,7 +49,28 @@ projects, market research and other application areas where accurate data
 collection and analysis is crucial.
 
 
-<a id="orgb8893f3"></a>
+<a id="org71faa7e"></a>
+
+### Design Goals
+
+-   Integrate questionnaires into your own website or software: The software
+    enables seamless integration of questionnaires into existing digital
+    environments to improve user experience and simplify data collection.
+
+-   Reusability through templates: Through customizable templates, the software
+    offers an efficient solution for creating repeatable and consistent survey
+    formats for various use cases.
+
+-   Ability to combine data from multiple questionnaires into one study: Users
+    can merge and aggregate data from different questionnaires to provide more
+    comprehensive insights and analysis in a single study.
+
+-   Data protection through self-hosting: The self-hosting option ensures
+    complete data control and strengthens data protection as sensitive
+    information does not need to be transferred to external servers.
+
+
+<a id="orgfa4e430"></a>
 
 ## Dependencies
 
@@ -56,33 +78,33 @@ collection and analysis is crucial.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org1e94521"></a>
+<a id="org1d8307c"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org21705ad"></a>
+<a id="org406575f"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org1538d08"></a>
+<a id="orgd8c6a45"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="orgbe27a7f"></a>
+<a id="orga5c9fc3"></a>
 
 ## Installation instructions
 
 
-<a id="orgb1cd926"></a>
+<a id="org67de338"></a>
 
 ### 1. Install a Common Lisp implementation
 
@@ -93,7 +115,7 @@ collection and analysis is crucial.
     -   [CCL](https://ccl.clozure.com/)
 
 
-<a id="org096f7ea"></a>
+<a id="org762005d"></a>
 
 ### 2. Set up ASDF
 
@@ -101,7 +123,7 @@ collection and analysis is crucial.
     it&rsquo;s not present, you can download it from [ASDF&rsquo;s repository](https://gitlab.common-lisp.net/asdf/asdf).
 
 
-<a id="org7e09293"></a>
+<a id="orga1725f5"></a>
 
 ### 3. Organize the project directory
 
@@ -115,7 +137,7 @@ collection and analysis is crucial.
                   └── app.lisp
 
 
-<a id="orge70699b"></a>
+<a id="org5e3ce31"></a>
 
 ### 4. Configure ASDF to find the project
 
@@ -129,7 +151,7 @@ collection and analysis is crucial.
         (push #p"~/common-lisp/" asdf:*central-registry*)
 
 
-<a id="org3a2e8bb"></a>
+<a id="org9f571d3"></a>
 
 ### 5. Load the project
 
@@ -138,7 +160,7 @@ collection and analysis is crucial.
         (asdf:load-system :dev.metalisp.survey)
 
 
-<a id="orgaca1c5b"></a>
+<a id="org6538bb4"></a>
 
 ### 6. Run the project
 
@@ -149,7 +171,7 @@ collection and analysis is crucial.
         (ml-survey:start)
 
 
-<a id="org7f6f9be"></a>
+<a id="org01cbab2"></a>
 
 ### Optional: Example Initialization in .sbclrc
 
@@ -168,7 +190,7 @@ setup to your `.sbclrc` file:
         `~/common-lisp` directory in the ASDF central registry.
 
 
-<a id="orgcd477b2"></a>
+<a id="org2b2279f"></a>
 
 ## License
 

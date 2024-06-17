@@ -23,6 +23,24 @@ survey web application strives to make a valuable contribution to research
 projects, market research and other application areas where accurate data
 collection and analysis is crucial.
 
+*** Design Goals
+
+- Integrate questionnaires into your own website or software: The software
+  enables seamless integration of questionnaires into existing digital
+  environments to improve user experience and simplify data collection.
+
+- Reusability through templates: Through customizable templates, the software
+  offers an efficient solution for creating repeatable and consistent survey
+  formats for various use cases.
+
+- Ability to combine data from multiple questionnaires into one study: Users
+  can merge and aggregate data from different questionnaires to provide more
+  comprehensive insights and analysis in a single study.
+
+- Data protection through self-hosting: The self-hosting option ensures
+  complete data control and strengthens data protection as sensitive
+  information does not need to be transferred to external servers.
+
 ** Dependencies
 - https://github.com/edicl/hunchentoot
 - https://git.sr.ht/~marcuskammer/dev.metalisp.sbt
