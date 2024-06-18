@@ -6,11 +6,10 @@
   (with-page (:title "Survey Details")
     (navbar-en)
     (:section :class "container"
-              (:h2 (format nil "Survey ID: ~a" (ml-survey:survey-id survey)))
-              (:h3 "Properties")
+              (:p (format nil "Survey ID: ~a" (ml-survey:survey-id survey)))
+              (:h2 "Properties")
               (ml-survey:survey-html survey)
               (when results
-                (:h3 "Questionnaire Results")
-                (:ul
-                 (loop for result in results do
-                   (:li result)))))))
+                (:h2 "Questionnaire Results")
+                (:ul (loop for result in results do
+                  (:li result)))))))

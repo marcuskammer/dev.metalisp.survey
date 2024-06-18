@@ -34,6 +34,7 @@
 (defmacro navbar (&body body)
   `(spinneret:with-html
      (:nav :class "navbar bg-body-tertiary navbar-expand-sm mb-5"
+           :aria-label "Primary Navigation"
            (:div :class "container"
                  ,@body))))
 
