@@ -1,8 +1,7 @@
 (defpackage ml-survey/views
   (:use #:cl)
   (:import-from #:spinneret
-                #:*html*
-                #:*html-lang*)
+                #:*html*)
   (:import-from #:dev.metalisp.sbt
                 #:find-l10n)
   (:import-from #:dev.metalisp.sbt
@@ -17,9 +16,7 @@
   (:import-from #:dev.metalisp.sbt/utility
                 #:spacing)
   (:import-from #:dev.metalisp.sbt
-                #:*use-cdn*
-                #:bs-url-css
-                #:bs-url-js)
+                #:*use-cdn*)
   (:export #:index
            #:imprint
            #:new-survey

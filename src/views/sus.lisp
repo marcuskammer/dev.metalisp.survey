@@ -13,14 +13,15 @@
   nil)
 
 (defun sus-form ()
-    (with-page (:title "SUS Form")
-      (:section :class "container my-5"
-                (:h2 "Usability Feedback Form")
-                (:p "Please fill out the following forms and press the submit button.")
-                (:form :action (hunchentoot:request-uri*)
-                       :method "post"
-                       :class (spacing :property "m" :side "y" :size 5)
-                       ;; load the multi-form from disk
-                       (load-form *html-lang* "sus.lisp")
-                       (btn-primary (:type "submit")
-                         (find-l10n "submit" *html-lang* *l10n*))))))
+  (with-form (:title "SUS Form")
+    (:main :id "main-content"
+           :class "container my-5"
+           (:h1 "Usability Feedback Form")
+           (:p "Please fill out the following forms and press the submit button.")
+           (:form :action (hunchentoot:request-uri*)
+                  :method "post"
+                  :class (spacing :property "m" :side "y" :size 5)
+                  ;; load the multi-form from disk
+                  (load-form spinneret:*html-lang* "sus.lisp")
+                  (btn-primary (:type "submit")
+                    (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
