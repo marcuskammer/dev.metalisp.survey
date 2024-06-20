@@ -73,4 +73,4 @@ within the data directory."
 
 (ensure-directories-exist (public-dir))
 
-(format t "App Data Directory: ~a~%" (app-dir))
+(format t "~%App Data Directory: ~a~%" (app-dir))
