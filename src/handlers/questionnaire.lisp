@@ -13,7 +13,7 @@
 
 (defun process-questionnaire-get (lang)
   (check-type lang string)
-  (setf *html-lang* lang)
+  (setf spinneret:*html-lang* lang)
   (ml-survey/views:sus-form))
 
 (defun process-questionnaire-post (request survey)
