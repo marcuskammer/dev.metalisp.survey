@@ -45,5 +45,6 @@
                for value = (cdr property) do
                  (:dt key)
                  (cond ((string= key "questionnaire")
-                        (:dd (:a :href (build-questionnaire-link (survey-id survey) value) value)))
+                        (:dd (:a :href (build-questionnaire-link (survey-id survey) value)
+				 (format nil "Open Questionnaire ~a" value))))
                        (t (:dd value)))))))
