@@ -275,6 +275,7 @@ write_files:
       git config --global user.email "marcus.kammer@mailbox.org"
       git config --global user.name "Marcus Kammer"
       git config --global init.defaultBranch main
+      git config --global pull.rebase true
 
   - path: /home/cl/setup_repos.sh
     owner: 'cl:cl'
