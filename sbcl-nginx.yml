@@ -537,6 +537,61 @@ write_files:
       #!/bin/bash
       sbcl --noinform --noprint --load ~/lisp_03_load_swank_faster.lisp
 
+  - path: /home/cl/emacs_build.sh
+    owner: cl:cl
+    permissions: '0755'
+    defer: True
+    content: |
+      #!/bin/bash
+
+      # Update package list and install dependencies
+      # note to myself: libgccjit version number should be qual to gcc --version
+      sudo apt update
+      sudo apt install -y build-essential git autoconf texinfo libncurses-dev libgnutls28-dev libjansson-dev libgccjit-13-dev pkg-config zlib1g-dev libtree-sitter-dev libxml2-dev
+
+      # Clone the Emacs repository
+      git clone git://git.sv.gnu.org/emacs.git ~/emacs-src && cd emacs-src
+
+      # Check out the Emacs-29 branch (replace 'emacs-29' with the specific version if different)
+      git checkout emacs-29
+
+      # Prepare for build
+      ./autogen.sh
+
+      # Configure Emacs for building without X11, without GTK, without image support, and with native compilation
+
+      # This configuration is tailored for an Emacs build focused on performance and
+      # native compilation, with reduced dependency on external image libraries and
+      # graphical systems. It's particularly suitable if you're aiming for a
+      # lightweight Emacs setup, primarily for text editing and programming tasks
+      # without the need for image handling within Emacs.
+
+      ./configure --without-xpm --without-jpeg --without-png --without-gif --without-tiff --without-xpm --without-rsvg --without-webp --without-lcms2 --without-cairo --without-gpm --with-json --with-native-compilation --with-tree-sitter
+
+      # Build Emacs
+      make -j$(nproc)
+
+      # If the build succeeds, install Emacs
+      sudo make install
+
+  - path: home/cl/.config/systemd/user/emacs.service
+    owner: cl:cl
+    defer: True
+    content: |
+      [Unit]
+      Description=Emacs text editor
+      Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+
+      [Service]
+      Type=forking
+      ExecStart=emacs --daemon
+      ExecStop=emacsclient --eval "(kill-emacs)"
+      Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+      Restart=on-failure
+
+      [Install]
+      WantedBy=default.target
+
 runcmd:
   # Run Certbot to obtain SSL certificates and configure Nginx
   - certbot certonly --nginx -d survey.metalisp.dev --non-interactive --agree-tos --email marcus.kammer@metalisp.dev --redirect
