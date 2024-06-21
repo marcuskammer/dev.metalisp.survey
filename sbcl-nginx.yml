@@ -293,7 +293,7 @@ write_files:
       #!/bin/bash
       /bin/bash /home/cl/setup_git.sh
       /bin/bash /home/cl/setup_repos.sh
-      ssh-keygen -t ed25519 -C 'u1.metalisp' -f ~/.ssh/id_ed25519 -N ''
+      ssh-keygen -t ed25519 -C 'survey.metalisp' -f ~/.ssh/id_ed25519 -N ''
       mkdir -p ~/www/u1/docs/
 
   - path: /home/cl/openai_block_access.sh
@@ -539,7 +539,6 @@ write_files:
 runcmd:
   # Run Certbot to obtain SSL certificates and configure Nginx
   - certbot certonly --nginx -d survey.metalisp.dev --non-interactive --agree-tos --email marcus.kammer@metalisp.dev --redirect
-  - certbot certonly --nginx -d survey.u1.metalisp.dev --non-interactive --agree-tos --email marcus.kammer@metalisp.dev --redirect
   # Add cron job for automatic certificate renewal (runs once a month)
   - echo '0 0 1 * * root certbot renew --post-hook "systemctl reload nginx" >> /var/log/letsencrypt/letsencrypt-auto-renew.log' > /etc/cron.d/letsencrypt-renew
   # Download DHPARAM
