@@ -544,6 +544,8 @@ write_files:
     content: |
       #!/bin/bash
 
+      git clone git@git.sr.ht:~marcuskammer/emacs.d-lisp ~/.emacs.d/
+
       # Update package list and install dependencies
       # note to myself: libgccjit version number should be qual to gcc --version
       sudo apt update
