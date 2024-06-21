@@ -283,7 +283,7 @@ write_files:
     content: |
       #!/bin/bash
       # Clone the SLIME repository for a specific branch and depth
-      git clone --branch v2.9 https://github.com/slime/slime.git ~/slime
+      git clone https://github.com/slime/slime.git ~/slime && cd ~/slime && git checkout v2.30
 
   - path: /home/cl/setup_user_all.sh
     owner: 'cl:cl'
@@ -294,7 +294,7 @@ write_files:
       /bin/bash /home/cl/setup_git.sh
       /bin/bash /home/cl/setup_repos.sh
       ssh-keygen -t ed25519 -C 'survey.metalisp' -f ~/.ssh/id_ed25519 -N ''
-      mkdir -p ~/www/u1/docs/
+      mkdir -p ~/www/survey/docs/
 
   - path: /home/cl/openai_block_access.sh
     owner: 'cl:cl'
