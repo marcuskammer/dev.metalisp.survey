@@ -20,14 +20,14 @@ Returns a list of integers."
 
 (defun sus-calc-score-per-row (results)
   (check-type results list)
-  (* (apply #'+ (sus-calc-score results)) 2.5))
+  (reverse (cons (* (apply #'+ (sus-calc-score results)) 2.5) (reverse results))))
 
 (defun sus-calc (files)
   (check-type files list)
   (loop for f in files
         for resp = (load-response f)
         collect
-        (sus-calc-score-per-row (extract-numbers resp))))
+	(sus-calc-score-per-row (extract-numbers resp))))
 
 (defun survey-uri-p (uri)
   (let ((parts (split-uri uri)))

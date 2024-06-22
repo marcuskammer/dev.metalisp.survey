@@ -11,5 +11,16 @@
               (ml-survey:survey-html survey)
               (when results
                 (:h2 "Questionnaire Results")
-                (:ul (loop for result in results do
-                  (:li result)))))))
+		(let ((count-answers (length (car results))))
+                  (:table :class "table table-hover"
+		    (:thead
+		     (:tr
+		      (loop for i from 1 to count-answers do
+ 			(if (= i count-answers)
+			    (:th :scope "col" "SUS Score")
+			    (:th :scope "col" (format nil "Q ~a" i)))))
+		     (:tbody
+		      (loop for result in results do
+			(:tr
+			 (loop for answer in result do
+			   (:td answer))))))))))))
