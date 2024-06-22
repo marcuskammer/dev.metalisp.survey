@@ -17,12 +17,11 @@
                  (:caption "Questionnaire results table")
 		         (:thead
 		          (:tr
-		           (loop for i from 1 to count-answers do
- 		             (if (= i count-answers)
-			             (:th :scope "col" "SUS Score")
-			             (:th :scope "col" (format nil "Q ~a" i)))))
-		          (:tbody
-		           (loop for result in results do
-		             (:tr
-		              (loop for answer in result do
-			            (:td answer))))))))))))
+		           (loop for i from 1 below count-answers do
+			         (:th :scope "col" (format nil "Q ~a" i)))
+                   (:th :scope "col" "SUS Score")))
+		         (:tbody
+		          (loop for result in results do
+		            (:tr
+		             (loop for answer in result do
+			           (:td answer)))))))))))
