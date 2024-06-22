@@ -1,31 +1,31 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#orgd64e9c8)
-    1.  [Introduction](#orgf97d78a)
-    2.  [Design Goals](#org6fd0952)
-    3.  [Dependencies](#org81ce433)
-    4.  [Mailing list](#org0d7fc51)
-    5.  [Issue tracker](#org32aff05)
-    6.  [News Feed](#orge459190)
-    7.  [Installation instructions](#org50fe2e7)
-        1.  [1. Install a Common Lisp implementation](#org8f3be53)
-        2.  [2. Set up ASDF](#org5793033)
-        3.  [3. Organize the project directory](#orgdc541ad)
-        4.  [4. Configure ASDF to find the project](#org1137230)
-        5.  [5. Load the project](#orgdf9fae7)
-        6.  [6. Run the project](#orgdc968c0)
-        7.  [Optional: Example Initialization in .sbclrc](#org98d9f63)
-    8.  [License](#org3e92933)
+1.  [dev.metalisp.survey](#org2897deb)
+    1.  [Introduction](#orgfb6d5f7)
+    2.  [Design Goals](#orgdfc28ab)
+    3.  [Dependencies](#org6b889ff)
+    4.  [Mailing list](#orgf5055cc)
+    5.  [Issue tracker](#orgc4a8b25)
+    6.  [News Feed](#org2f18653)
+    7.  [Installation instructions](#orgfd8430c)
+        1.  [1. Install a Common Lisp implementation](#orgf30cb52)
+        2.  [2. Set up ASDF](#org5676561)
+        3.  [3. Organize the project directory](#org0f1ad40)
+        4.  [4. Configure ASDF to find the project](#org316ff10)
+        5.  [5. Load the project](#org0a0ce20)
+        6.  [6. Run the project](#org201712e)
+        7.  [Optional: Example Initialization in .sbclrc](#org1e6c49d)
+    8.  [License](#org5cd04ac)
 
 
 
-<a id="orgd64e9c8"></a>
+<a id="org2897deb"></a>
 
 # dev.metalisp.survey
 
 
-<a id="orgf97d78a"></a>
+<a id="orgfb6d5f7"></a>
 
 ## Introduction
 
@@ -46,7 +46,7 @@ aimed at significantly contributing to research projects, market research, and
 other fields where precise data collection and analysis are vital.
 
 
-<a id="org6fd0952"></a>
+<a id="orgdfc28ab"></a>
 
 ## Design Goals
 
@@ -65,8 +65,15 @@ other fields where precise data collection and analysis are vital.
     sovereignty and enhances privacy, avoiding the need to transfer sensitive
     data to external servers.
 
+5.  **Accessibility**: The application is designed following the Web
+    Content Accessibility Guidelines (WCAG) provided by WebAIM,
+    ensuring that the survey is accessible to all users, including
+    those with disabilities. This includes features such as keyboard
+    navigation, screen reader compatibility, and high contrast modes to
+    accommodate users with varying needs and abilities.
 
-<a id="org81ce433"></a>
+
+<a id="org6b889ff"></a>
 
 ## Dependencies
 
@@ -74,33 +81,33 @@ other fields where precise data collection and analysis are vital.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org0d7fc51"></a>
+<a id="orgf5055cc"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org32aff05"></a>
+<a id="orgc4a8b25"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orge459190"></a>
+<a id="org2f18653"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org50fe2e7"></a>
+<a id="orgfd8430c"></a>
 
 ## Installation instructions
 
 
-<a id="org8f3be53"></a>
+<a id="orgf30cb52"></a>
 
 ### 1. Install a Common Lisp implementation
 
@@ -111,7 +118,7 @@ other fields where precise data collection and analysis are vital.
     -   [CCL](https://ccl.clozure.com/)
 
 
-<a id="org5793033"></a>
+<a id="org5676561"></a>
 
 ### 2. Set up ASDF
 
@@ -119,7 +126,7 @@ other fields where precise data collection and analysis are vital.
     it&rsquo;s not present, you can download it from [ASDF&rsquo;s repository](https://gitlab.common-lisp.net/asdf/asdf).
 
 
-<a id="orgdc541ad"></a>
+<a id="org0f1ad40"></a>
 
 ### 3. Organize the project directory
 
@@ -133,7 +140,7 @@ other fields where precise data collection and analysis are vital.
                   └── app.lisp
 
 
-<a id="org1137230"></a>
+<a id="org316ff10"></a>
 
 ### 4. Configure ASDF to find the project
 
@@ -147,7 +154,7 @@ other fields where precise data collection and analysis are vital.
         (push #p"~/common-lisp/" asdf:*central-registry*)
 
 
-<a id="orgdf9fae7"></a>
+<a id="org0a0ce20"></a>
 
 ### 5. Load the project
 
@@ -156,7 +163,7 @@ other fields where precise data collection and analysis are vital.
         (asdf:load-system :dev.metalisp.survey)
 
 
-<a id="orgdc968c0"></a>
+<a id="org201712e"></a>
 
 ### 6. Run the project
 
@@ -167,7 +174,7 @@ other fields where precise data collection and analysis are vital.
         (ml-survey:start)
 
 
-<a id="org98d9f63"></a>
+<a id="org1e6c49d"></a>
 
 ### Optional: Example Initialization in .sbclrc
 
@@ -186,7 +193,7 @@ setup to your `.sbclrc` file:
         `~/common-lisp` directory in the ASDF central registry.
 
 
-<a id="org3e92933"></a>
+<a id="org5cd04ac"></a>
 
 ## License
 

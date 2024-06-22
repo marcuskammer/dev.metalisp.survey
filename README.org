@@ -38,6 +38,13 @@ other fields where precise data collection and analysis are vital.
    sovereignty and enhances privacy, avoiding the need to transfer sensitive
    data to external servers.
 
+5. *Accessibility*: The application is designed following the Web
+   Content Accessibility Guidelines (WCAG) provided by WebAIM,
+   ensuring that the survey is accessible to all users, including
+   those with disabilities. This includes features such as keyboard
+   navigation, screen reader compatibility, and high contrast modes to
+   accommodate users with varying needs and abilities.
+
 ** Dependencies
 - https://github.com/edicl/hunchentoot
 - https://git.sr.ht/~marcuskammer/dev.metalisp.sbt
