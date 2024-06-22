@@ -5,5 +5,6 @@
     (body-header "Confirmation")
     (:main :id "main-content"
            :class "container"
-           (:div :class "alert alert-info" :role "alert"
-                 (format nil "Thank you for filling out the questionnaire.")))))
+           (:div :class "alert alert-info"
+                 :role "alert"
+                  "Thank you for filling out the questionnaire."))))
