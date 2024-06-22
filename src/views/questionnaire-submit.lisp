@@ -2,8 +2,8 @@
 
 (defun questionnaire-submit ()
   (with-page (:title "Confirmation")
-    (navbar-en)
-    (:section :class "container"
-              (:h2 "Confirmation")
-              (:div :class "alert alert-info" :role "alert"
-                    (format nil "Thank you for filling out the questionnaire.")))))
+    (body-header "Confirmation")
+    (:main :id "main-content"
+           :class "container"
+           (:div :class "alert alert-info" :role "alert"
+                 (format nil "Thank you for filling out the questionnaire.")))))
