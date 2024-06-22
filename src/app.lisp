@@ -1,5 +1,7 @@
 (in-package :ml-survey)
 
+(defparameter *html-lang* "en")
+
 (defun set-default-directory (directory)
   (setf *default-pathname-defaults* (truename (merge-pathnames directory))))
 

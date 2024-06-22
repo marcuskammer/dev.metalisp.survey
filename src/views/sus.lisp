@@ -12,16 +12,19 @@
     (load form-path))
   nil)
 
-(defun sus-form ()
-  (with-form (:title "SUS Form")
+(defmacro with-form (&body body)
+  `(spinneret:with-html
     (:main :id "main-content"
            :class "container my-5"
-           (:h1 "Usability Feedback Form")
            (:p "Please fill out the following forms and press the submit button.")
-           (:form :action (hunchentoot:request-uri*)
+           (:form :action (request-uri*)
                   :method "post"
                   :class (spacing :property "m" :side "y" :size 5)
-                  ;; load the multi-form from disk
-                  (load-form spinneret:*html-lang* "sus.lisp")
+                  ,@body
                   (btn-primary (:type "submit")
-                    (find-l10n "submit" spinneret:*html-lang* *l10n*))))))
+                    (find-l10n "submit" ml-survey:*html-lang* *l10n*))))))
+
+(defun sus-form ()
+  (with-page (:title "SUS Form")
+    (body-header "System Usability Form")
+    (with-form (load-form ml-survey:*html-lang* "sus.lisp"))))

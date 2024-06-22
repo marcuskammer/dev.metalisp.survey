@@ -1,5 +1,7 @@
 (defpackage ml-survey/views
   (:use #:cl)
+  (:import-from #:hunchentoot
+                #:request-uri*)
   (:import-from #:spinneret
                 #:*html*)
   (:import-from #:dev.metalisp.sbt
@@ -7,8 +9,8 @@
                 #:*l10n*
                 #:*use-cdn*
                 #:with-page
-		#:body-header
-		#:body-main)
+		        #:body-header
+		        #:body-main)
   (:import-from #:dev.metalisp.sbt/btn
                 #:btn
                 #:btn-primary)
