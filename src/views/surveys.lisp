@@ -20,17 +20,18 @@
                        (:a :class "btn btn-primary"
                            :href "/new-survey"
                            "New Survey")))
-           (:h2 :class "mb-3" "Overview")
-           (:ol :class "list-group list-group-numbered"
-                (loop for survey in surveys
-                      for title = (extract-title survey)
-                      for description = (extract-description survey)
-                      for id = (extract-id survey) do
-                        (:li :class "list-group-item d-flex justify-content-between align-items-start"
-                             (:div :class "ms-2 me-auto"
-                                   (:a :class "fw-bold clearfix"
-                                       :href (format nil "/survey/~a" id)
-                                       title)
-                                   (if description
-                                       (:span description)
-                                       nil))))))))
+           (when surveys
+             (:h2 :class "mb-3" "Overview")
+             (:ol :class "list-group list-group-numbered"
+                  (loop for survey in surveys
+                        for title = (extract-title survey)
+                        for description = (extract-description survey)
+                        for id = (extract-id survey) do
+                          (:li :class "list-group-item d-flex justify-content-between align-items-start"
+                               (:div :class "ms-2 me-auto"
+                                     (:a :class "fw-bold clearfix"
+                                         :href (format nil "/survey/~a" id)
+                                         title)
+                                     (if description
+                                         (:span description)
+                                         nil)))))))))
