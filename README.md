@@ -1,26 +1,25 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#orgc66cfcc)
-    1.  [Introduction](#org3352779)
-    2.  [Design Goals](#org40a77cb)
-    3.  [Dependencies](#org6304ba7)
-    4.  [Mailing list](#org965470f)
-    5.  [Issue tracker](#org00db5dc)
-    6.  [News Feed](#org4d6d6d9)
-    7.  [Installation instructions](#org7eb180d)
-        1.  [Without using Quicklisp](#org926b3bc)
-        2.  [With using Quicklisp](#org07715ac)
-    8.  [License](#orgef05e23)
+1.  [dev.metalisp.survey](#org1975482)
+    1.  [Introduction](#org6e3b1a7)
+    2.  [Design Goals](#org1d291c6)
+    3.  [Dependencies](#org3ab2392)
+    4.  [Mailing list](#org07ed01d)
+    5.  [Issue tracker](#org60e4fbd)
+    6.  [News Feed](#orgf18f06e)
+    7.  [Installation instructions](#org82b39a2)
+        1.  [With using Quicklisp](#org9e7f013)
+    8.  [License](#orga10bc56)
 
 
 
-<a id="orgc66cfcc"></a>
+<a id="org1975482"></a>
 
 # dev.metalisp.survey
 
 
-<a id="org3352779"></a>
+<a id="org6e3b1a7"></a>
 
 ## Introduction
 
@@ -41,7 +40,7 @@ aimed at significantly contributing to research projects, market research, and
 other fields where precise data collection and analysis are vital.
 
 
-<a id="org40a77cb"></a>
+<a id="org1d291c6"></a>
 
 ## Design Goals
 
@@ -68,7 +67,7 @@ other fields where precise data collection and analysis are vital.
     accommodate users with varying needs and abilities.
 
 
-<a id="org6304ba7"></a>
+<a id="org3ab2392"></a>
 
 ## Dependencies
 
@@ -76,103 +75,33 @@ other fields where precise data collection and analysis are vital.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org965470f"></a>
+<a id="org07ed01d"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org00db5dc"></a>
+<a id="org60e4fbd"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org4d6d6d9"></a>
+<a id="orgf18f06e"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org7eb180d"></a>
+<a id="org82b39a2"></a>
 
 ## Installation instructions
 
 
-<a id="org926b3bc"></a>
-
-### Without using Quicklisp
-
-1.  1. Install a Common Lisp implementation
-
-    -   Ensure you have a Common Lisp implementation installed. Common options
-        include SBCL (Steel Bank Common Lisp) and CCL (Clozure Common Lisp). You
-        can download and install them from their respective websites:
-        -   [SBCL](http://www.sbcl.org/)
-        -   [CCL](https://ccl.clozure.com/)
-
-2.  2. Set up ASDF
-
-    -   ASDF is typically bundled with modern Lisp implementations. However, if
-        it&rsquo;s not present, you can download it from [ASDF&rsquo;s repository](https://gitlab.common-lisp.net/asdf/asdf).
-
-3.  3. Organize the project directory
-
-    -   Place the `dev.metalisp.survey` project in the `~/common-lisp`
-        directory. Ensure the directory structure looks like this:
-        
-            ~/common-lisp/
-              └── dev.metalisp.survey/
-                  ├── dev.metalisp.survey.asd
-                  └── src/
-                      └── app.lisp
-
-4.  4. Configure ASDF to find the project
-
-    -   Open your Common Lisp REPL and run the following commands to set up the
-        ASDF central registry:
-        
-            ;; Ensure ASDF is loaded
-            (require :asdf)
-            
-            ;; Add ~/common-lisp to the ASDF central registry
-            (push #p"~/common-lisp/" asdf:*central-registry*)
-
-5.  5. Load the project
-
-    -   In your REPL, load the project by running:
-        
-            (asdf:load-system :dev.metalisp.survey)
-
-6.  6. Run the project
-
-    -   After loading the system, you can run the main function or entry point of
-        the project.
-        `ml-survey:start`, you would execute:
-        
-            (ml-survey:start)
-
-7.  Optional: Example Initialization in .sbclrc
-
-    To make the ASDF configuration persistent across REPL sessions, you can add the
-    setup to your `.sbclrc` file:
-    
-    1.  Edit `.sbclrc`
-        -   Open (or create) the `.sbclrc` file in your home directory and add the
-            following lines:
-            
-                (require :asdf)
-                (push #p"~/common-lisp/" asdf:*central-registry*)
-    
-    2.  Reload SBCL
-        -   The next time you start SBCL, it will automatically include the
-            `~/common-lisp` directory in the ASDF central registry.
-
-
-<a id="org07715ac"></a>
+<a id="org9e7f013"></a>
 
 ### With using Quicklisp
 
@@ -181,7 +110,8 @@ streamlining the process of installing and maintaining libraries. It simplifies
 downloading, building, and loading libraries with a minimal fuss and supports
 command line interaction.
 
-This guide will demonstrate how to install Quicklisp on both Linux and Windows operating systems.
+This guide will demonstrate how to install Quicklisp on both Linux and Windows
+operating systems.
 
 1.  Why Use Quicklisp?
 
@@ -255,8 +185,19 @@ This guide will demonstrate how to install Quicklisp on both Linux and Windows o
         
             (quit)
 
+4.  Load dev.metalisp.survey
 
-<a id="orgef05e23"></a>
+    1.  Clone this repository and dev.metalisp.sbt
+        
+            git clone git@git.sr.ht:~marcuskammer/dev.metalisp.sbt ~/quicklisp/local-projects/
+            git clone git@git.sr.ht:~marcuskammer/dev.metalisp.survey ~/quicklisp/local-projects/
+    
+    2.  Start sbcl and load dev.metalisp.survey
+        
+            (ql:quickload :dev.metalisp.survey)
+
+
+<a id="orga10bc56"></a>
 
 ## License
 

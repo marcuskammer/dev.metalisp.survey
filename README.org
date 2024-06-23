@@ -55,7 +55,7 @@ other fields where precise data collection and analysis are vital.
 ** News Feed
 - https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml
 ** Installation instructions
-*** Without using Quicklisp
+*** Without using Quicklisp                                        :noexport:
 **** 1. Install a Common Lisp implementation
 
    - Ensure you have a Common Lisp implementation installed. Common options
@@ -139,7 +139,8 @@ streamlining the process of installing and maintaining libraries. It simplifies
 downloading, building, and loading libraries with a minimal fuss and supports
 command line interaction.
 
-This guide will demonstrate how to install Quicklisp on both Linux and Windows operating systems.
+This guide will demonstrate how to install Quicklisp on both Linux and Windows
+operating systems.
 
 **** Why Use Quicklisp?
 
@@ -219,6 +220,18 @@ Quicklisp offers several advantages for Common Lisp development:
    (quit)
    #+end_src
 
+**** Load dev.metalisp.survey
+
+1. Clone this repository and dev.metalisp.sbt
+   #+begin_src shell
+     git clone git@git.sr.ht:~marcuskammer/dev.metalisp.sbt ~/quicklisp/local-projects/
+     git clone git@git.sr.ht:~marcuskammer/dev.metalisp.survey ~/quicklisp/local-projects/
+   #+end_src
+
+2. Start sbcl and load dev.metalisp.survey
+   #+begin_src shell
+     (ql:quickload :dev.metalisp.survey)
+   #+end_src
 ** License
 
 MIT
