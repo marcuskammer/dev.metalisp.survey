@@ -55,7 +55,8 @@ other fields where precise data collection and analysis are vital.
 ** News Feed
 - https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml
 ** Installation instructions
-*** 1. Install a Common Lisp implementation
+*** Without using Quicklisp
+**** 1. Install a Common Lisp implementation
 
    - Ensure you have a Common Lisp implementation installed. Common options
      include SBCL (Steel Bank Common Lisp) and CCL (Clozure Common Lisp). You
@@ -64,12 +65,12 @@ other fields where precise data collection and analysis are vital.
      - [[http://www.sbcl.org/][SBCL]]
      - [[https://ccl.clozure.com/][CCL]]
 
-*** 2. Set up ASDF
+**** 2. Set up ASDF
 
    - ASDF is typically bundled with modern Lisp implementations. However, if
      it's not present, you can download it from [[https://gitlab.common-lisp.net/asdf/asdf][ASDF's repository]].
 
-*** 3. Organize the project directory
+**** 3. Organize the project directory
 
    - Place the =dev.metalisp.survey= project in the =~/common-lisp=
      directory. Ensure the directory structure looks like this:
@@ -82,7 +83,7 @@ other fields where precise data collection and analysis are vital.
                └── app.lisp
      #+END_EXAMPLE
 
-*** 4. Configure ASDF to find the project
+**** 4. Configure ASDF to find the project
 
    - Open your Common Lisp REPL and run the following commands to set up the
      ASDF central registry:
@@ -95,7 +96,7 @@ other fields where precise data collection and analysis are vital.
      (push #p"~/common-lisp/" asdf:*central-registry*)
      #+END_SRC
 
-*** 5. Load the project
+**** 5. Load the project
 
    - In your REPL, load the project by running:
 
@@ -103,7 +104,7 @@ other fields where precise data collection and analysis are vital.
      (asdf:load-system :dev.metalisp.survey)
      #+END_SRC
 
-*** 6. Run the project
+**** 6. Run the project
 
    - After loading the system, you can run the main function or entry point of
      the project.
@@ -113,7 +114,7 @@ other fields where precise data collection and analysis are vital.
      (ml-survey:start)
      #+END_SRC
 
-*** Optional: Example Initialization in .sbclrc
+**** Optional: Example Initialization in .sbclrc
 
 To make the ASDF configuration persistent across REPL sessions, you can add the
 setup to your =.sbclrc= file:
@@ -130,6 +131,93 @@ setup to your =.sbclrc= file:
 2. Reload SBCL
    - The next time you start SBCL, it will automatically include the
      =~/common-lisp= directory in the ASDF central registry.
+
+*** With using Quicklisp
+
+Quicklisp is a highly recommended library manager for Common Lisp capable of
+streamlining the process of installing and maintaining libraries. It simplifies
+downloading, building, and loading libraries with a minimal fuss and supports
+command line interaction.
+
+This guide will demonstrate how to install Quicklisp on both Linux and Windows operating systems.
+
+**** Why Use Quicklisp?
+
+Quicklisp offers several advantages for Common Lisp development:
+- *Ease of Use:* It simplifies the installation process of common Lisp
+  libraries, handling dependencies automatically.
+- *Extensive Library Collection:* Quicklisp connects to a vast repository of
+  libraries, making it easy to find and install almost any library you need for
+  a project.
+- *Regular Updates:* Quicklisp updates its library list monthly, so you always
+  have access to the latest versions.
+- *Integration:* It integrates well with many Lisp environments and tools,
+  enhancing your development workflow.
+
+**** On Linux
+
+1. *Install a Common Lisp implementation:*
+   For example, to install SBCL:
+   #+begin_src bash
+   sudo apt-get install sbcl
+   #+end_src
+
+2. *Download Quicklisp Installer:*
+   Open a terminal and run:
+   #+begin_src bash
+   curl -O https://beta.quicklisp.org/quicklisp.lisp
+   #+end_src
+
+3. *Install Quicklisp:*
+   With Lisp implementation installed (e.g., SBCL), run:
+   #+begin_src bash
+   sbcl --load quicklisp.lisp
+   #+end_src
+   Within the Lisp environment, enter:
+   #+begin_src lisp
+   (quicklisp-quickstart:install)
+   #+end_src
+
+4. *Integrate Quicklisp with your Lisp environment:*
+   To automatically load Quicklisp on Lisp startup:
+   #+begin_src lisp
+   (ql:add-to-init-file)
+   #+end_src
+   Follow the on-screen instructions, then exit Lisp:
+   #+begin_src lisp
+   (quit)
+   #+end_src
+
+**** On Windows
+
+1. *Install a Common Lisp implementation:*
+   Download and install, for example, SBCL from http://www.sbcl.org/platform-table.html
+
+2. *Download Quicklisp Installer:*
+   Open PowerShell and run:
+   #+begin_src powershell
+   Invoke-WebRequest -Uri https://beta.quicklisp.org/quicklisp.lisp -OutFile quicklisp.lisp
+   #+end_src
+
+3. *Install Quicklisp:*
+   Open installed Lisp (e.g., SBCL) shell by searching it in the start menu. Then run:
+   #+begin_src shell
+   --load quicklisp.lisp
+   #+end_src
+   Within the Lisp REPL, execute:
+   #+begin_src lisp
+   (quicklisp-quickstart:install)
+   #+end_src
+
+4. *Set Up Quicklisp:*
+   To enable Quicklisp every time Lisp starts:
+   #+begin_src lisp
+   (ql:add-to-init-file)
+   #+end_src
+   Follow the steps provided, then exit:
+   #+begin_src lisp
+   (quit)
+   #+end_src
 
 ** License
 
