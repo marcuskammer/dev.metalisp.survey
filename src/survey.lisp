@@ -35,6 +35,12 @@
 (defmethod survey-data-dir-p ((survey survey))
   (uiop:directory-exists-p (survey-data-dir survey)))
 
+(defmethod survey-properties-title ((survey survey))
+  (cdr (assoc "title" (survey-properties survey) :test #'string-equal)))
+
+(defmethod survey-properties-description ((survey survey))
+  (cdr (assoc "description" (survey-properties survey) :test #'string-equal)))
+
 (defun build-questionnaire-link (survey-id resource)
   (format nil "/survey/~a/questionnaire~a" survey-id resource))
 

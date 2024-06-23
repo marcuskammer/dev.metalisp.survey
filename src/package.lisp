@@ -9,6 +9,9 @@
    #:survey-data-dir-p
    #:survey-data-dir-files
    #:survey-html
+   #:survey-properties
+   #:survey-properties-title
+   #:survey-properties-description
    #:ensure-data-dir
    #:ensure-data-file-exist
    #:store-response
