@@ -1,16 +1,5 @@
 (in-package :ml-survey/views)
 
-;; CREATE TABLE surveys (
-;;   id SERIAL PRIMARY KEY,
-;;   unique_id UUID DEFAULT uuid_generate_v4(),
-;;   title VARCHAR(255),
-;;   description TEXT,
-;;   instructions TEXT,
-;;   creator_id INTEGER,
-;;   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-;;   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-;; );
-
 (defun new-survey ()
   "Generates the view to create a new survey."
   (with-page (:title "New Survey")
