@@ -25,6 +25,12 @@
 (defgeneric survey-data-dir-p (survey)
   (:documentation "Check if the survey's data directory exists."))
 
+(defgeneric survey-properties-title (survey)
+  (:documentation "Get title property."))
+
+(defgeneric survey-properties-description (survey)
+  (:documentation "Get description property."))
+
 (defmethod survey-id-p ((survey survey))
   (let ((ids (mapcar #'car (load-response (make-surveys-db-file)))))
     (if (member (parse-integer (survey-id survey)) ids) t nil)))
