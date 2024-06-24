@@ -7,6 +7,7 @@
   :depends-on
   ("local-time" "hunchentoot" "dev.metalisp.sbt")
   :components
+
   ((:module "src"
     :components
     ((:file "package")
