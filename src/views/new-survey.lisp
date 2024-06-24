@@ -1,13 +1,17 @@
 (in-package :ml-survey/views)
 
-(defun new-survey ()
+(defun new-survey (&optional survey-id)
   "Generates the view to create a new survey."
   (with-page (:title "New Survey")
     (body-header "New Survey" (navbar-en))
     (:main :class "container"
            :id "main-content"
 
-           (:form :action "/create-survey"
+           (when survey-id
+             (:div :class "alert alert-info" :role "alert"
+                   (format nil "Your new survey: ~A is created." survey-id)))
+
+           (:form :action "/new-survey"
                   :method "post"
 
                   (:fieldset
