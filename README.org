@@ -3,6 +3,9 @@
 #+email: marcus.kammer@metalisp.dev
 
 * dev.metalisp.survey
+
+Made with Love ❤️ and Common Lisp
+
 ** Introduction
 
 I am developing a web application using Common Lisp, designed to administer the
