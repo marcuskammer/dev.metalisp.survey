@@ -21,7 +21,6 @@
      (:file "_navbar")
      (:file "main")
      (:file "sus")
-     (:file "create-survey")
      (:file "new-survey")
      (:file "survey")
      (:file "surveys")
@@ -31,7 +30,6 @@
     :components
     ((:file "package")
      (:file "main")
-     (:file "create-survey")
      (:file "new-survey")
      (:file "survey")
      (:file "surveys")
