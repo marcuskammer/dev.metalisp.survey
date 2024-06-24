@@ -1,25 +1,26 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#org1975482)
-    1.  [Introduction](#org6e3b1a7)
-    2.  [Design Goals](#org1d291c6)
-    3.  [Dependencies](#org3ab2392)
-    4.  [Mailing list](#org07ed01d)
-    5.  [Issue tracker](#org60e4fbd)
-    6.  [News Feed](#orgf18f06e)
-    7.  [Installation instructions](#org82b39a2)
-        1.  [With using Quicklisp](#org9e7f013)
-    8.  [License](#orga10bc56)
+1.  [dev.metalisp.survey](#org2d37947)
+    1.  [Introduction](#org1974a75)
+    2.  [Design Goals](#org59fdf9c)
+    3.  [Features](#org5ba09fc)
+    4.  [Dependencies](#org3053ed5)
+    5.  [Mailing list](#org04128bc)
+    6.  [Issue tracker](#org968bb92)
+    7.  [News Feed](#org2892b8b)
+    8.  [Installation instructions](#orgb61177e)
+        1.  [With using Quicklisp](#org86ca959)
+    9.  [License](#orgd314aa8)
 
 
 
-<a id="org1975482"></a>
+<a id="org2d37947"></a>
 
 # dev.metalisp.survey
 
 
-<a id="org6e3b1a7"></a>
+<a id="org1974a75"></a>
 
 ## Introduction
 
@@ -40,7 +41,7 @@ aimed at significantly contributing to research projects, market research, and
 other fields where precise data collection and analysis are vital.
 
 
-<a id="org1d291c6"></a>
+<a id="org59fdf9c"></a>
 
 ## Design Goals
 
@@ -67,7 +68,21 @@ other fields where precise data collection and analysis are vital.
     accommodate users with varying needs and abilities.
 
 
-<a id="org3ab2392"></a>
+<a id="org5ba09fc"></a>
+
+## Features
+
+1.  **Questionnaires**: Questionnaires can be defined using a Domain-Specific
+    Language (DSL) developed for dev.metalisp.sbt. The benefit of defining forms
+    in files is that they can be versioned using GIT, providing better control
+    over changes and updates.
+
+2.  **Simplicity**: All data is saved to files, eliminating the need for a
+    database. This reduces costs for self-hosting and simplifies the setup and
+    maintenance of the application.
+
+
+<a id="org3053ed5"></a>
 
 ## Dependencies
 
@@ -75,33 +90,33 @@ other fields where precise data collection and analysis are vital.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org07ed01d"></a>
+<a id="org04128bc"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org60e4fbd"></a>
+<a id="org968bb92"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orgf18f06e"></a>
+<a id="org2892b8b"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org82b39a2"></a>
+<a id="orgb61177e"></a>
 
 ## Installation instructions
 
 
-<a id="org9e7f013"></a>
+<a id="org86ca959"></a>
 
 ### With using Quicklisp
 
@@ -197,7 +212,7 @@ operating systems.
             (ql:quickload :dev.metalisp.survey)
 
 
-<a id="orga10bc56"></a>
+<a id="orgd314aa8"></a>
 
 ## License
 

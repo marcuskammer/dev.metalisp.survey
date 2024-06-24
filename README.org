@@ -45,6 +45,17 @@ other fields where precise data collection and analysis are vital.
    navigation, screen reader compatibility, and high contrast modes to
    accommodate users with varying needs and abilities.
 
+** Features
+
+1. *Questionnaires*: Questionnaires can be defined using a Domain-Specific
+   Language (DSL) developed for dev.metalisp.sbt. The benefit of defining forms
+   in files is that they can be versioned using GIT, providing better control
+   over changes and updates.
+
+2. *Simplicity*: All data is saved to files, eliminating the need for a
+   database. This reduces costs for self-hosting and simplifies the setup and
+   maintenance of the application.
+
 ** Dependencies
 - https://github.com/edicl/hunchentoot
 - https://git.sr.ht/~marcuskammer/dev.metalisp.sbt
