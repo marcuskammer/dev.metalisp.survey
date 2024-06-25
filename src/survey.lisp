@@ -12,7 +12,7 @@
   (with-slots (id data-dir properties) survey
     (setf data-dir (uiop:merge-pathnames*
                     (format nil "~a/" id)
-                    (ensure-data-dir)))
+                    (ensure-surveys-dir)))
     (setf properties (first (rest (assoc (parse-integer id)
                                          (load-response (make-surveys-db-file))))))))
 

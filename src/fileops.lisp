@@ -16,12 +16,35 @@ operating system."
 (defun data-dir ()
   "Construct and return the directory path for storing data within the
 application."
+  (uiop:merge-pathnames* #P"data/" (app-dir)))
+
+(defun surveys-dir ()
+  "Construct and return the directory path for storing surveys within the
+application."
   (uiop:merge-pathnames* #P"data/surveys/" (app-dir)))
+
+(defun forms-dir ()
+  "Construct and return the directory path for storing forms within the
+application."
+  (uiop:merge-pathnames* #P"data/forms/" (app-dir)))
 
 (defun ensure-data-dir ()
   "Ensure the data directory exists, create it if necessary, and return its
 path."
   (ensure-directories-exist (data-dir)))
+
+(defun ensure-surveys-dir ()
+  "Ensure the data directory exists, create it if necessary, and return its
+path."
+  (ensure-directories-exist (surveys-dir)))
+
+(defun ensure-forms-dir ()
+  "Ensure the data directory exists, create it if necessary, and return its
+path."
+  (ensure-directories-exist (forms-dir)))
+
+(defun forms-list-files ()
+  (uiop:directory* (format nil "~a*/*.lisp" (forms-dir))))
 
 (defun ensure-file-exist (pathname)
   "Ensure that a file specified by PATHNAME exists, create it if it doesn't."
@@ -37,7 +60,7 @@ path."
   "Ensure that a specific file for given survey and questionnaire IDs exists
 within the data directory."
   (let ((path (format nil "~a~a/~a.lisp"
-                      (ensure-data-dir)
+                      (ensure-surveys-dir)
                       survey-id
                       questionnaire-id)))
     (ensure-file-exist (ensure-directories-exist path))))
@@ -45,7 +68,7 @@ within the data directory."
 (defun make-db-file (file)
   "Prepare and ensure a database file at FILE-STR path."
   (check-type file string)
-  (let ((path (uiop:merge-pathnames* file (ensure-data-dir))))
+  (let ((path (uiop:merge-pathnames* file (ensure-surveys-dir))))
     (ensure-file-exist path)))
 
 (defun load-response (db)

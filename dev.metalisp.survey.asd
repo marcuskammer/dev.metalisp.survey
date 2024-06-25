@@ -13,7 +13,8 @@
     ((:file "package")
      (:file "fileops")
      (:file "app")
-     (:file "survey")))
+     (:file "survey")
+     (:file "questionnaire")))
 
    (:module "src/views"
     :components
