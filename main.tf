@@ -6,3 +6,13 @@ resource "aws_vpc" "survey-buttler-vpc" {
     Name = "survey-buttler-vpc"
   }
 }
+
+resource "aws_subnet" "survey-buttler-public-subnet" {
+  vpc_id                  = aws_vpc.survey-buttler-vpc.id
+  cidr_block              = "10.123.1.0/24"
+  map_public_ip_on_launch = true
+  availability_zone       = "eu-central-1"
+  tags = {
+    Name = "survey-buttler-public"
+  }
+}
