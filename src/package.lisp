@@ -14,6 +14,7 @@
    #:survey-properties-description
    #:ensure-data-dir
    #:ensure-data-file-exist
+   #:forms-dir
    #:forms-list-files
    #:extract-lang-and-filename
    #:list-questionnaires
