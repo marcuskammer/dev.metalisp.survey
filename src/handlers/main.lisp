@@ -24,6 +24,9 @@
                                 (local-time:now)
                                 :format '((:hour 2) ":" (:min 2) ":" (:sec 2))))
 
+(defun today+now ()
+   (format nil "~a ~a" (today) (now)))
+
 (defun generate-uuid ()
   (parse-integer (format nil "~A~A~A"
                          (sb-posix:getpid)

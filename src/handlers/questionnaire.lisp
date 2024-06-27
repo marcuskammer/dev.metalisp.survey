@@ -17,11 +17,11 @@
   (ml-survey/views:sus-form))
 
 (defun process-questionnaire-post (request survey)
-  (let ((post-params (post-parameters* request))
-        (questionnaire-id (generate-uuid)))
-    (store-response (ensure-data-file-exist (ml-survey:survey-id survey)
-                                            questionnaire-id)
-                    (push (format nil "~aT~a" (today) (now)) post-params))
+  (let* ((post-params (post-parameters* request))
+         (questionnaire-id (generate-uuid))
+         (questionnaire-data-file (ensure-data-file-exist (ml-survey:survey-id survey)
+                                                          questionnaire-id)))
+    (store-response questionnaire-data-file (push (today+now) post-params))
     (ml-survey/views:questionnaire-submit)))
 
 (define-easy-handler (questionnaire :uri #'questionnaire-uri) (lang)
