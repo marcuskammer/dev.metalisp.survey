@@ -21,7 +21,7 @@
         (questionnaire-id (generate-uuid)))
     (store-response (ensure-data-file-exist (ml-survey:survey-id survey)
                                             questionnaire-id)
-                    post-params)
+                    (push (format nil "~aT~a" (today) (now)) post-params))
     (ml-survey/views:questionnaire-submit)))
 
 (define-easy-handler (questionnaire :uri #'questionnaire-uri) (lang)

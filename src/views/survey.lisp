@@ -12,16 +12,15 @@
 	       (ml-survey:survey-html survey)
 	       (when results
              (:h2 "Questionnaire Results")
-	         (let ((count-answers (length (car results))))
+	         (let ((count-answers (length (cdr (car results)))))
                (:table :class "table table-hover"
                  (:caption "Questionnaire results table")
 		         (:thead
 		          (:tr
-		           (loop for i from 1 below count-answers do
-			         (:th :scope "col" (format nil "Q ~a" i)))
+	               (:th :scope "col" "Time")
+	               (loop for i from 1 below count-answers
+                         do (:th :scope "col" (format nil "Q ~a" i)))
                    (:th :scope "col" "SUS Score")))
 		         (:tbody
-		          (loop for result in results do
-		            (:tr
-		             (loop for answer in result do
-			           (:td answer)))))))))))
+		          (loop for result in results
+                        do (:tr (mapcar (lambda (x) (:td x)) result))))))))))

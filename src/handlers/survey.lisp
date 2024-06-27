@@ -27,7 +27,7 @@ Returns a list of integers."
   (loop for f in files
         for resp = (load-response f)
         collect
-	(sus-calc-score-per-row (extract-numbers resp))))
+	(cons (car resp) (sus-calc-score-per-row (extract-numbers (cdr resp))))))
 
 (defun survey-uri-p (uri)
   (let ((parts (split-uri uri)))
