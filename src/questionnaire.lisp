@@ -12,3 +12,6 @@
     (if lang
         (format nil "/~A/~A" lang name)
         (format nil "/~A" name))))
+
+(defun list-questionnaires ()
+  (mapcar #'extract-lang-and-filename (forms-list-files)))

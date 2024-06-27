@@ -35,20 +35,16 @@
                   (:fieldset
                    (:legend "Questionnaires")
                    (:div :class "mb-3"
-                         (let ((questionnaires '(("System Usability Scale (Deutsch)" "/sus?lang=de")
-                                                 ("System Usability Scale (English)" "/sus?lang=en"))))
-                           (loop for q in questionnaires
-                                 for name = (first q)
-                                 for uri = (second q)
-                                 do (:div :class "form-check"
-                                          (:input :class "form-check-input"
-                                                  :type "checkbox"
-                                                  :value uri
-                                                  :id uri
-                                                  :name "questionnaire"
-                                                  (:label :class "form-check-label"
-                                                          :for uri
-                                                          name)))))))
+                         (loop for q in (ml-survey:list-questionnaires)
+                               do (:div :class "form-check"
+                                        (:input :class "form-check-input"
+                                                :type "checkbox"
+                                                :value q
+                                                :id q
+                                                :name "questionnaire"
+                                                (:label :class "form-check-label"
+                                                        :for q
+                                                        q))))))
 
                   (:button :type"Submit"
                            :class "btn btn-primary"
