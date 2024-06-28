@@ -4,7 +4,7 @@
   "Load a Lisp file containing form definitions."
   (check-type lang string)
   (check-type questionnaire string)
-  (let* ((full-path (uiop:merge-pathnames* (format nil "~a/~a.lisp" lang questionnaire)
+  (let* ((form-path (uiop:merge-pathnames* (format nil "~a/~a.lisp" lang questionnaire)
                                            (ml-survey:ensure-forms-dir))))
     (unless (probe-file form-path)
       (error "Form file ~A does not exist." form-path))
