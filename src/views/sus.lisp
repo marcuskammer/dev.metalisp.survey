@@ -1,12 +1,11 @@
 (in-package :ml-survey/views)
 
-(defun load-form (lang form-file-name)
+(defun load-form (lang questionnaire)
   "Load a Lisp file containing form definitions."
   (check-type lang string)
-  (check-type form-file-name string)
-  (let* ((relative-path (concatenate 'string "src/views/forms/" lang "/"))
-         (full-path (uiop:merge-pathnames* relative-path (uiop:getcwd)))
-         (form-path (uiop:merge-pathnames* form-file-name full-path)))
+  (check-type questionnaire string)
+  (let* ((full-path (uiop:merge-pathnames* (format nil "~a/~a.lisp" lang questionnaire)
+                                           (ml-survey:ensure-forms-dir))))
     (unless (probe-file form-path)
       (error "Form file ~A does not exist." form-path))
     (load form-path))
@@ -31,7 +30,7 @@ available in its environment for full functionality."
                   (btn-primary (:type "submit")
                     (find-l10n "submit" ml-survey:*html-lang* *l10n*))))))
 
-(defun sus-form ()
+(defun sus-form (questionnaire)
   (with-page (:title "SUS Form")
     (body-header "System Usability Form")
-    (with-form (load-form ml-survey:*html-lang* "sus.lisp"))))
+    (with-form (load-form ml-survey:*html-lang* questionnaire))))

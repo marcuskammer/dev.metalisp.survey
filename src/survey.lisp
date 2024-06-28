@@ -48,7 +48,7 @@
   (cdr (assoc "description" (survey-properties survey) :test #'string-equal)))
 
 (defun build-questionnaire-link (survey-id resource)
-  (format nil "/survey/~a/questionnaire~a" survey-id resource))
+  (format nil "/survey/~a~a" survey-id resource))
 
 (defmethod survey-html ((survey survey))
   (spinneret:with-html

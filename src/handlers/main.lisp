@@ -1,16 +1,20 @@
 (in-package :ml-survey/handlers)
 
+(defparameter *url-key-map*
+  '((:survey-id . 1)
+    (:language . 2)
+    (:questionnaire . 3)))
+
 (defun split-uri (uri)
   (check-type uri string)
   (remove-if #'string-empty-p
              (uiop:split-string uri :separator "/")))
 
-(defun get-resource-id (resource request)
-  (case resource
-    (survey (second (split-uri request)))))
-
-(defun get-survey-id (request)
-  (get-resource-id 'survey request))
+(defun extract-from (url key)
+  (let* ((parts (split-uri url))
+         (index (cdr (assoc key *url-key-map*))))
+    (when (and parts index)
+      (nth index parts))))
 
 (defun today ()
   "Return today's date formatted as ISO-8601."
