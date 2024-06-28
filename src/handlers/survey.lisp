@@ -39,7 +39,8 @@ Returns a list of integers."
   (survey-uri-p (request-uri request)))
 
 (define-easy-handler (survey :uri #'survey-uri) ()
-  (let ((s (make-instance 'ml-survey:survey :id (get-survey-id (request-uri*)))))
+  (let ((s (make-instance 'ml-survey:survey
+                          :id (extract-from (request-uri*) :survey-id))))
     (ml-survey/views:survey s
                             (when (ml-survey:survey-data-dir-p s)
                               (sus-calc (ml-survey:survey-data-dir-files s))))))
