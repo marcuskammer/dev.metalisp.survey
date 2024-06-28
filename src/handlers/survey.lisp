@@ -41,6 +41,6 @@ Returns a list of integers."
 (define-easy-handler (survey :uri #'survey-uri) ()
   (let ((s (make-instance 'ml-survey:survey
                           :id (extract-from (request-uri*) :survey-id))))
-    (ml-survey/views:survey s
-                            (when (ml-survey:survey-data-dir-p s)
-                              (sus-calc (ml-survey:survey-data-dir-files s))))))
+
+    (when (ml-survey:survey-data-dir-p s)
+      (ml-survey/views:survey s (sus-calc (ml-survey:survey-data-dir-files s))))))
