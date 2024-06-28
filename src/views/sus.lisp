@@ -30,7 +30,7 @@ available in its environment for full functionality."
                   (btn-primary (:type "submit")
                     (find-l10n "submit" ml-survey:*html-lang* *l10n*))))))
 
-(defun sus-form (questionnaire)
+(defun questionnaire (questionnaire)
   (with-page (:title "SUS Form")
     (body-header "System Usability Form")
     (with-form (load-form ml-survey:*html-lang* questionnaire))))
