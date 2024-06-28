@@ -21,7 +21,7 @@
     ((:file "package")
      (:file "_navbar")
      (:file "main")
-     (:file "sus")
+     (:file "questionnaire")
      (:file "new-survey")
      (:file "survey")
      (:file "surveys")
