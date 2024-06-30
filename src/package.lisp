@@ -19,6 +19,9 @@
    #:forms-list-files
    #:extract-lang-and-filename
    #:list-questionnaires
+   #:questionnaire-result
+   #:build-questionnaire-result
+   #:sus-calc
    #:store-response
    #:load-response
    #:make-surveys-db-file

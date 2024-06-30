@@ -16,19 +16,26 @@
   (setf ml-survey:*html-lang* lang)
   (ml-survey/views:questionnaire questionnaire))
 
-(defun process-questionnaire-post (request survey)
+(defun process-questionnaire-post (request survey questionnaire)
   (let* ((post-params (post-parameters* request))
+         (survey-id (ml-survey:survey-id survey))
          (questionnaire-id (generate-uuid))
-         (questionnaire-data-file (ensure-data-file-exist (ml-survey:survey-id survey)
+         (questionnaire-data-file (ensure-data-file-exist survey-id
                                                           questionnaire-id)))
-    (store-response questionnaire-data-file (push (today+now) post-params))
+
+    (store-response questionnaire-data-file
+                    (list :type questionnaire
+                          :timestamp (today+now)
+                          :post-data post-params))
+
     (ml-survey/views:questionnaire-submit)))
 
 (define-easy-handler (questionnaire :uri #'questionnaire-uri) (lang)
   (let ((s (make-instance 'ml-survey:survey
-                          :id (extract-from (request-uri*) :survey-id))))
+                          :id (extract-from (request-uri*) :survey-id)))
+        (language (extract-from (request-uri*) :language))
+        (questionnaire (extract-from (request-uri*) :questionnaire)))
     (cond ((eq (hunchentoot:request-method*) :get)
-           (process-questionnaire-get (extract-from (request-uri*) :language)
-                                      (extract-from (request-uri*) :questionnaire)))
+           (process-questionnaire-get language questionnaire))
           ((eq (hunchentoot:request-method*) :post)
-           (process-questionnaire-post *request* s)))))
+           (process-questionnaire-post *request* s questionnaire)))))

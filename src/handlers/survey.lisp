@@ -1,33 +1,22 @@
 (in-package :ml-survey/handlers)
 
-(defun extract-numbers (results)
-  "Extract numbers from a questionnaire RESULTS list.
-Returns a list of integers."
-  (check-type results list)
-  (mapcar (lambda (x)
-            (parse-integer (remove-if (complement #'digit-char-p)
-                                      (cdr x)))) results))
-
-(defun sus-calc-score (results)
-  (check-type results list)
-  (let ((counter 0))
-    (mapcar (lambda (x)
-              (setq counter (1+ counter))
-              (if (evenp counter)
-                  (- 5 x)
-                  (1- x)))
-            results)))
-
-(defun sus-calc-score-per-row (results)
-  (check-type results list)
-  (reverse (cons (* (apply #'+ (sus-calc-score results)) 2.5) (reverse results))))
-
-(defun sus-calc (files)
-  (check-type files list)
-  (loop for f in files
-        for resp = (load-response f)
-        collect
-	(cons (car resp) (sus-calc-score-per-row (extract-numbers (cdr resp))))))
+(defun process-and-categorize-results (result-objs)
+  "Categorize results into different lists based on their type.
+  Apply special calculation for results of type 'sus'."
+  (let ((categorized-results (list :sus nil :other nil)))
+    (dolist (result result-objs categorized-results)
+      (let ((type (ml-survey::questionnaire-result-type result))
+            (data (ml-survey::questionnaire-result-post-data result))
+            (timestamp (ml-survey::questionnaire-result-timestamp result)))
+        (cond
+          ((string= type "sus")
+           (setf (getf categorized-results :sus)
+                 (cons (ml-survey:sus-calc (cons timestamp data))
+                       (getf categorized-results :sus))))
+          (t
+           (setf (getf categorized-results :other)
+                 (cons (cons timestamp (mapcar #'cdr data))
+                       (getf categorized-results :other)))))))))
 
 (defun survey-uri-p (uri)
   (let ((parts (split-uri uri)))
@@ -39,8 +28,8 @@ Returns a list of integers."
   (survey-uri-p (request-uri request)))
 
 (define-easy-handler (survey :uri #'survey-uri) ()
-  (let ((s (make-instance 'ml-survey:survey
-                          :id (extract-from (request-uri*) :survey-id))))
-
-    (when (ml-survey:survey-data-dir-p s)
-      (ml-survey/views:survey s (sus-calc (ml-survey:survey-data-dir-files s))))))
+  (let* ((s (make-instance 'ml-survey:survey
+                           :id (extract-from (request-uri*) :survey-id)))
+         (result-objs (mapcar #'ml-survey:build-questionnaire-result
+                              (ml-survey:survey-data-dir-files s))))
+    (ml-survey/views:survey s (process-and-categorize-results result-objs))))
