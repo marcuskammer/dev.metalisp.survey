@@ -1,11 +1,15 @@
 (in-package :ml-survey/views)
 
 (multi-form
-  (:ask "How old are you?"
-   :group "demo-1"
-   :style "list-style:none;"
-   :choices (:single "under 18"
-                     "18 to 25"
-                     "26 to 35"
-                     "36 to 45"
-                     "over 45")))
+  (:ask "What is your age range?"
+   :group "demo-age-range"
+   :choices (:single "18-24" "25-34" "35-44" "45-54" "55+"))
+  (:ask "What is your gender?"
+   :group "demo-gender"
+   :choices (:single "Male" "Female" "Non-binary" "Prefer not to say" "Other" :text "Other"))
+  (:ask "What is your profession?"
+   :group "demo-profession"
+   :choices (:text "Profession"))
+  (:ask "What is your educational background?"
+   :group "demo-edu"
+   :choices (:text "Last Degree")))
