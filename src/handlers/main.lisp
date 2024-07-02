@@ -37,9 +37,8 @@
                          (get-universal-time)
                          (random 1000000))))
 
-(defun generate-random-id ()
-  (let ((charset "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-        (length 11))
+(defun generate-random-id (length)
+  (let ((charset "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"))
     (coerce (loop repeat length
                   collect (char charset (random (length charset))))
             'string)))
