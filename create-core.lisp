@@ -8,7 +8,7 @@
 (quicklisp-setup)
 
 (ql:quickload :dev.metalisp.survey)
-(let ((app-name (uiop:os-cond (:windows "survey-buttler.exe")
-                              (:linux "survey-buttler"))))
+(let ((app-name (uiop:os-cond ((eq :os-windows (uiop:detect-os)) "survey-buttler.exe")
+                              ((eq :os-unix (uiop:detect-os)) "survey-buttler"))))
   (sb-ext:save-lisp-and-die app-name :executable t :toplevel 'ml-survey:main))
 (quit)

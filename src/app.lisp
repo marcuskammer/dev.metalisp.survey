@@ -35,3 +35,22 @@
 
 (defun start ()
   (start-server *app*))
+
+(defun main ()
+  (start)
+  ;; let the webserver run.
+  ;; warning: hardcoded "hunchentoot".
+  ;; You can simply run (sleep most-positive-fixnum)
+  (handler-case (bt:join-thread (find-if (lambda (th)
+                                            (search "hunchentoot" (bt:thread-name th)))
+                                         (bt:all-threads)))
+    ;; Catch a user's C-c
+    (#+sbcl sb-sys:interactive-interrupt
+      #+ccl  ccl:interrupt-signal-condition
+      #+clisp system::simple-interrupt-condition
+      #+ecl ext:interactive-interrupt
+      #+allegro excl:interrupt-signal
+      () (progn
+           (format *error-output* "Aborting.~&")
+           (uiop:quit)))
+    (error (c) (format t "Woops, an unknown error occured:~&~a~&" c))))

@@ -3,6 +3,7 @@
   (:import-from #:hunchentoot
                 #:easy-acceptor)
   (:export
+   #:main
    #:*html-lang*
    #:survey
    #:survey-id
