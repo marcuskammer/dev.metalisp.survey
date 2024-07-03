@@ -21,7 +21,7 @@
    #:extract-lang-and-filename
    #:list-questionnaires
    #:questionnaire-result
-   #:build-questionnaire-result
+   #:questionnaire-result-from-file
    #:sus-calc
    #:store-response
    #:load-response
