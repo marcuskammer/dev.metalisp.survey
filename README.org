@@ -6,6 +6,18 @@
 
 Made with Love ❤️ and Common Lisp
 
+** Disclaimer
+
+Open source software (OSS) is often misunderstood as entirely free, including
+support and maintenance. While OSS is freely available to use, modify, and
+distribute, users bear the responsibility for its integration, upkeep, and
+troubleshooting. Unlike commercial software, which typically includes support
+services, OSS relies on community or paid third-party support, if
+available. This model empowers users with flexibility and control but requires
+a commitment to managing the software effectively. Therefore, adopting OSS
+demands a proactive approach to handling any issues and ensuring the software
+meets organizational needs.
+
 ** Introduction
 
 I am developing a web application using Common Lisp, designed to administer the

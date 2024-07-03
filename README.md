@@ -1,28 +1,44 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#orgcdc4e86)
-    1.  [Introduction](#org3c82ae8)
-    2.  [Design Goals](#org00ae20d)
-    3.  [Features](#orgc2cd494)
-    4.  [Dependencies](#orgfbf64aa)
-    5.  [Mailing list](#org70bb2e4)
-    6.  [Issue tracker](#org8025206)
-    7.  [News Feed](#org85a6941)
-    8.  [Installation instructions](#orgc58b51d)
-        1.  [With using Quicklisp](#orgf7b82fc)
-    9.  [License](#org6624df9)
+1.  [dev.metalisp.survey](#org1cda8bc)
+    1.  [Disclaimer](#orge33daa7)
+    2.  [Introduction](#orga3ff592)
+    3.  [Design Goals](#orge53c2ad)
+    4.  [Features](#orgc2764f7)
+    5.  [Dependencies](#orgb146d80)
+    6.  [Mailing list](#org2b31bd4)
+    7.  [Issue tracker](#orgc50f520)
+    8.  [News Feed](#orgf3462a8)
+    9.  [Installation instructions](#org14659af)
+        1.  [With using Quicklisp](#org69171ae)
+    10. [License](#org60aafa3)
 
 
 
-<a id="orgcdc4e86"></a>
+<a id="org1cda8bc"></a>
 
 # dev.metalisp.survey
 
 Made with Love ❤️ and Common Lisp
 
 
-<a id="org3c82ae8"></a>
+<a id="orge33daa7"></a>
+
+## Disclaimer
+
+Open source software (OSS) is often misunderstood as entirely free, including
+support and maintenance. While OSS is freely available to use, modify, and
+distribute, users bear the responsibility for its integration, upkeep, and
+troubleshooting. Unlike commercial software, which typically includes support
+services, OSS relies on community or paid third-party support, if
+available. This model empowers users with flexibility and control but requires
+a commitment to managing the software effectively. Therefore, adopting OSS
+demands a proactive approach to handling any issues and ensuring the software
+meets organizational needs.
+
+
+<a id="orga3ff592"></a>
 
 ## Introduction
 
@@ -43,7 +59,7 @@ aimed at significantly contributing to research projects, market research, and
 other fields where precise data collection and analysis are vital.
 
 
-<a id="org00ae20d"></a>
+<a id="orge53c2ad"></a>
 
 ## Design Goals
 
@@ -70,7 +86,7 @@ other fields where precise data collection and analysis are vital.
     accommodate users with varying needs and abilities.
 
 
-<a id="orgc2cd494"></a>
+<a id="orgc2764f7"></a>
 
 ## Features
 
@@ -84,7 +100,7 @@ other fields where precise data collection and analysis are vital.
     maintenance of the application.
 
 
-<a id="orgfbf64aa"></a>
+<a id="orgb146d80"></a>
 
 ## Dependencies
 
@@ -92,33 +108,33 @@ other fields where precise data collection and analysis are vital.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org70bb2e4"></a>
+<a id="org2b31bd4"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org8025206"></a>
+<a id="orgc50f520"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org85a6941"></a>
+<a id="orgf3462a8"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="orgc58b51d"></a>
+<a id="org14659af"></a>
 
 ## Installation instructions
 
 
-<a id="orgf7b82fc"></a>
+<a id="org69171ae"></a>
 
 ### With using Quicklisp
 
@@ -214,7 +230,7 @@ operating systems.
             (ql:quickload :dev.metalisp.survey)
 
 
-<a id="org6624df9"></a>
+<a id="org60aafa3"></a>
 
 ## License
 
