@@ -30,7 +30,7 @@
 
     (ml-survey/views:questionnaire-submit)))
 
-(define-easy-handler (questionnaire :uri #'questionnaire-uri) (lang)
+(define-easy-handler (questionnaire :uri #'questionnaire-uri) nil
   (let ((s (make-instance 'ml-survey:survey
                           :id (extract-from (request-uri*) :survey-id)))
         (language (extract-from (request-uri*) :language))
