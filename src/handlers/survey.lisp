@@ -1,6 +1,6 @@
 (in-package :ml-survey/handlers)
 
-(defun process-and-categorize-results (result-objs)
+(defun list-of-categorized-results (result-objs)
   "Categorize results into different lists based on their type.
   Apply special calculation for results of type 'sus'."
   (let ((categorized-results (list :sus nil :other nil)))
@@ -30,6 +30,6 @@
 (define-easy-handler (survey :uri #'survey-uri) ()
   (let* ((s (make-instance 'ml-survey:survey
                            :id (extract-from (request-uri*) :survey-id)))
-         (result-objs (mapcar #'ml-survey:build-questionnaire-result
+         (result-objs (mapcar #'ml-survey:questionnaire-result-from-file
                               (ml-survey:survey-data-dir-files s))))
-    (ml-survey/views:survey s (process-and-categorize-results result-objs))))
+    (ml-survey/views:survey s (list-of-categorized-results result-objs))))

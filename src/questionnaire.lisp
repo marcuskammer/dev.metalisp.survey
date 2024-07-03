@@ -47,7 +47,7 @@ Returns a list of integers."
   timestamp
   post-data)
 
-(defun build-questionnaire-result (filename)
+(defun questionnaire-result-from-file (filename)
   (check-type filename (or string pathname))
   (let ((data (load-response filename)))
     (make-questionnaire-result :type (getf data :type)
