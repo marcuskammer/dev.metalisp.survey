@@ -1,44 +1,44 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#org1cda8bc)
-    1.  [Disclaimer](#orge33daa7)
-    2.  [Introduction](#orga3ff592)
-    3.  [Design Goals](#orge53c2ad)
-    4.  [Features](#orgc2764f7)
-    5.  [Dependencies](#orgb146d80)
-    6.  [Mailing list](#org2b31bd4)
-    7.  [Issue tracker](#orgc50f520)
-    8.  [News Feed](#orgf3462a8)
-    9.  [Installation instructions](#org14659af)
-        1.  [With using Quicklisp](#org69171ae)
-    10. [License](#org60aafa3)
+1.  [dev.metalisp.survey](#org4060900)
+    1.  [Disclaimer](#orgc673591)
+    2.  [Introduction](#org4a2cf0a)
+    3.  [Design Goals](#org2fdae43)
+    4.  [Features](#org58dad62)
+    5.  [Dependencies](#orgce4fd2b)
+    6.  [Mailing list](#orgd25f13f)
+    7.  [Issue tracker](#org8211352)
+    8.  [News Feed](#org3b83d51)
+    9.  [Installation instructions](#org2ade09e)
+        1.  [With using Quicklisp](#orgee0e500)
+    10. [License](#org342090d)
 
 
 
-<a id="org1cda8bc"></a>
+<a id="org4060900"></a>
 
 # dev.metalisp.survey
 
 Made with Love ❤️ and Common Lisp
 
 
-<a id="orge33daa7"></a>
+<a id="orgc673591"></a>
 
 ## Disclaimer
 
-Open source software (OSS) is often misunderstood as entirely free, including
-support and maintenance. While OSS is freely available to use, modify, and
-distribute, users bear the responsibility for its integration, upkeep, and
+Libre software (LS) is often misunderstood as entirely free, including support
+and maintenance. While LS is freely available to use, modify, and distribute,
+users bear the responsibility for its integration, upkeep, and
 troubleshooting. Unlike commercial software, which typically includes support
-services, OSS relies on community or paid third-party support, if
+services, LS relies on community or paid third-party support, if
 available. This model empowers users with flexibility and control but requires
-a commitment to managing the software effectively. Therefore, adopting OSS
+a commitment to managing the software effectively. Therefore, adopting LS
 demands a proactive approach to handling any issues and ensuring the software
 meets organizational needs.
 
 
-<a id="orga3ff592"></a>
+<a id="org4a2cf0a"></a>
 
 ## Introduction
 
@@ -59,7 +59,7 @@ aimed at significantly contributing to research projects, market research, and
 other fields where precise data collection and analysis are vital.
 
 
-<a id="orge53c2ad"></a>
+<a id="org2fdae43"></a>
 
 ## Design Goals
 
@@ -86,7 +86,7 @@ other fields where precise data collection and analysis are vital.
     accommodate users with varying needs and abilities.
 
 
-<a id="orgc2764f7"></a>
+<a id="org58dad62"></a>
 
 ## Features
 
@@ -100,7 +100,7 @@ other fields where precise data collection and analysis are vital.
     maintenance of the application.
 
 
-<a id="orgb146d80"></a>
+<a id="orgce4fd2b"></a>
 
 ## Dependencies
 
@@ -108,33 +108,33 @@ other fields where precise data collection and analysis are vital.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org2b31bd4"></a>
+<a id="orgd25f13f"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orgc50f520"></a>
+<a id="org8211352"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orgf3462a8"></a>
+<a id="org3b83d51"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org14659af"></a>
+<a id="org2ade09e"></a>
 
 ## Installation instructions
 
 
-<a id="org69171ae"></a>
+<a id="orgee0e500"></a>
 
 ### With using Quicklisp
 
@@ -230,7 +230,7 @@ operating systems.
             (ql:quickload :dev.metalisp.survey)
 
 
-<a id="org60aafa3"></a>
+<a id="org342090d"></a>
 
 ## License
 
