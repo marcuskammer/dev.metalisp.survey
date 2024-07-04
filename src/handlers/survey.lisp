@@ -3,20 +3,20 @@
 (defun list-of-categorized-results (result-objs)
   "Categorize results into different lists based on their type.
   Apply special calculation for results of type 'sus'."
-  (let ((categorized-results (list :sus nil :other nil)))
+  (let ((categorized-results (list :sus nil)))
     (dolist (result result-objs categorized-results)
-      (let ((type (ml-survey::questionnaire-result-type result))
+      (let ((type (intern (string-upcase (ml-survey::questionnaire-result-type result)) :keyword))
             (data (ml-survey::questionnaire-result-post-data result))
             (timestamp (ml-survey::questionnaire-result-timestamp result)))
         (cond
-          ((string= type "sus")
+          ((eq type :sus)
            (setf (getf categorized-results :sus)
                  (cons (ml-survey:sus-calc (cons timestamp data))
                        (getf categorized-results :sus))))
           (t
-           (setf (getf categorized-results :other)
+           (setf (getf categorized-results type)
                  (cons (cons timestamp (mapcar #'cdr data))
-                       (getf categorized-results :other)))))))))
+                       (getf categorized-results type)))))))))
 
 (defun survey-uri-p (uri)
   (let ((parts (split-uri uri)))
