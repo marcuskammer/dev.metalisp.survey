@@ -6,7 +6,6 @@
 (defun survey (survey &optional results)
   "Generates the view to show the survey created."
   (check-type survey ml-survey:survey)
-  (print results)
   (let ((results-not-null (results-not-null results))
         (sus-results (getf results :sus)))
     (with-page (:title "Survey Details")
@@ -28,17 +27,17 @@
 		               (:thead
 		                (:tr
 	                     (:th :scope "col" "Time")
-	                     (loop for i from 1 below count-answers
-                               do (:th :scope "col" (format nil "Q ~a" i)))
+	                     (loop for header from 1 below count-answers
+                               do (:th :scope "col" (format nil "Q ~a" header)))
                          (:th :scope "col" "SUS Score")))
 		               (:tbody
-		                (loop for result in sus-results
-                              do (:tr (mapcar (lambda (x) (:td x)) result)))))))
+		                (loop for row in sus-results
+                              do (:tr (mapcar (lambda (data) (:td data)) row)))))))
 
                (loop for (type data) on results by #'cddr unless (eq type :sus)
                      do (progn (:h3 (format nil "~a" type))
                                (loop for row in data
                                      do (:ul :class "list-group py-3"
-                                             (loop for item in row
+                                             (loop for data in row
                                                    do (:li :class "list-group-item"
-                                                           item)))))))))))
+                                                           data)))))))))))
