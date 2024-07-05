@@ -20,21 +20,20 @@ meets organizational needs.
 
 ** Introduction
 
-I am developing a web application using Common Lisp, designed to administer the
-System Usability Scale (SUS) questionnaire efficiently. This application
-simplifies the process of conducting usability evaluations by presenting SUS
-questions and collecting responses, streamlining both the gathering and
-analysis of usability feedback.
-
-The software focuses on enhancing the ease of creating, managing, and
-integrating questionnaires within existing websites or software. Leveraging
-flexible templates, it offers a high level of reusability and
-adaptability. Data from multiple questionnaires can be synthesized within a
-single study, facilitating more profound insights. As a self-hosted solution,
-it assures enhanced data protection, granting users complete control over their
-data, a crucial feature for sensitive data environments. This application is
-aimed at significantly contributing to research projects, market research, and
-other fields where precise data collection and analysis are vital.
+I am developing a web application using Common Lisp, specifically tailored for
+efficiently administering the System Usability Scale (SUS), user experience
+questionnaires, and VISAWI to streamline usability evaluations. This
+application not only presents these various questions and collects responses
+but also simplifies the entire process of gathering and analyzing usability
+feedback. Designed to enhance the ease of creating, managing, and integrating
+questionnaires within existing websites or software systems, it leverages
+flexible templates to offer high levels of reusability and adaptability. The
+software allows for the synthesis of data from multiple questionnaires into a
+single study, enabling deeper insights. As a self-hosted solution, it provides
+enhanced data protection, granting users full control over their data—a crucial
+feature in environments handling sensitive data. This makes it an invaluable
+tool for research projects, market research, and other sectors that require
+precise data collection and analysis.
 
 ** Design Goals
 

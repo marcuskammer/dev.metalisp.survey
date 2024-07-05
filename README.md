@@ -1,29 +1,29 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#org4060900)
-    1.  [Disclaimer](#orgc673591)
-    2.  [Introduction](#org4a2cf0a)
-    3.  [Design Goals](#org2fdae43)
-    4.  [Features](#org58dad62)
-    5.  [Dependencies](#orgce4fd2b)
-    6.  [Mailing list](#orgd25f13f)
-    7.  [Issue tracker](#org8211352)
-    8.  [News Feed](#org3b83d51)
-    9.  [Installation instructions](#org2ade09e)
-        1.  [With using Quicklisp](#orgee0e500)
-    10. [License](#org342090d)
+1.  [dev.metalisp.survey](#orgba0bc72)
+    1.  [Disclaimer](#org579f473)
+    2.  [Introduction](#orgdf2a4b1)
+    3.  [Design Goals](#org9aeb7a5)
+    4.  [Features](#org5320add)
+    5.  [Dependencies](#org0e9b045)
+    6.  [Mailing list](#orgecd0434)
+    7.  [Issue tracker](#orga2f5fcd)
+    8.  [News Feed](#org9abd4c9)
+    9.  [Installation instructions](#org60ac2ea)
+        1.  [With using Quicklisp](#orgb04e716)
+    10. [License](#org139b403)
 
 
 
-<a id="org4060900"></a>
+<a id="orgba0bc72"></a>
 
 # dev.metalisp.survey
 
 Made with Love ❤️ and Common Lisp
 
 
-<a id="orgc673591"></a>
+<a id="org579f473"></a>
 
 ## Disclaimer
 
@@ -38,28 +38,27 @@ demands a proactive approach to handling any issues and ensuring the software
 meets organizational needs.
 
 
-<a id="org4a2cf0a"></a>
+<a id="orgdf2a4b1"></a>
 
 ## Introduction
 
-I am developing a web application using Common Lisp, designed to administer the
-System Usability Scale (SUS) questionnaire efficiently. This application
-simplifies the process of conducting usability evaluations by presenting SUS
-questions and collecting responses, streamlining both the gathering and
-analysis of usability feedback.
+I am developing a web application using Common Lisp, specifically tailored for
+efficiently administering the System Usability Scale (SUS), user experience
+questionnaires, and VISAWI to streamline usability evaluations. This
+application not only presents these various questions and collects responses
+but also simplifies the entire process of gathering and analyzing usability
+feedback. Designed to enhance the ease of creating, managing, and integrating
+questionnaires within existing websites or software systems, it leverages
+flexible templates to offer high levels of reusability and adaptability. The
+software allows for the synthesis of data from multiple questionnaires into a
+single study, enabling deeper insights. As a self-hosted solution, it provides
+enhanced data protection, granting users full control over their data—a crucial
+feature in environments handling sensitive data. This makes it an invaluable
+tool for research projects, market research, and other sectors that require
+precise data collection and analysis.
 
-The software focuses on enhancing the ease of creating, managing, and
-integrating questionnaires within existing websites or software. Leveraging
-flexible templates, it offers a high level of reusability and
-adaptability. Data from multiple questionnaires can be synthesized within a
-single study, facilitating more profound insights. As a self-hosted solution,
-it assures enhanced data protection, granting users complete control over their
-data, a crucial feature for sensitive data environments. This application is
-aimed at significantly contributing to research projects, market research, and
-other fields where precise data collection and analysis are vital.
 
-
-<a id="org2fdae43"></a>
+<a id="org9aeb7a5"></a>
 
 ## Design Goals
 
@@ -86,7 +85,7 @@ other fields where precise data collection and analysis are vital.
     accommodate users with varying needs and abilities.
 
 
-<a id="org58dad62"></a>
+<a id="org5320add"></a>
 
 ## Features
 
@@ -100,7 +99,7 @@ other fields where precise data collection and analysis are vital.
     maintenance of the application.
 
 
-<a id="orgce4fd2b"></a>
+<a id="org0e9b045"></a>
 
 ## Dependencies
 
@@ -108,33 +107,33 @@ other fields where precise data collection and analysis are vital.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="orgd25f13f"></a>
+<a id="orgecd0434"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org8211352"></a>
+<a id="orga2f5fcd"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org3b83d51"></a>
+<a id="org9abd4c9"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org2ade09e"></a>
+<a id="org60ac2ea"></a>
 
 ## Installation instructions
 
 
-<a id="orgee0e500"></a>
+<a id="orgb04e716"></a>
 
 ### With using Quicklisp
 
@@ -230,7 +229,7 @@ operating systems.
             (ql:quickload :dev.metalisp.survey)
 
 
-<a id="org342090d"></a>
+<a id="org139b403"></a>
 
 ## License
 
