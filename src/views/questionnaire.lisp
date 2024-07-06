@@ -5,7 +5,7 @@
   (check-type lang string)
   (check-type questionnaire string)
   (let* ((form-path (uiop:merge-pathnames* (format nil "~a/~a.lisp" lang questionnaire)
-                                           (ml-survey:ensure-forms-dir))))
+                                           (ml-survey:ensure-questionnaires-dir))))
     (unless (probe-file form-path)
       (error "Form file ~A does not exist." form-path))
     (load form-path))

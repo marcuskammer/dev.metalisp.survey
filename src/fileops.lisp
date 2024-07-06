@@ -23,10 +23,10 @@ application."
 application."
   (uiop:merge-pathnames* #P"data/surveys/" (app-dir)))
 
-(defun forms-dir ()
+(defun questionnaires-dir ()
   "Construct and return the directory path for storing forms within the
 application."
-  (uiop:merge-pathnames* #P"data/forms/" (app-dir)))
+  (uiop:merge-pathnames* #P"data/questionnaires/" (app-dir)))
 
 (defun ensure-data-dir ()
   "Ensure the data directory exists, create it if necessary, and return its
@@ -38,13 +38,13 @@ path."
 path."
   (ensure-directories-exist (surveys-dir)))
 
-(defun ensure-forms-dir ()
+(defun ensure-questionnaires-dir ()
   "Ensure the data directory exists, create it if necessary, and return its
 path."
-  (ensure-directories-exist (forms-dir)))
+  (ensure-directories-exist (questionnaires-dir)))
 
-(defun forms-list-files ()
-  (uiop:directory* (format nil "~a*/*.lisp" (forms-dir))))
+(defun questionnaires-list-files ()
+  (uiop:directory* (format nil "~a*/*.lisp" (questionnaires-dir))))
 
 (defun ensure-file-exist (pathname)
   "Ensure that a file specified by PATHNAME exists, create it if it doesn't."

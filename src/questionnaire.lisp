@@ -14,7 +14,7 @@
         (format nil "/~A" name))))
 
 (defun list-questionnaires ()
-  (mapcar #'extract-lang-and-filename (forms-list-files)))
+  (mapcar #'extract-lang-and-filename (questionnaires-list-files)))
 
 (defun extract-numbers (results)
   "Extract numbers from a questionnaire RESULTS list.

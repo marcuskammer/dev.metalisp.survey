@@ -14,7 +14,7 @@
                (:div :class "alert alert-warning"
                      :role "alert"
                      (format nil "There are no questionnaires available.~%
-                                  The folder: ~a is empty." (ml-survey:forms-dir))))
+                                  The folder: ~a is empty." (ml-survey:questionnaires-dir))))
 
              ;; When a new survey was created, show the user an info message.
              (when survey-id
