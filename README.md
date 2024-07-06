@@ -1,30 +1,30 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#org2c36081)
-    1.  [Disclaimer](#org864fff2)
-    2.  [Introduction](#orgc445893)
-    3.  [Design Goals](#orgac8e79a)
-    4.  [Features](#orgd4d4415)
-    5.  [Dependencies](#orgaa0ed5a)
-    6.  [Mailing list](#orge1520e8)
-    7.  [Issue tracker](#org68a245b)
-    8.  [News Feed](#org850a549)
-    9.  [Installation instructions](#orge2b5daa)
-        1.  [With using Quicklisp](#org662f128)
-    10. [Screenshot](#org51f3c3f)
-    11. [License](#org57b6293)
+1.  [dev.metalisp.survey](#org62d1451)
+    1.  [Disclaimer](#org9c0b5eb)
+    2.  [Introduction](#org4a18a97)
+    3.  [Design Goals](#org405f166)
+    4.  [Features](#orge8ba89c)
+    5.  [Dependencies](#orgfd57770)
+    6.  [Mailing list](#org0fcc6b1)
+    7.  [Issue tracker](#org1761465)
+    8.  [News Feed](#org47d5635)
+    9.  [Installation instructions](#orgd4e3719)
+        1.  [With using Quicklisp](#org69bfc60)
+    10. [Screenshot](#orgbd154ee)
+    11. [License](#orgfaff42e)
 
 
 
-<a id="org2c36081"></a>
+<a id="org62d1451"></a>
 
 # dev.metalisp.survey
 
 Made with Love ❤️ and Common Lisp
 
 
-<a id="org864fff2"></a>
+<a id="org9c0b5eb"></a>
 
 ## Disclaimer
 
@@ -39,7 +39,7 @@ demands a proactive approach to handling any issues and ensuring the software
 meets organizational needs.
 
 
-<a id="orgc445893"></a>
+<a id="org4a18a97"></a>
 
 ## Introduction
 
@@ -59,7 +59,7 @@ tool for research projects, market research, and other sectors that require
 precise data collection and analysis.
 
 
-<a id="orgac8e79a"></a>
+<a id="org405f166"></a>
 
 ## Design Goals
 
@@ -86,7 +86,7 @@ precise data collection and analysis.
     accommodate users with varying needs and abilities.
 
 
-<a id="orgd4d4415"></a>
+<a id="orge8ba89c"></a>
 
 ## Features
 
@@ -100,7 +100,7 @@ precise data collection and analysis.
     maintenance of the application.
 
 
-<a id="orgaa0ed5a"></a>
+<a id="orgfd57770"></a>
 
 ## Dependencies
 
@@ -108,33 +108,33 @@ precise data collection and analysis.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="orge1520e8"></a>
+<a id="org0fcc6b1"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org68a245b"></a>
+<a id="org1761465"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org850a549"></a>
+<a id="org47d5635"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="orge2b5daa"></a>
+<a id="orgd4e3719"></a>
 
 ## Installation instructions
 
 
-<a id="org662f128"></a>
+<a id="org69bfc60"></a>
 
 ### With using Quicklisp
 
@@ -230,12 +230,14 @@ operating systems.
             (ql:quickload :dev.metalisp.survey)
 
 
-<a id="org51f3c3f"></a>
+<a id="orgbd154ee"></a>
 
 ## Screenshot
 
+![img](https://git.sr.ht/~marcuskammer/dev.metalisp.survey/tree/main/item/screenshot.png)
 
-<a id="org57b6293"></a>
+
+<a id="orgfaff42e"></a>
 
 ## License
 
