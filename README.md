@@ -1,30 +1,31 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#org47d121b)
-    1.  [Disclaimer](#org5bed190)
-    2.  [Introduction](#orgc349819)
-    3.  [Design Goals](#orgad6f901)
-    4.  [Features](#org3f409cd)
-    5.  [Dependencies](#org0fb4017)
-    6.  [Mailing list](#org5b67f4c)
-    7.  [Issue tracker](#org301d510)
-    8.  [News Feed](#orgcc3cbf3)
-    9.  [Installation instructions](#org4a7e43f)
-        1.  [With using Quicklisp](#org72bcdcb)
-    10. [Screenshot](#org78c87a3)
-    11. [License](#org0341fe5)
+1.  [dev.metalisp.survey](#org4f2ee7b)
+    1.  [Disclaimer](#org3711d19)
+    2.  [Introduction](#orgc4e834f)
+    3.  [Design Goals](#orgb8c700e)
+    4.  [Features](#orgced632b)
+    5.  [Dependencies](#org49c823c)
+    6.  [Mailing list](#orgd677c30)
+    7.  [Issue tracker](#orga5d8978)
+    8.  [News Feed](#org0512ef1)
+    9.  [Installation instructions](#orgf299775)
+        1.  [With using Quicklisp](#org8fa28a5)
+    10. [Screenshot](#org68f9e1c)
+    11. [License](#orgc2016d0)
+        1.  [MIT](#orgb803f2e)
 
 
 
-<a id="org47d121b"></a>
+<a id="org4f2ee7b"></a>
 
 # dev.metalisp.survey
 
 Made with Love ❤️ and Common Lisp
 
 
-<a id="org5bed190"></a>
+<a id="org3711d19"></a>
 
 ## Disclaimer
 
@@ -39,7 +40,7 @@ demands a proactive approach to handling any issues and ensuring the software
 meets organizational needs.
 
 
-<a id="orgc349819"></a>
+<a id="orgc4e834f"></a>
 
 ## Introduction
 
@@ -59,7 +60,7 @@ tool for research projects, market research, and other sectors that require
 precise data collection and analysis.
 
 
-<a id="orgad6f901"></a>
+<a id="orgb8c700e"></a>
 
 ## Design Goals
 
@@ -86,7 +87,7 @@ precise data collection and analysis.
     accommodate users with varying needs and abilities.
 
 
-<a id="org3f409cd"></a>
+<a id="orgced632b"></a>
 
 ## Features
 
@@ -100,7 +101,7 @@ precise data collection and analysis.
     maintenance of the application.
 
 
-<a id="org0fb4017"></a>
+<a id="org49c823c"></a>
 
 ## Dependencies
 
@@ -108,33 +109,33 @@ precise data collection and analysis.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org5b67f4c"></a>
+<a id="orgd677c30"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org301d510"></a>
+<a id="orga5d8978"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orgcc3cbf3"></a>
+<a id="org0512ef1"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org4a7e43f"></a>
+<a id="orgf299775"></a>
 
 ## Installation instructions
 
 
-<a id="org72bcdcb"></a>
+<a id="org8fa28a5"></a>
 
 ### With using Quicklisp
 
@@ -230,16 +231,40 @@ operating systems.
             (ql:quickload :dev.metalisp.survey)
 
 
-<a id="org78c87a3"></a>
+<a id="org68f9e1c"></a>
 
 ## Screenshot
 
 ![img](https://git.sr.ht/~marcuskammer/dev.metalisp.survey/blob/main/screenshot.png)
 
 
-<a id="org0341fe5"></a>
+<a id="orgc2016d0"></a>
 
 ## License
 
-MIT
+
+<a id="orgb803f2e"></a>
+
+### MIT
+
+Copyright (c) 2024 Marcus Kammer
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+&ldquo;Software&rdquo;), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
