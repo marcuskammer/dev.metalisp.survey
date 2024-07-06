@@ -257,6 +257,8 @@ Quicklisp offers several advantages for Common Lisp development:
    #+begin_src shell
      (ql:quickload :dev.metalisp.survey)
    #+end_src
+** Screenshot
+[[screenshot.png]]
 ** License
 
 MIT
