@@ -25,7 +25,7 @@ efficiently administering the
 
 - [[https://git.sr.ht/~marcuskammer/dev.metalisp.survey/tree/main/item/src/views/questionnaires/en/sus.lisp][System Usability Scale]] ([[https://en.wikipedia.org/wiki/System_usability_scale][wikipedia]]),
 - User Experience Questionnaire ([[https://www.ueq-online.org/][website]]),
-- and Visual Aesthetics of Websites Inventory ([[https://www.researchgate.net/publication/274649948_VisAWI_Manual_Visual_Aesthetics_of_Websites_Inventory_and_the_short_form_VisAWI-S_Short_Visual_Aesthetics_of_Websites_Inventory][researchgate]])
+- and Visual Aesthetics of Websites Inventory ([[https://meinald.de/forschung/visawi/][website]], [[https://www.researchgate.net/publication/274649948_VisAWI_Manual_Visual_Aesthetics_of_Websites_Inventory_and_the_short_form_VisAWI-S_Short_Visual_Aesthetics_of_Websites_Inventory][researchgate]])
 
 to streamline usability evaluations. This application not only presents these
 various questions and collects responses but also simplifies the entire process

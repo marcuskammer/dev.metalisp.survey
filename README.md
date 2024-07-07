@@ -1,31 +1,31 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#org618c24e)
-    1.  [Disclaimer](#orge5d74db)
-    2.  [Introduction](#orgaea2d79)
-    3.  [Design Goals](#org8f8ee4a)
-    4.  [Features](#org59d1f3e)
-    5.  [Dependencies](#org5e9fa52)
-    6.  [Mailing list](#org54336ad)
-    7.  [Issue tracker](#org4a48118)
-    8.  [News Feed](#org8e877e1)
-    9.  [Installation instructions](#org0c5a97e)
-        1.  [With using Quicklisp](#orga032261)
-    10. [Screenshot](#org4410916)
-    11. [License](#org1473271)
-        1.  [MIT](#orga143e04)
+1.  [dev.metalisp.survey](#org3666b36)
+    1.  [Disclaimer](#org2ec4102)
+    2.  [Introduction](#orgd1424d7)
+    3.  [Design Goals](#orgfaf1caa)
+    4.  [Features](#org78fc369)
+    5.  [Dependencies](#org0497490)
+    6.  [Mailing list](#org1eb4d79)
+    7.  [Issue tracker](#orgb66b1f8)
+    8.  [News Feed](#orgf058c85)
+    9.  [Installation instructions](#org1a67245)
+        1.  [With using Quicklisp](#orgd636c79)
+    10. [Screenshot](#orge3330dd)
+    11. [License](#orgeeb80fd)
+        1.  [MIT](#orgfb80f25)
 
 
 
-<a id="org618c24e"></a>
+<a id="org3666b36"></a>
 
 # dev.metalisp.survey
 
 Made with Love ❤️ and Common Lisp
 
 
-<a id="orge5d74db"></a>
+<a id="org2ec4102"></a>
 
 ## Disclaimer
 
@@ -40,7 +40,7 @@ demands a proactive approach to handling any issues and ensuring the software
 meets organizational needs.
 
 
-<a id="orgaea2d79"></a>
+<a id="orgd1424d7"></a>
 
 ## Introduction
 
@@ -49,7 +49,7 @@ efficiently administering the
 
 -   [System Usability Scale](https://git.sr.ht/~marcuskammer/dev.metalisp.survey/tree/main/item/src/views/questionnaires/en/sus.lisp) ([wikipedia](https://en.wikipedia.org/wiki/System_usability_scale)),
 -   User Experience Questionnaire ([website](https://www.ueq-online.org/)),
--   and Visual Aesthetics of Websites Inventory ([researchgate](https://www.researchgate.net/publication/274649948_VisAWI_Manual_Visual_Aesthetics_of_Websites_Inventory_and_the_short_form_VisAWI-S_Short_Visual_Aesthetics_of_Websites_Inventory))
+-   and Visual Aesthetics of Websites Inventory ([website](https://meinald.de/forschung/visawi/), [researchgate](https://www.researchgate.net/publication/274649948_VisAWI_Manual_Visual_Aesthetics_of_Websites_Inventory_and_the_short_form_VisAWI-S_Short_Visual_Aesthetics_of_Websites_Inventory))
 
 to streamline usability evaluations. This application not only presents these
 various questions and collects responses but also simplifies the entire process
@@ -64,7 +64,7 @@ sensitive data. This makes it an invaluable tool for research projects, market
 research, and other sectors that require precise data collection and analysis.
 
 
-<a id="org8f8ee4a"></a>
+<a id="orgfaf1caa"></a>
 
 ## Design Goals
 
@@ -91,7 +91,7 @@ research, and other sectors that require precise data collection and analysis.
     accommodate users with varying needs and abilities.
 
 
-<a id="org59d1f3e"></a>
+<a id="org78fc369"></a>
 
 ## Features
 
@@ -105,7 +105,7 @@ research, and other sectors that require precise data collection and analysis.
     maintenance of the application.
 
 
-<a id="org5e9fa52"></a>
+<a id="org0497490"></a>
 
 ## Dependencies
 
@@ -113,33 +113,33 @@ research, and other sectors that require precise data collection and analysis.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="org54336ad"></a>
+<a id="org1eb4d79"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org4a48118"></a>
+<a id="orgb66b1f8"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org8e877e1"></a>
+<a id="orgf058c85"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org0c5a97e"></a>
+<a id="org1a67245"></a>
 
 ## Installation instructions
 
 
-<a id="orga032261"></a>
+<a id="orgd636c79"></a>
 
 ### With using Quicklisp
 
@@ -235,19 +235,19 @@ operating systems.
             (ql:quickload :dev.metalisp.survey)
 
 
-<a id="org4410916"></a>
+<a id="orge3330dd"></a>
 
 ## Screenshot
 
 ![img](https://git.sr.ht/~marcuskammer/dev.metalisp.survey/blob/main/screenshot.png)
 
 
-<a id="org1473271"></a>
+<a id="orgeeb80fd"></a>
 
 ## License
 
 
-<a id="orga143e04"></a>
+<a id="orgfb80f25"></a>
 
 ### MIT
 
