@@ -1,3 +1,5 @@
+;;;; -*- mode: common-lisp; coding: utf-8; -*-
+
 (in-package :ml-survey)
 
 (defun make-surveys-db-file ()

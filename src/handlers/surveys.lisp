@@ -1,3 +1,5 @@
+;;;; -*- mode: common-lisp; coding: utf-8; -*-
+
 (in-package :ml-survey/handlers)
 
 (define-easy-handler (surveys :uri "/") nil

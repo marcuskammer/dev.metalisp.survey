@@ -1,6 +1,8 @@
+;;;; -*- mode: common-lisp; coding: utf-8; -*-
+
 (defsystem "dev.metalisp.survey"
   :description "A simple survey"
-  :version "0.1.8"
+  :version "0.1.9"
   :author "Marcus Kammer <marcus.kammer@metalisp.dev"
   :source-control "git@git.sr.ht:~marcuskammer/dev.metalisp.survey"
   :licence "MIT"

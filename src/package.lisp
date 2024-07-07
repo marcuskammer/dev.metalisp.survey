@@ -1,3 +1,5 @@
+;;;; -*- mode: common-lisp; coding: utf-8; -*-
+
 (defpackage ml-survey
   (:use #:cl)
   (:import-from #:hunchentoot
