@@ -21,19 +21,23 @@ meets organizational needs.
 ** Introduction
 
 I am developing a web application using Common Lisp, specifically tailored for
-efficiently administering the System Usability Scale (SUS), user experience
-questionnaires, and VISAWI to streamline usability evaluations. This
-application not only presents these various questions and collects responses
-but also simplifies the entire process of gathering and analyzing usability
-feedback. Designed to enhance the ease of creating, managing, and integrating
-questionnaires within existing websites or software systems, it leverages
-flexible templates to offer high levels of reusability and adaptability. The
-software allows for the synthesis of data from multiple questionnaires into a
-single study, enabling deeper insights. As a self-hosted solution, it provides
-enhanced data protection, granting users full control over their data—a crucial
-feature in environments handling sensitive data. This makes it an invaluable
-tool for research projects, market research, and other sectors that require
-precise data collection and analysis.
+efficiently administering the
+
+- [[https://en.wikipedia.org/wiki/System_usability_scale][System Usability Scale (SUS)]],
+- [[https://www.ueq-online.org/][user experience questionnaires (UEQ)]],
+- and [[https://www.researchgate.net/publication/274649948_VisAWI_Manual_Visual_Aesthetics_of_Websites_Inventory_and_the_short_form_VisAWI-S_Short_Visual_Aesthetics_of_Websites_Inventory][Visual Aesthetics of Websites Inventory (VISAWI)]]
+
+to streamline usability evaluations. This application not only presents these
+various questions and collects responses but also simplifies the entire process
+of gathering and analyzing usability feedback. Designed to enhance the ease of
+creating, managing, and integrating questionnaires within existing websites or
+software systems, it leverages flexible templates to offer high levels of
+reusability and adaptability. The software allows for the synthesis of data
+from multiple questionnaires into a single study, enabling deeper insights. As
+a self-hosted solution, it provides enhanced data protection, granting users
+full control over their data—a crucial feature in environments handling
+sensitive data. This makes it an invaluable tool for research projects, market
+research, and other sectors that require precise data collection and analysis.
 
 ** Design Goals
 

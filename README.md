@@ -1,31 +1,31 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#org4f2ee7b)
-    1.  [Disclaimer](#org3711d19)
-    2.  [Introduction](#orgc4e834f)
-    3.  [Design Goals](#orgb8c700e)
-    4.  [Features](#orgced632b)
-    5.  [Dependencies](#org49c823c)
-    6.  [Mailing list](#orgd677c30)
-    7.  [Issue tracker](#orga5d8978)
-    8.  [News Feed](#org0512ef1)
-    9.  [Installation instructions](#orgf299775)
-        1.  [With using Quicklisp](#org8fa28a5)
-    10. [Screenshot](#org68f9e1c)
-    11. [License](#orgc2016d0)
-        1.  [MIT](#orgb803f2e)
+1.  [dev.metalisp.survey](#orga4996f9)
+    1.  [Disclaimer](#orgc893fdb)
+    2.  [Introduction](#orgbea2325)
+    3.  [Design Goals](#org74e9a9c)
+    4.  [Features](#org725807e)
+    5.  [Dependencies](#org5728f6f)
+    6.  [Mailing list](#org68a92ab)
+    7.  [Issue tracker](#org9873074)
+    8.  [News Feed](#orgff1bc61)
+    9.  [Installation instructions](#orge072790)
+        1.  [With using Quicklisp](#orgca6a5b1)
+    10. [Screenshot](#org40ca60a)
+    11. [License](#org004c043)
+        1.  [MIT](#org0b3fc58)
 
 
 
-<a id="org4f2ee7b"></a>
+<a id="orga4996f9"></a>
 
 # dev.metalisp.survey
 
 Made with Love ❤️ and Common Lisp
 
 
-<a id="org3711d19"></a>
+<a id="orgc893fdb"></a>
 
 ## Disclaimer
 
@@ -40,27 +40,31 @@ demands a proactive approach to handling any issues and ensuring the software
 meets organizational needs.
 
 
-<a id="orgc4e834f"></a>
+<a id="orgbea2325"></a>
 
 ## Introduction
 
 I am developing a web application using Common Lisp, specifically tailored for
-efficiently administering the System Usability Scale (SUS), user experience
-questionnaires, and VISAWI to streamline usability evaluations. This
-application not only presents these various questions and collects responses
-but also simplifies the entire process of gathering and analyzing usability
-feedback. Designed to enhance the ease of creating, managing, and integrating
-questionnaires within existing websites or software systems, it leverages
-flexible templates to offer high levels of reusability and adaptability. The
-software allows for the synthesis of data from multiple questionnaires into a
-single study, enabling deeper insights. As a self-hosted solution, it provides
-enhanced data protection, granting users full control over their data—a crucial
-feature in environments handling sensitive data. This makes it an invaluable
-tool for research projects, market research, and other sectors that require
-precise data collection and analysis.
+efficiently administering the
+
+-   [System Usability Scale (SUS)](https://en.wikipedia.org/wiki/System_usability_scale),
+-   [user experience questionnaires (UEQ)](https://www.ueq-online.org/),
+-   and [Visual Aesthetics of Websites Inventory (VISAWI)](https://www.researchgate.net/publication/274649948_VisAWI_Manual_Visual_Aesthetics_of_Websites_Inventory_and_the_short_form_VisAWI-S_Short_Visual_Aesthetics_of_Websites_Inventory)
+
+to streamline usability evaluations. This application not only presents these
+various questions and collects responses but also simplifies the entire process
+of gathering and analyzing usability feedback. Designed to enhance the ease of
+creating, managing, and integrating questionnaires within existing websites or
+software systems, it leverages flexible templates to offer high levels of
+reusability and adaptability. The software allows for the synthesis of data
+from multiple questionnaires into a single study, enabling deeper insights. As
+a self-hosted solution, it provides enhanced data protection, granting users
+full control over their data—a crucial feature in environments handling
+sensitive data. This makes it an invaluable tool for research projects, market
+research, and other sectors that require precise data collection and analysis.
 
 
-<a id="orgb8c700e"></a>
+<a id="org74e9a9c"></a>
 
 ## Design Goals
 
@@ -87,7 +91,7 @@ precise data collection and analysis.
     accommodate users with varying needs and abilities.
 
 
-<a id="orgced632b"></a>
+<a id="org725807e"></a>
 
 ## Features
 
@@ -101,7 +105,7 @@ precise data collection and analysis.
     maintenance of the application.
 
 
-<a id="org49c823c"></a>
+<a id="org5728f6f"></a>
 
 ## Dependencies
 
@@ -109,33 +113,33 @@ precise data collection and analysis.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="orgd677c30"></a>
+<a id="org68a92ab"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orga5d8978"></a>
+<a id="org9873074"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org0512ef1"></a>
+<a id="orgff1bc61"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="orgf299775"></a>
+<a id="orge072790"></a>
 
 ## Installation instructions
 
 
-<a id="org8fa28a5"></a>
+<a id="orgca6a5b1"></a>
 
 ### With using Quicklisp
 
@@ -231,19 +235,19 @@ operating systems.
             (ql:quickload :dev.metalisp.survey)
 
 
-<a id="org68f9e1c"></a>
+<a id="org40ca60a"></a>
 
 ## Screenshot
 
 ![img](https://git.sr.ht/~marcuskammer/dev.metalisp.survey/blob/main/screenshot.png)
 
 
-<a id="orgc2016d0"></a>
+<a id="org004c043"></a>
 
 ## License
 
 
-<a id="orgb803f2e"></a>
+<a id="org0b3fc58"></a>
 
 ### MIT
 
