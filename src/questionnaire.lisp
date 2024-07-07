@@ -7,7 +7,7 @@
     (when index
       (nth (1+ index) dir-list))))
 
-(defun extract-lang-and-filename (path &optional (target-dir "forms"))
+(defun extract-lang-and-filename (path &optional (target-dir "questionnaires"))
   (let* ((directory (pathname-directory path))
          (name (pathname-name path))
          (lang (find-next-directory directory target-dir)))
