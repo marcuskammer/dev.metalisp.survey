@@ -12,7 +12,7 @@
 
 SURVEYS: List of survey objects."
   (check-type surveys surveys-list)
-  (with-page (:title "Surveys")
+  (with-page (:title "Surveys" :add-js-urls ("/app.js"))
     (body-header "Surveys" (navbar-en))
     (:main :id "main-content"
            :class "container"

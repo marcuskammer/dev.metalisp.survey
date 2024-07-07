@@ -31,6 +31,6 @@ available in its environment for full functionality."
                     (find-l10n "submit" ml-survey:*html-lang* *l10n*))))))
 
 (defun questionnaire (questionnaire)
-  (with-page (:title "SUS Form")
+  (with-page (:title "SUS Form" :add-js-urls ("/app.js"))
     (body-header "System Usability Form")
     (with-form (load-form ml-survey:*html-lang* questionnaire))))

@@ -8,7 +8,8 @@
   (check-type survey ml-survey:survey)
   (let ((results-not-null (results-not-null results))
         (sus-results (getf results :sus)))
-    (with-page (:title "Survey Details")
+
+    (with-page (:title "Survey Details" :add-js-urls ("/app.js"))
       (body-header "Survey Details" (navbar-en))
       (:main :id "main-content"
 	         :class "container"
