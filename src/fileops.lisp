@@ -2,33 +2,20 @@
 
 (in-package :ml-survey)
 
-(defun base-dir ()
-  "Determine and return the base directory for application data based on the
-operating system."
-  (let ((os (uiop:detect-os)))
-    (cond ((eq os :os-windows) (truename "~/AppData/Local/"))
-          ((eq os :os-unix) (truename "~/.local/share/"))
-          ((eq os :os-macos) (truename "~/Library/Application Support/"))
-          (t (error "Unsupported OS")))))
-
-(defun app-dir ()
-  "Construct and return the application-specific directory path."
-  (uiop:merge-pathnames* #P"ml-survey/" (base-dir)))
-
 (defun data-dir ()
   "Construct and return the directory path for storing data within the
 application."
-  (uiop:merge-pathnames* #P"data/" (app-dir)))
+  (uiop:merge-pathnames* #P"ml-survey/" (uiop:xdg-data-home)))
 
 (defun surveys-dir ()
   "Construct and return the directory path for storing surveys within the
 application."
-  (uiop:merge-pathnames* #P"data/surveys/" (app-dir)))
+  (uiop:merge-pathnames* #P"surveys/" (data-dir)))
 
 (defun questionnaires-dir ()
   "Construct and return the directory path for storing forms within the
 application."
-  (uiop:merge-pathnames* #P"data/questionnaires/" (app-dir)))
+  (uiop:merge-pathnames* #P"questionnaires/" (data-dir)))
 
 (defun ensure-data-dir ()
   "Ensure the data directory exists, create it if necessary, and return its
@@ -91,11 +78,11 @@ within the data directory."
     (prin1 responses stream)))
 
 (defun access-log-file ()
-  (uiop:merge-pathnames* #P"access.log" (app-dir)))
+  (uiop:merge-pathnames* #P"access.log" (data-dir)))
 
 (defun public-dir ()
-  (uiop:merge-pathnames* #P"public/" (app-dir)))
+  (uiop:merge-pathnames* #P"public/" (data-dir)))
 
 (ensure-directories-exist (public-dir))
 
-(format t "~%App Data Directory: ~a~%" (app-dir))
+(format t "~%App Data Directory: ~a~%" (data-dir))
