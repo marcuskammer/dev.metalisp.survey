@@ -39,6 +39,8 @@
   (start-server *app*))
 
 (defun main ()
+  "Call this function automatically from binary lisp image. Out of a REPL use
+`start' function."
   (start)
   ;; let the webserver run.
   ;; warning: hardcoded "hunchentoot".
