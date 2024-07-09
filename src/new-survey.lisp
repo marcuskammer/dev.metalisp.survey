@@ -1,12 +1,24 @@
 ;;;; -*- mode: common-lisp; coding: utf-8; -*-
 
-(in-package :ml-survey/views)
+(defpackage ml-survey/new-survey
+  (:use :cl)
+  (:import-from #:hunchentoot
+                #:define-easy-handler)
+  (:import-from #:dev.metalisp.sbt
+                #:with-page
+                #:body-header))
 
-(defun new-survey (&optional survey-id)
+(in-package :ml-survey/new-survey)
+
+(defun list-questionnaires ()
+  (mapcar #'ml-survey/fileops:extract-lang-and-filename
+          (ml-survey/fileops:questionnaires-list-files)))
+
+(defun view (&optional survey-id)
   "Generates the view to create a new survey."
-  (let ((questionnaires (ml-survey:list-questionnaires)))
+  (let ((questionnaires (list-questionnaires)))
     (with-page (:title "New Survey")
-      (body-header "New Survey" (navbar-en))
+      (body-header "New Survey" (ml-survey/navbar:navbar-en))
       (:main :class "container"
              :id "main-content"
 
@@ -16,7 +28,7 @@
                (:div :class "alert alert-warning"
                      :role "alert"
                      (format nil "There are no questionnaires available.~%
-                                  The folder: ~a is empty." (ml-survey:questionnaires-dir))))
+                                  The folder: ~a is empty." (ml-survey/fileops:questionnaires-dir))))
 
              ;; When a new survey was created, show the user an info message.
              (when survey-id
@@ -63,3 +75,20 @@
                     (:button :type"Submit"
                              :class "btn btn-primary"
                              "Create Survey"))))))
+
+(defun process-new-survey-get ()
+  (view))
+
+(defun process-new-survey-post (request)
+  (let ((post-params (hunchentoot:post-parameters* request))
+        (uid (ml-survey/app:generate-uuid))
+        (stored-surveys (ml-survey/fileops:read-from-file (ml-survey/fileops:make-surveys-db-file))))
+    (ml-survey/fileops:write-to-file (ml-survey/fileops:make-surveys-db-file)
+                                     (push (list uid post-params) stored-surveys))
+    (view uid)))
+
+(define-easy-handler (new-survey-handler :uri "/new-survey") nil
+  (cond ((eq (hunchentoot:request-method*) :get)
+         (process-new-survey-get))
+        ((eq (hunchentoot:request-method*) :post)
+         (process-new-survey-post hunchentoot:*request*))))

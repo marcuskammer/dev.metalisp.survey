@@ -1,6 +1,21 @@
 ;;;; -*- mode: common-lisp; coding: utf-8; -*-
 
-(in-package :ml-survey)
+(defpackage ml-survey/fileops
+  (:use #:cl)
+  (:export #:public-dir
+           #:access-log-file
+           #:read-from-file
+           #:write-to-file
+           #:ensure-questionnaires-dir
+           #:ensure-data-file-exist
+           #:ensure-surveys-dir
+           #:make-db-file
+           #:extract-lang-and-filename
+           #:questionnaires-list-files
+           #:questionnaires-dir
+           #:make-surveys-db-file))
+
+(in-package #:ml-survey/fileops)
 
 (defun data-dir ()
   "Construct and return the directory path for storing data within the
@@ -34,6 +49,19 @@ path."
 
 (defun questionnaires-list-files ()
   (uiop:directory* (format nil "~a*/*.lisp" (questionnaires-dir))))
+
+(defun find-next-directory (dir-list target)
+  (let ((index (position target dir-list :test #'string=)))
+    (when index
+      (nth (1+ index) dir-list))))
+
+(defun extract-lang-and-filename (path &optional (target-dir "questionnaires"))
+  (let* ((directory (pathname-directory path))
+         (name (pathname-name path))
+         (lang (find-next-directory directory target-dir)))
+    (if lang
+        (format nil "/~A/~A" lang name)
+        (format nil "/~A" name))))
 
 (defun ensure-file-exist (pathname)
   "Ensure that a file specified by PATHNAME exists, create it if it doesn't."
@@ -86,3 +114,6 @@ within the data directory."
 (ensure-directories-exist (public-dir))
 
 (format t "~%App Data Directory: ~a~%" (data-dir))
+
+(defun make-surveys-db-file ()
+  (make-db-file "surveys-db.lisp"))

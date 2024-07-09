@@ -1,6 +1,10 @@
 ;;;; -*- mode: common-lisp; coding: utf-8; -*-
 
-(in-package :ml-survey/views)
+(defpackage ml-survey/navbar
+  (:use :cl)
+  (:export #:navbar-en))
+
+(in-package :ml-survey/navbar)
 
 (defmacro navbar-brand (src width)
   `(spinneret:with-html

@@ -1,6 +1,4 @@
-;;;; -*- mode: common-lisp; coding: utf-8; -*-
-
-(in-package :ml-survey/views)
+(in-package :ml-survey/questionnaire)
 
 (multi-form
   (:ask "What is your age range?"
