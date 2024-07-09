@@ -51,7 +51,7 @@ Returns a list of integers."
 
 (defun questionnaire-result-from-file (filename)
   (check-type filename (or string pathname))
-  (let ((data (load-response filename)))
+  (let ((data (read-from-file filename)))
     (make-questionnaire-result :type (getf data :type)
                                :timestamp (getf data :timestamp)
                                :post-data (getf data :post-data))))

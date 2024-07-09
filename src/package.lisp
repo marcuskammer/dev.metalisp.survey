@@ -25,8 +25,8 @@
    #:questionnaire-result
    #:questionnaire-result-from-file
    #:sus-calc
-   #:store-response
-   #:load-response
+   #:write-to-file
+   #:read-from-file
    #:make-surveys-db-file
    #:start
    #:*app*

@@ -25,7 +25,7 @@
          (questionnaire-data-file (ensure-data-file-exist survey-id
                                                           questionnaire-id)))
 
-    (store-response questionnaire-data-file
+    (write-to-file questionnaire-data-file
                     (list :type questionnaire
                           :timestamp (today+now)
                           :post-data post-params))

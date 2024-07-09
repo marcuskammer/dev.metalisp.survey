@@ -16,7 +16,7 @@
                     (format nil "~a/" id)
                     (ensure-surveys-dir)))
     (setf properties (first (rest (assoc (parse-integer id)
-                                         (load-response (make-surveys-db-file))))))))
+                                         (read-from-file (make-surveys-db-file))))))))
 
 (defgeneric survey-id-p (survey)
   (:documentation "Check if the survey ID is present in the surveys database."))
@@ -34,7 +34,7 @@
   (:documentation "Get description property."))
 
 (defmethod survey-id-p ((survey survey))
-  (let ((ids (mapcar #'car (load-response (make-surveys-db-file)))))
+  (let ((ids (mapcar #'car (read-from-file (make-surveys-db-file)))))
     (if (member (parse-integer (survey-id survey)) ids) t nil)))
 
 (defmethod survey-data-dir-files ((survey survey))

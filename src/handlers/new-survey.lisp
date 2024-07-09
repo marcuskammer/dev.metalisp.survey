@@ -8,8 +8,8 @@
 (defun process-new-survey-post (request)
   (let ((post-params (post-parameters* request))
         (uid (generate-uuid))
-        (stored-surveys (load-response (make-surveys-db-file))))
-    (store-response (make-surveys-db-file) (push (list uid post-params) stored-surveys))
+        (stored-surveys (read-from-file (make-surveys-db-file))))
+    (write-to-file (make-surveys-db-file) (push (list uid post-params) stored-surveys))
     (ml-survey/views:new-survey uid)))
 
 (define-easy-handler (new-survey :uri "/new-survey") nil

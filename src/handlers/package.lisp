@@ -14,6 +14,6 @@
   (:import-from #:ml-survey
                 #:ensure-data-dir
                 #:ensure-data-file-exist
-                #:store-response
-                #:load-response
+                #:write-to-file
+                #:read-from-file
                 #:make-surveys-db-file))

@@ -60,7 +60,7 @@ within the data directory."
   (let ((path (uiop:merge-pathnames* file (ensure-surveys-dir))))
     (ensure-file-exist path)))
 
-(defun load-response (db)
+(defun read-from-file (db)
   (check-type db (or string pathname))
   (with-open-file (stream db
                           :direction :input
@@ -69,7 +69,7 @@ within the data directory."
         (list)
         (read stream))))
 
-(defun store-response (db responses)
+(defun write-to-file (db responses)
   (check-type db (or string pathname))
   (check-type responses list)
   (with-open-file (stream db
