@@ -10,8 +10,8 @@
 (ql:quickload :dev.metalisp.survey)
 
 (defvar os (uiop:detect-os))
-(let ((app-name (uiop:os-cond ((eq :os-windows os) "ml-survey.exe")
-                              ((eq :os-unix os) "ml-survey"))))
-  (sb-ext:save-lisp-and-die app-name :executable t :toplevel 'ml-survey:main))
+(let ((app-name (uiop:os-cond ((uiop:os-windows-p) "ml-survey.exe")
+                              ((uiop:os-unix-p) "ml-survey"))))
+  (sb-ext:save-lisp-and-die app-name :executable t :toplevel 'ml-survey/app:main))
 
 (quit)

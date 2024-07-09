@@ -8,7 +8,8 @@
            #:split-uri
            #:today+now
            #:*app*
-           #:start))
+           #:start
+           #:main))
 
 (in-package #:ml-survey/app)
 
