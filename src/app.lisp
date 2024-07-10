@@ -91,9 +91,11 @@
                              :document-root
                              (ml-survey/fileops:public-dir)
                              :access-log-destination
-                             (ml-survey/fileops:access-log-file)))
+                             (ml-survey/fileops:access-log-file))
+  "The web server.")
 
 (defun start ()
+  "Start here. Start the web server."
   (start-server *app*))
 
 (defun main ()
