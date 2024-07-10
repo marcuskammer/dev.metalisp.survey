@@ -75,6 +75,11 @@
 (defun results-not-null (results)
   (some (lambda (x) (and (listp x) (not (null x)))) results))
 
+(defun group-in-chunks (lst)
+  "Group LST into sublists of three elements."
+  (loop for i from 0 by 3 while (< i (length lst))
+        collect (subseq lst i (min (+ i 3) (length lst)))))
+
 (defun view (survey &optional results)
   "Generates the view to show the survey created."
   (check-type survey survey)
@@ -109,14 +114,17 @@
 
                (loop for (type data) on results by #'cddr unless (eq type :sus)
                      do (progn (:h3 :class "py-1" (format nil "~a" type))
-                               (loop for row in data
-                                     do (:ul :class "list-group py-3"
-                                             (loop for data in row
-                                                   for i from 0
-                                                   do (:li :class (if (zerop i)
-                                                                      "list-group-item active"
-                                                                      "list-group-item")
-                                                           data)))))))))))
+                               (:div :class "container"
+                                     (loop for row in (group-in-chunks data)
+                                           do (:div :class "row"
+                                                    (loop for col in row
+                                                          do (:ul :class "col-4 list-group py-3"
+                                                                  (loop for entry in col
+                                                                        for i from 0
+                                                                        do (:li :class (if (zerop i)
+                                                                                           "list-group-item active"
+                                                                                           "list-group-item")
+                                                                                entry))))))))))))))
 (defun extract-numbers (results)
   "Extract numbers from a questionnaire RESULTS list.
 Returns a list of integers."
