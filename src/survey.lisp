@@ -80,6 +80,36 @@
   (loop for i from 0 by 3 while (< i (length lst))
         collect (subseq lst i (min (+ i 3) (length lst)))))
 
+(defun sus-results-html (count-answers sus-results)
+  (spinneret:with-html
+    (:h3 :class "py-1" "SUS")
+    (:table :class "table table-hover"
+      (:caption "Questionnaire results table")
+	  (:thead
+	   (:tr
+	    (:th :scope "col" "Time")
+	    (loop for header from 1 below count-answers
+              do (:th :scope "col" (format nil "Q ~a" header)))
+        (:th :scope "col" "SUS Score")))
+	  (:tbody
+	   (loop for row in sus-results
+             do (:tr (mapcar (lambda (data) (:td data)) row)))))))
+
+(defun results-html (results)
+  (loop for (type data) on results by #'cddr unless (eq type :sus)
+        do (spinneret:with-html (:h3 :class "py-1" (format nil "~a" type))
+             (:div :class "container"
+                   (loop for row in (group-in-chunks data)
+                         do (:div :class "row"
+                                  (loop for col in row
+                                        do (:ul :class "col-4 list-group py-3"
+                                                (loop for entry in col
+                                                      for i from 0
+                                                      do (:li :class (if (zerop i)
+                                                                         "list-group-item active"
+                                                                         "list-group-item")
+                                                              entry))))))))))
+
 (defun view (survey &optional results)
   "Generates the view to show the survey created."
   (check-type survey survey)
@@ -99,32 +129,9 @@
 
                (if sus-results
                    (let ((count-answers (length (cdr (car sus-results)))))
-                     (:h3 :class "py-1" "SUS")
-                     (:table :class "table table-hover"
-                       (:caption "Questionnaire results table")
-		               (:thead
-		                (:tr
-	                     (:th :scope "col" "Time")
-	                     (loop for header from 1 below count-answers
-                               do (:th :scope "col" (format nil "Q ~a" header)))
-                         (:th :scope "col" "SUS Score")))
-		               (:tbody
-		                (loop for row in sus-results
-                              do (:tr (mapcar (lambda (data) (:td data)) row)))))))
+                     (sus-results-html count-answers sus-results)))
 
-               (loop for (type data) on results by #'cddr unless (eq type :sus)
-                     do (progn (:h3 :class "py-1" (format nil "~a" type))
-                               (:div :class "container"
-                                     (loop for row in (group-in-chunks data)
-                                           do (:div :class "row"
-                                                    (loop for col in row
-                                                          do (:ul :class "col-4 list-group py-3"
-                                                                  (loop for entry in col
-                                                                        for i from 0
-                                                                        do (:li :class (if (zerop i)
-                                                                                           "list-group-item active"
-                                                                                           "list-group-item")
-                                                                                entry))))))))))))))
+               (results-html results))))))
 (defun extract-numbers (results)
   "Extract numbers from a questionnaire RESULTS list.
 Returns a list of integers."
