@@ -132,6 +132,7 @@
                      (sus-results-html count-answers sus-results)))
 
                (results-html results))))))
+
 (defun extract-numbers (results)
   "Extract numbers from a questionnaire RESULTS list.
 Returns a list of integers."
