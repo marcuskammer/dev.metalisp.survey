@@ -95,8 +95,11 @@
 	   (loop for row in sus-results
              do (:tr (mapcar (lambda (data) (:td data)) row)))))))
 
+(defparameter *special-questionnaire-types* '(:sus :ueq :visawi :mucue))
+
 (defun results-html (results)
-  (loop for (type data) on results by #'cddr unless (eq type :sus)
+  (loop for (type data) on results by #'cddr
+        unless (member type *special-questionnaire-types* :test 'eq)
         do (spinneret:with-html (:h3 :class "py-1" (format nil "~a" type))
              (:div :class "container"
                    (loop for row in (group-in-chunks data)
