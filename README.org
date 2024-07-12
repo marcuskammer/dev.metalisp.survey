@@ -83,6 +83,8 @@ research, and other sectors that require precise data collection and analysis.
 - https://todo.sr.ht/~marcuskammer/dev.metalisp.survey
 ** News Feed
 - https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml
+** XMPP Chat
+- [[xmpp:ml-survey@conference.mailbox.org?join][xmpp:ml-survey@conference.mailbox.org?join]]
 ** Installation instructions
 *** Without using Quicklisp                                        :noexport:
 **** 1. Install a Common Lisp implementation
