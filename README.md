@@ -1,32 +1,32 @@
 
 # Table of Contents
 
-1.  [dev.metalisp.survey](#orgb0084b6)
-    1.  [Disclaimer](#orgf3d6bc4)
-    2.  [Introduction](#orgec63d69)
-    3.  [Design Goals](#orgc44dc9a)
-    4.  [Features](#org588692e)
-    5.  [Dependencies](#org754aa24)
-    6.  [Mailing list](#orgbb08363)
-    7.  [Issue tracker](#org5e74cac)
-    8.  [News Feed](#orgdff4099)
-    9.  [XMPP Chat](#org6d84f8a)
-    10. [Installation instructions](#org66f6bfb)
-        1.  [With using Quicklisp](#org416a5d4)
-    11. [Screenshot](#orgac3d4c3)
-    12. [License](#org5a15fc3)
-        1.  [MIT](#org484072e)
+1.  [dev.metalisp.survey](#orgc2981b2)
+    1.  [Disclaimer](#org5c33979)
+    2.  [Introduction](#orgcc2a9db)
+    3.  [Design Goals](#org43de596)
+    4.  [Features](#org4fa0949)
+    5.  [Dependencies](#org3adcfc5)
+    6.  [Mailing list](#org1d5312e)
+    7.  [Issue tracker](#org3fc0511)
+    8.  [News Feed](#org2b186f1)
+    9.  [XMPP Chat](#org7dd80c3)
+    10. [Installation instructions](#org1ef9280)
+        1.  [With using Quicklisp](#org24ef34d)
+    11. [Screenshot](#orge111fa8)
+    12. [License](#org96160b1)
+        1.  [MIT](#orga728a9f)
 
 
 
-<a id="orgb0084b6"></a>
+<a id="orgc2981b2"></a>
 
 # dev.metalisp.survey
 
 Made with Love ❤️ and Common Lisp
 
 
-<a id="orgf3d6bc4"></a>
+<a id="org5c33979"></a>
 
 ## Disclaimer
 
@@ -41,7 +41,7 @@ demands a proactive approach to handling any issues and ensuring the software
 meets organizational needs.
 
 
-<a id="orgec63d69"></a>
+<a id="orgcc2a9db"></a>
 
 ## Introduction
 
@@ -65,7 +65,7 @@ sensitive data. This makes it an invaluable tool for research projects, market
 research, and other sectors that require precise data collection and analysis.
 
 
-<a id="orgc44dc9a"></a>
+<a id="org43de596"></a>
 
 ## Design Goals
 
@@ -92,7 +92,7 @@ research, and other sectors that require precise data collection and analysis.
     accommodate users with varying needs and abilities.
 
 
-<a id="org588692e"></a>
+<a id="org4fa0949"></a>
 
 ## Features
 
@@ -106,7 +106,7 @@ research, and other sectors that require precise data collection and analysis.
     maintenance of the application.
 
 
-<a id="org754aa24"></a>
+<a id="org3adcfc5"></a>
 
 ## Dependencies
 
@@ -114,40 +114,40 @@ research, and other sectors that require precise data collection and analysis.
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.sbt>
 
 
-<a id="orgbb08363"></a>
+<a id="org1d5312e"></a>
 
 ## Mailing list
 
 -   <https://lists.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="org5e74cac"></a>
+<a id="org3fc0511"></a>
 
 ## Issue tracker
 
 -   <https://todo.sr.ht/~marcuskammer/dev.metalisp.survey>
 
 
-<a id="orgdff4099"></a>
+<a id="org2b186f1"></a>
 
 ## News Feed
 
 -   <https://git.sr.ht/~marcuskammer/dev.metalisp.survey/log/main/rss.xml>
 
 
-<a id="org6d84f8a"></a>
+<a id="org7dd80c3"></a>
 
 ## XMPP Chat
 
--   
+-   ml-survey@conference.mailbox.org
 
 
-<a id="org66f6bfb"></a>
+<a id="org1ef9280"></a>
 
 ## Installation instructions
 
 
-<a id="org416a5d4"></a>
+<a id="org24ef34d"></a>
 
 ### With using Quicklisp
 
@@ -243,19 +243,19 @@ operating systems.
             (ql:quickload :dev.metalisp.survey)
 
 
-<a id="orgac3d4c3"></a>
+<a id="orge111fa8"></a>
 
 ## Screenshot
 
 ![img](https://git.sr.ht/~marcuskammer/dev.metalisp.survey/blob/main/screenshot.png)
 
 
-<a id="org5a15fc3"></a>
+<a id="org96160b1"></a>
 
 ## License
 
 
-<a id="org484072e"></a>
+<a id="orga728a9f"></a>
 
 ### MIT
 
