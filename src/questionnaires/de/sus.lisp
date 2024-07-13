@@ -1,3 +1,6 @@
+;;;; -*- mode: common-lisp; coding: utf-8; -*-
+;;;; System Usability Scale in german language.
+
 (in-package :ml-survey/questionnaire)
 
 (multi-form
