@@ -81,6 +81,15 @@ available in its environment for full functionality."
   (setf ml-survey/app:*html-lang* lang)
   (view questionnaire))
 
+(defparameter *likert-scale*
+  '(:sus :nps :ueq :mecue :seq :umux :pwu :smeq :intui))
+
+(defun likert-p (q)
+  (let ((q-keyword (if (stringp q) (intern (string-upcase q) :keyword) q)))
+    (if (member q-keyword *likert-scale*)
+        t
+        nil)))
+
 (defun process-questionnaire-post (request survey questionnaire)
   (let* ((post-params (hunchentoot:post-parameters* request))
          (survey-id (ml-survey/survey:survey-id survey))
@@ -89,7 +98,10 @@ available in its environment for full functionality."
                                                                             questionnaire-id)))
 
     (ml-survey/fileops:write-to-file questionnaire-data-file
-                                     (list :type questionnaire
+                                     (list :type (if (likert-p questionnaire)
+                                                     "likert"
+                                                     "mixed")
+                                           :name questionnaire
                                            :timestamp (ml-survey/app:today+now)
                                            :post-data post-params))
 
