@@ -85,7 +85,7 @@ available in its environment for full functionality."
   (questionnaire-uri-p (hunchentoot:request-uri request)))
 
 (defparameter *likert-scale*
-  '(:sus :nps :ueq :mecue :seq :umux :pwu :smeq :intui))
+  '(:sus :nps :ueq :mecue :seq :umux :pwu :smeq :intui :visawi))
 
 (defun likert-p (q)
   (let ((q-keyword (if (stringp q) (intern (string-upcase q) :keyword) q)))
