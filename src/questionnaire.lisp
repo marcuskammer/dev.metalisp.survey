@@ -21,6 +21,8 @@
 
 (in-package :ml-survey/questionnaire)
 
+(setf *use-cdn* nil)
+
 (defstruct questionnaire
   (lang "" :type string)
   (name "" :type string))
@@ -58,7 +60,7 @@ available in its environment for full functionality."
 
 (defun view (q)
   (declare (type questionnaire q))
-  (with-page (:title "SUS Form" :add-js-urls ("/app.js"))
+  (with-page (:title "SUS Form")
     (body-header "System Usability Form")
     (with-form (load-form q))))
 

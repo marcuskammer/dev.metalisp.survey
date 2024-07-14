@@ -5,10 +5,13 @@
   (:import-from #:hunchentoot
                 #:define-easy-handler)
   (:import-from #:dev.metalisp.sbt
+                #:*use-cdn*
                 #:body-header
                 #:with-page))
 
 (in-package :ml-survey/surveys)
+
+(setf *use-cdn* nil)
 
 (defun surveys-p (list)
   "Check if all elements in `lst` are instances of the class `survey`."
@@ -22,7 +25,7 @@
 
 SURVEYS: List of survey objects."
   (check-type surveys surveys-list)
-  (with-page (:title "Surveys" :add-js-urls ("/app.js"))
+  (with-page (:title "Surveys")
     (body-header "Surveys" (ml-survey/navbar:navbar-en))
     (:main :id "main-content"
            :class "container"

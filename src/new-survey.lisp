@@ -5,10 +5,13 @@
   (:import-from #:hunchentoot
                 #:define-easy-handler)
   (:import-from #:dev.metalisp.sbt
+                #:*use-cdn*
                 #:with-page
                 #:body-header))
 
 (in-package :ml-survey/new-survey)
+
+(setf *use-cdn* nil)
 
 (defun list-questionnaires ()
   (mapcar #'ml-survey/fileops:extract-lang-and-filename

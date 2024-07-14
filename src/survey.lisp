@@ -5,6 +5,7 @@
   (:import-from #:hunchentoot
                 #:define-easy-handler)
   (:import-from #:dev.metalisp.sbt
+                #:*use-cdn*
                 #:with-page
 		        #:body-header)
   (:export #:survey-id
@@ -13,6 +14,8 @@
            #:survey-properties-description))
 
 (in-package #:ml-survey/survey)
+
+(defparameter *use-cdn* nil)
 
 (defclass survey ()
   ((id :initarg :id :reader survey-id)
@@ -128,7 +131,7 @@
                              unless (eq name :likert)
                              collect (cons name data))))
 
-    (with-page (:title "Survey Details" :add-js-urls ("/app.js"))
+    (with-page (:title "Survey Details")
       (body-header "Survey Details" (ml-survey/navbar:navbar-en))
       (:main :id "main-content"
 	         :class "container"
