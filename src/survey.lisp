@@ -83,27 +83,29 @@
   (loop for i from 0 by 3 while (< i (length lst))
         collect (subseq lst i (min (+ i 3) (length lst)))))
 
+(defun total-average (data)
+  (loop for sublist in data
+        sum (first (last sublist)) into total
+        count sublist into count
+        finally (return (if (zerop count)
+                            0
+                            (/ total count)))))
+
 (defun likert-results-html (results)
-  (let ((sus-average (loop for sublist in (getf results :sus)
-                           sum (first (last sublist)) into total
-                           count sublist into count
-                           finally (return (/ total count)))))
-    (spinneret:with-html
-      (loop for (name data) on results by #'cddr
-            do (:h3 :class "py-1" (if (eq name :sus)
-                                      (format nil "~a: ~,1f" name sus-average)
-                                      (format nil "~a" name)))
-               (:table :class "table table-hover"
-                 (:caption "Questionnaire results table")
-	             (:thead
-	              (:tr
-	               (:th :scope "col" "Time")
-	               (loop for index from 1 below (length (cdr (car data)))
-                         do (:th :scope "col" (format nil "Q ~a" index)))
-                   (:th :scope "col" "Score")))
-	             (:tbody
-	              (loop for row in data
-                        do (:tr (mapcar (lambda (col) (:td col)) row)))))))))
+  (spinneret:with-html
+    (loop for (name data) on results by #'cddr
+          do (:h3 :class "py-1" (format nil "~a: ~,1f" name (total-average data)))
+             (:table :class "table table-hover"
+               (:caption "Questionnaire results table")
+	           (:thead
+	            (:tr
+	             (:th :scope "col" "Time")
+	             (loop for index from 1 below (length (cdr (car data)))
+                       do (:th :scope "col" (format nil "Q ~a" index)))
+                 (:th :scope "col" "Score")))
+	           (:tbody
+	            (loop for row in data
+                      do (:tr (mapcar (lambda (col) (:td col)) row))))))))
 
 (defun mixed-results-html (results)
   (loop for result in results
@@ -170,13 +172,13 @@ Returns a list of integers."
   (check-type results list)
   (reverse (cons (* (apply #'+ (sus-calc-score results)) 2.5) (reverse results))))
 
-(defun sus-calc (files)
-  (check-type files list)
-	(cons (car files) (sus-calc-score-per-row (extract-numbers (cdr files)))))
+(defun sus-calc (time-data)
+  (check-type time-data list)
+	(cons (car time-data) (sus-calc-score-per-row (extract-numbers (cdr time-data)))))
 
-(defun nps-calc (scores)
+(defun nps-calc (time-data)
   "Calculate the Net Promoter Score (NPS) from a list of SCORES."
-  (check-type scores list)
+  (check-type time-data list)
   (let ((promoters 0)
         (detractors 0)
         (total-responses (length scores)))
@@ -188,6 +190,10 @@ Returns a list of integers."
                      (/ detractors total-responses))
                   100)))
       nps)))
+
+(defun default-likert-calc (time-data)
+ (let ((row (reverse (extract-numbers (cdr time-data)))))
+   (cons (car time-data) (reverse (cons (* 1.0 (/ (reduce '+ row) (length row))) row)))))
 
 (defstruct questionnaire-result
   type
@@ -216,7 +222,8 @@ Returns a list of integers."
   "Calculate metrics based on NAME from provided ARGS."
   (case name
     (:sus (sus-calc args))
-    (:nps (nps-calc args))))
+    (:nps (nps-calc args))
+    (t (default-likert-calc args))))
 
 (defun string->keyword (string)
   (intern (string-upcase string) :keyword))
