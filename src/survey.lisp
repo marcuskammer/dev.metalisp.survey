@@ -80,27 +80,33 @@
   (loop for i from 0 by 3 while (< i (length lst))
         collect (subseq lst i (min (+ i 3) (length lst)))))
 
-(defun sus-results-html (count-answers sus-results)
-  (spinneret:with-html
-    (:h3 :class "py-1" "SUS")
-    (:table :class "table table-hover"
-      (:caption "Questionnaire results table")
-	  (:thead
-	   (:tr
-	    (:th :scope "col" "Time")
-	    (loop for header from 1 below count-answers
-              do (:th :scope "col" (format nil "Q ~a" header)))
-        (:th :scope "col" "SUS Score")))
-	  (:tbody
-	   (loop for row in sus-results
-             do (:tr (mapcar (lambda (data) (:td data)) row)))))))
+(defun likert-results-html (results)
+  (let ((sus-average (loop for sublist in (getf results :sus)
+                           sum (first (last sublist)) into total
+                           count sublist into count
+                           finally (return (/ total count)))))
+    (spinneret:with-html
+      (loop for (name data) on results by #'cddr
+            do (:h3 :class "py-1" (if (eq name :sus)
+                                      (format nil "~a: ~,1f" name sus-average)
+                                      (format nil "~a" name)))
+               (:table :class "table table-hover"
+                 (:caption "Questionnaire results table")
+	             (:thead
+	              (:tr
+	               (:th :scope "col" "Time")
+	               (loop for index from 1 below (length (cdr (car data)))
+                         do (:th :scope "col" (format nil "Q ~a" index)))
+                   (:th :scope "col" "Score")))
+	             (:tbody
+	              (loop for row in data
+                        do (:tr (mapcar (lambda (col) (:td col)) row)))))))))
 
-(defparameter *special-questionnaire-types* '(:sus :ueq :visawi :mucue))
-
-(defun results-html (results)
-  (loop for (type data) on results by #'cddr
-        unless (member type *special-questionnaire-types* :test 'eq)
-        do (spinneret:with-html (:h3 :class "py-1" (format nil "~a" type))
+(defun mixed-results-html (results)
+  (loop for result in results
+        for name = (car result)
+        for data = (cdr result)
+        do (spinneret:with-html (:h3 :class "py-1" (format nil "~a" name))
              (:div :class "container"
                    (loop for row in (group-in-chunks data)
                          do (:div :class "row"
@@ -117,7 +123,10 @@
   "Generates the view to show the survey created."
   (check-type survey survey)
   (let ((results-not-null (results-not-null results))
-        (sus-results (getf results :sus)))
+        (likert-results (getf results :likert))
+        (mixed-results (loop for (name data) on results by #'cddr
+                             unless (eq name :likert)
+                             collect (cons name data))))
 
     (with-page (:title "Survey Details" :add-js-urls ("/app.js"))
       (body-header "Survey Details" (ml-survey/navbar:navbar-en))
@@ -130,11 +139,11 @@
 	         (when results-not-null
                (:h2 :class "py-3" "Questionnaire Results")
 
-               (if sus-results
-                   (let ((count-answers (length (cdr (car sus-results)))))
-                     (sus-results-html count-answers sus-results)))
+               (if likert-results
+                   (likert-results-html likert-results))
 
-               (results-html results))))))
+               (if mixed-results
+                   (mixed-results-html mixed-results)))))))
 
 (defun extract-numbers (results)
   "Extract numbers from a questionnaire RESULTS list.
@@ -162,35 +171,72 @@ Returns a list of integers."
   (check-type files list)
 	(cons (car files) (sus-calc-score-per-row (extract-numbers (cdr files)))))
 
+(defun nps-calc (scores)
+  "Calculate the Net Promoter Score (NPS) from a list of SCORES."
+  (check-type scores list)
+  (let ((promoters 0)
+        (detractors 0)
+        (total-responses (length scores)))
+    (dolist (score scores)
+      (cond
+        ((>= score 9) (incf promoters))
+        ((<= score 6) (incf detractors))))
+    (let ((nps (* (- (/ promoters total-responses)
+                     (/ detractors total-responses))
+                  100)))
+      nps)))
+
 (defstruct questionnaire-result
   type
+  name
   timestamp
   post-data)
 
+(defun questionnaire-result-list-p (list)
+  "Check if all elements in LIST are of type 'questionnaire-result'."
+  (if (every 'questionnaire-result-p list) t nil))
+
+(deftype questionnaire-result-list ()
+  "Define a type representing a list containing only questionnaire-result instances."
+  '(and list (satisfies questionnaire-result-list-p)))
+
 (defun questionnaire-result-from-file (filename)
+  "Create a 'questionnaire-result' instance from data read from the file specified by FILENAME."
   (check-type filename (or string pathname))
   (let ((data (ml-survey/fileops:read-from-file filename)))
     (make-questionnaire-result :type (getf data :type)
+                               :name (getf data :name)
                                :timestamp (getf data :timestamp)
                                :post-data (getf data :post-data))))
 
+(defun likert-calc (name args)
+  "Calculate metrics based on NAME from provided ARGS."
+  (case name
+    (:sus (sus-calc args))
+    (:nps (nps-calc args))))
+
+(defun string->keyword (string)
+  (intern (string-upcase string) :keyword))
+
 (defun list-of-categorized-results (result-objs)
-  "Categorize results into different lists based on their type.
-  Apply special calculation for results of type 'sus'."
-  (let ((categorized-results (list :sus nil)))
+  "Categorize and process questionnaire results listed in RESULT-OBJs.
+Each result must conform to 'questionnaire-result-list' type."
+  (declare (type questionnaire-result-list result-objs))
+  (let ((categorized-results (list :likert nil)))
     (dolist (result result-objs categorized-results)
-      (let ((type (intern (string-upcase (questionnaire-result-type result)) :keyword))
+      (let ((name (string->keyword (questionnaire-result-name result)))
+            (type (string->keyword (questionnaire-result-type result)))
             (data (questionnaire-result-post-data result))
             (timestamp (questionnaire-result-timestamp result)))
         (cond
-          ((eq type :sus)
-           (setf (getf categorized-results :sus)
-                 (cons (sus-calc (cons timestamp data))
-                       (getf categorized-results :sus))))
+          ((eq type :likert)
+           (setf (getf (getf categorized-results :likert) name)
+                 (cons (likert-calc name (cons timestamp data))
+                       (getf (getf categorized-results :likert) name))))
           (t
-           (setf (getf categorized-results type)
+           (setf (getf categorized-results name)
                  (cons (cons timestamp (mapcar #'cdr data))
-                       (getf categorized-results type)))))))))
+                       (getf categorized-results name)))))))))
 
 (defun survey-uri-p (uri)
   (let ((parts (ml-survey/app:split-uri uri)))

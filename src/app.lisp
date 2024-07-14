@@ -19,7 +19,7 @@
 
 (defparameter *url-key-map*
   '((:survey-id . 1)
-    (:language . 2)
+    (:lang . 2)
     (:questionnaire . 3)))
 
 (defun split-uri (uri)

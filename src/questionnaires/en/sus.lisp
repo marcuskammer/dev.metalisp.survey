@@ -5,7 +5,7 @@
 
 (multi-form
   (:ask "I would like to use this system frequently."
-   :group "sus-1"
+   :group "likert-1"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -14,7 +14,7 @@
                      "5 Strongly Agree"))
 
   (:ask "The system is unnecessarily complex."
-   :group "sus-2"
+   :group "likert-2"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -23,7 +23,7 @@
                      "5 Strongly Agree"))
 
   (:ask "The system is easy to use."
-   :group "sus-3"
+   :group "likert-3"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -32,7 +32,7 @@
                      "5 Strongly Agree"))
 
   (:ask "I need the support of a technical person to use this system."
-   :group "sus-4"
+   :group "likert-4"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -41,7 +41,7 @@
                      "5 Strongly Agree"))
 
   (:ask "The functions in this system are well integrated."
-   :group "sus-5"
+   :group "likert-5"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -50,7 +50,7 @@
                      "5 Strongly Agree"))
 
   (:ask "There is too much inconsistency in this system."
-   :group "sus-6"
+   :group "likert-6"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -59,7 +59,7 @@
                      "5 Strongly Agree"))
 
   (:ask "Most people would learn to use this system very quickly."
-   :group "sus-7"
+   :group "likert-7"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -68,7 +68,7 @@
                      "5 Strongly Agree"))
 
   (:ask "The system is very awkward to use."
-   :group "sus-8"
+   :group "likert-8"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -77,7 +77,7 @@
                      "5 Strongly Agree"))
 
   (:ask "I feel very confident using this system."
-   :group "sus-9"
+   :group "likert-9"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -86,7 +86,7 @@
                      "5 Strongly Agree"))
 
   (:ask "I needed to learn a lot of things to get started with this system."
-   :group "sus-10"
+   :group "likert-10"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"

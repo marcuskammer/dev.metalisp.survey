@@ -21,11 +21,16 @@
 
 (in-package :ml-survey/questionnaire)
 
-(defun load-form (lang questionnaire)
+(defstruct questionnaire
+  (lang "" :type string)
+  (name "" :type string))
+
+(defun load-form (q)
+  (declare (type questionnaire q))
   "Load a Lisp file containing form definitions."
-  (check-type lang string)
-  (check-type questionnaire string)
-  (let* ((form-path (uiop:merge-pathnames* (format nil "~a/~a.lisp" lang questionnaire)
+  (let* ((form-path (uiop:merge-pathnames* (format nil "~a/~a.lisp"
+                                                   (questionnaire-lang q)
+                                                   (questionnaire-name q))
                                            (ml-survey/fileops:ensure-questionnaires-dir))))
     (unless (probe-file form-path)
       (error "Form file ~A does not exist." form-path))
@@ -51,10 +56,11 @@ available in its environment for full functionality."
                   (btn-primary (:type "submit")
                     (find-l10n "submit" ml-survey/app:*html-lang* *l10n*))))))
 
-(defun view (questionnaire)
+(defun view (q)
+  (declare (type questionnaire q))
   (with-page (:title "SUS Form" :add-js-urls ("/app.js"))
     (body-header "System Usability Form")
-    (with-form (load-form ml-survey/app:*html-lang* questionnaire))))
+    (with-form (load-form q))))
 
 (defun view-submit ()
   (with-page (:title "Confirmation")
@@ -76,11 +82,6 @@ available in its environment for full functionality."
 (defun questionnaire-uri (request)
   (questionnaire-uri-p (hunchentoot:request-uri request)))
 
-(defun process-questionnaire-get (lang questionnaire)
-  (check-type lang string)
-  (setf ml-survey/app:*html-lang* lang)
-  (view questionnaire))
-
 (defparameter *likert-scale*
   '(:sus :nps :ueq :mecue :seq :umux :pwu :smeq :intui))
 
@@ -90,7 +91,13 @@ available in its environment for full functionality."
         t
         nil)))
 
-(defun process-questionnaire-post (request survey questionnaire)
+(defun process-questionnaire-get (q)
+  (declare (type questionnaire q))
+  (setf ml-survey/app:*html-lang* (questionnaire-lang q))
+  (view q))
+
+(defun process-questionnaire-post (request survey q)
+  (declare (type questionnaire q))
   (let* ((post-params (hunchentoot:post-parameters* request))
          (survey-id (ml-survey/survey:survey-id survey))
          (questionnaire-id (ml-survey/app:generate-uuid))
@@ -98,10 +105,10 @@ available in its environment for full functionality."
                                                                             questionnaire-id)))
 
     (ml-survey/fileops:write-to-file questionnaire-data-file
-                                     (list :type (if (likert-p questionnaire)
+                                     (list :type (if (likert-p (questionnaire-name q))
                                                      "likert"
                                                      "mixed")
-                                           :name questionnaire
+                                           :name (questionnaire-name q)
                                            :timestamp (ml-survey/app:today+now)
                                            :post-data post-params))
 
@@ -110,9 +117,15 @@ available in its environment for full functionality."
 (define-easy-handler (questionnaire-handler :uri #'questionnaire-uri) nil
   (let ((s (make-instance 'ml-survey/survey:survey
                           :id (ml-survey/app:extract-from (hunchentoot:request-uri*) :survey-id)))
-        (language (ml-survey/app:extract-from (hunchentoot:request-uri*) :language))
-        (questionnaire (ml-survey/app:extract-from (hunchentoot:request-uri*) :questionnaire)))
+
+        (questionnaire (make-questionnaire :lang
+                                           (ml-survey/app:extract-from (hunchentoot:request-uri*)
+                                                                       :lang)
+                                           :name
+                                           (ml-survey/app:extract-from (hunchentoot:request-uri*)
+                                                                       :questionnaire))))
+
     (cond ((eq (hunchentoot:request-method*) :get)
-           (process-questionnaire-get language questionnaire))
+           (process-questionnaire-get questionnaire))
           ((eq (hunchentoot:request-method*) :post)
            (process-questionnaire-post hunchentoot:*request* s questionnaire)))))
