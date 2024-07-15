@@ -3,9 +3,13 @@
 
 (in-package :ml-survey/questionnaire)
 
+(spinneret:with-html (:p "On a scale from 1 (strongly disagree)
+to 5 (strongly agree), please rate the extent to which you agree
+with the following statements about the website. Thank you very much!"))
+
 (multi-form
   (:ask "I would like to use this system frequently."
-   :group "likert-1"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -14,7 +18,7 @@
                      "5 Strongly Agree"))
 
   (:ask "The system is unnecessarily complex."
-   :group "likert-2"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -23,7 +27,7 @@
                      "5 Strongly Agree"))
 
   (:ask "The system is easy to use."
-   :group "likert-3"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -32,7 +36,7 @@
                      "5 Strongly Agree"))
 
   (:ask "I need the support of a technical person to use this system."
-   :group "likert-4"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -41,7 +45,7 @@
                      "5 Strongly Agree"))
 
   (:ask "The functions in this system are well integrated."
-   :group "likert-5"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -50,7 +54,7 @@
                      "5 Strongly Agree"))
 
   (:ask "There is too much inconsistency in this system."
-   :group "likert-6"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -59,7 +63,7 @@
                      "5 Strongly Agree"))
 
   (:ask "Most people would learn to use this system very quickly."
-   :group "likert-7"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -68,7 +72,7 @@
                      "5 Strongly Agree"))
 
   (:ask "The system is very awkward to use."
-   :group "likert-8"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -77,7 +81,7 @@
                      "5 Strongly Agree"))
 
   (:ask "I feel very confident using this system."
-   :group "likert-9"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
@@ -86,7 +90,7 @@
                      "5 Strongly Agree"))
 
   (:ask "I needed to learn a lot of things to get started with this system."
-   :group "likert-10"
+   :group "likert"
    :style "list-style:none;"
    :choices (:single "1 Strongly Disagree"
                      "2 Disagree"
