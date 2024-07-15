@@ -192,8 +192,10 @@ Returns a list of integers."
       nps)))
 
 (defun default-likert-calc (time-data)
- (let ((row (reverse (extract-numbers (cdr time-data)))))
-   (cons (car time-data) (reverse (cons (* 1.0 (/ (reduce '+ row) (length row))) row)))))
+  "Default calculation for unknown likert class questionnaires.
+Just calculates the average."
+  (let ((row (reverse (extract-numbers (cdr time-data)))))
+    (cons (car time-data) (reverse (cons (* 1.0 (/ (reduce '+ row) (length row))) row)))))
 
 (defstruct questionnaire-result
   type
