@@ -8,7 +8,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
 
 (multi-form
   (:ask "Das Layout wirkt zu gedrängt."
-   :group "likert-1"
+   :group "likert-simplicity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -18,7 +18,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Das Layout ist gut zu erfassen."
-   :group "likert-2"
+   :group "likert-simplicity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -28,7 +28,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Das Layout erscheint angenehm gegliedert."
-   :group "likert-3"
+   :group "likert-simplicity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -38,7 +38,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Die Seite erscheint zu uneinheitlich."
-   :group "likert-4"
+   :group "likert-simplicity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -47,8 +47,9 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "5 Stimme eher zu"
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
+
   (:ask "Auf der Seite passt alles zusammen."
-   :group "likert-5"
+   :group "likert-simplicity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -58,7 +59,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Die Seitengestaltung ist uninteressant."
-   :group "likert-6"
+   :group "likert-diversity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -68,7 +69,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Das Layout ist originell."
-   :group "likert-7"
+   :group "likert-diversity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -78,7 +79,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Die Gestaltung wirkt einfallslos."
-   :group "likert-8"
+   :group "likert-diversity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -88,7 +89,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Das Layout wirkt dynamisch."
-   :group "likert-9"
+   :group "likert-diversity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -98,7 +99,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Das Layout ist angenehm vielseitig."
-   :group "likert-10"
+   :group "likert-diversity"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -108,7 +109,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Die farbliche Gesamtgestaltung wirkt attraktiv."
-   :group "likert-11"
+   :group "likert-colorfulness"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -118,7 +119,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Die Farben passen nicht zueinander."
-   :group "likert-12"
+   :group "likert-colorfulness"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -128,7 +129,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Der Farbeinsatz ist nicht gelungen."
-   :group "likert-13"
+   :group "likert-colorfulness"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -138,7 +139,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Die Farben haben eine angenehme Wirkung."
-   :group "likert-14"
+   :group "likert-colorfulness"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -148,7 +149,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Das Layout ist professionell."
-   :group "likert-15"
+   :group "likert-craftsmanship"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -158,7 +159,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Das Layout ist nicht zeitgemäß."
-   :group "likert-16"
+   :group "likert-craftsmanship"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -168,7 +169,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Die Seite erscheint mit Sorgfalt gemacht."
-   :group "likert-17"
+   :group "likert-craftsmanship"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
@@ -178,7 +179,7 @@ vorliegende Website zustimmen. Vielen Dank!"))
                      "6 Stimme zu"
                      "7 Stimme voll zu"))
   (:ask "Das Layout wirkt konzeptlos."
-   :group "likert-18"
+   :group "likert-craftsmanship"
    :style "list-style:none"
    :choices (:single "1 Stimme gar nicht zu"
                      "2 Stimme nicht zu"
