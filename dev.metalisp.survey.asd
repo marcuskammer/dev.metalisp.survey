@@ -2,7 +2,7 @@
 
 (defsystem "dev.metalisp.survey"
   :description "A simple survey"
-  :version "0.3.2"
+  :version "0.3.3"
   :author "Marcus Kammer <marcus.kammer@metalisp.dev>"
   :source-control "git@git.sr.ht:~marcuskammer/dev.metalisp.survey"
   :licence "MIT"
